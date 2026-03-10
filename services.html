@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Services — Elmdale AI</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -646,16 +647,16 @@
 
   <!-- ── NAV ── -->
   <nav>
-    <a href="index-test.html" class="logo">
+    <a href="index.html" class="logo">
       <span class="logo-dot"></span>
       Elmdale AI
     </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">&#9776;</button>
     <ul id="navMenu">
       <li><a href="services.html" class="active">Services</a></li>
-      <li><a href="#">Process</a></li>
-      <li><a href="#">Case Studies</a></li>
-      <li><a href="index-test.html" class="nav-cta">Book a call</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="index.html#case-studies">Case Studies</a></li>
+      <li><a href="#" class="nav-cta" onclick="openCal(); return false;">Book a call</a></li>
     </ul>
   </nav>
 
@@ -670,7 +671,7 @@
   <div class="pricing-banner">
     <div class="section-label fade-in">Pricing</div>
     <p class="fade-in fade-in-d1">We don't do fixed pricing. Every business is different — so after your free call, we'll send you a <strong>tailored proposal</strong> with a clear scope, timeline and price. <strong>No surprises.</strong></p>
-    <a href="index-test.html" class="btn-accent fade-in fade-in-d2">Book a free call</a>
+    <button class="btn-accent fade-in fade-in-d2" onclick="openCal()">Book a free call</button>
   </div>
 
   <!-- ── SERVICES ── -->
@@ -678,6 +679,7 @@
     <div class="services-intro fade-in">
       <div class="section-label">What we build</div>
       <h2>Six core automations.<br>Infinite combinations.</h2>
+      <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.75; margin-top: 1rem;">Every automation is built around your existing tools. Where needed, we build the page or form it runs through — included as part of the project, never charged separately.</p>
     </div>
 
     <!-- A: AI Lead Outreach Pipeline -->
@@ -896,12 +898,12 @@
     </div>
     <h2 class="fade-in">Ready to stop doing it manually?</h2>
     <p class="fade-in fade-in-d1">Book a free 30-minute call. Walk away with a clear plan.</p>
-    <a href="index-test.html#booking" class="btn-white fade-in fade-in-d2">Book your free call →</a>
+    <button class="btn-white fade-in fade-in-d2" onclick="openCal()">Book your free call →</button>
   </section>
 
   <!-- ── FOOTER ── -->
   <footer>
-    <a href="index-test.html" class="footer-logo">
+    <a href="index.html" class="footer-logo">
       <span class="logo-dot"></span>
       Elmdale AI
     </a>
@@ -946,7 +948,13 @@
     navToggle.addEventListener('click', () => {
       navMenu.classList.toggle('open');
     });
+
+    // ── CALENDLY ──
+    function openCal() {
+      Calendly.initPopupWidget({ url: 'https://calendly.com/elmdale-ai' });
+    }
   </script>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
 </body>
 </html>
