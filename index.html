@@ -2,27 +2,37 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="description" content="Elmdale AI builds custom AI automations that save your business 10+ hours a week. Lead outreach, inbox management, content pipelines, and more.">
+  <meta property="og:title" content="Elmdale AI | AI Automation Agency">
+  <meta property="og:description" content="Elmdale AI builds custom AI automations that save your business 10+ hours a week. Lead outreach, inbox management, content pipelines, and more.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://elmdale.ai">
+  <meta property="og:image" content="https://elmdale.ai/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Elmdale AI | AI Automation Agency">
+  <meta name="twitter:description" content="Elmdale AI builds custom AI automations that save your business 10+ hours a week. Lead outreach, inbox management, content pipelines, and more.">
+  <link rel="canonical" href="https://elmdale.ai/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%235b21b6'/><text x='50%25' y='55%25' font-family='Inter,sans-serif' font-size='18' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='middle'>E</text></svg>" type="image/svg+xml">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Elmdale AI | AI Automation Agency</title>
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <!-- Calendly CSS -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-  <style>
-    /* CALENDLY POPUP OVERRIDE — dark theme */
-    .calendly-overlay .calendly-close-overlay { background: rgba(0,0,0,0.75); }
-  </style>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0a0a0f;
-      --surface: #13131a;
-      --border: #1e1e2e;
-      --accent: #7c3aed;
+      --bg: #ffffff;
+      --bg2: #f9f9fb;
+      --bg3: #f3f3f8;
+      --border: #e4e4ec;
+      --border2: #d0d0e0;
+      --text: #0a0a12;
+      --muted: #6b6b80;
+      --accent: #5b21b6;
+      --accent-light: #ede9fe;
       --accent2: #f97316;
-      --accent3: #06b6d4;
-      --text: #f0f0f5;
-      --muted: #8888aa;
+      --green: #16a34a;
+      --green-light: #dcfce7;
     }
 
     html { scroll-behavior: smooth; }
@@ -36,145 +46,7 @@
       overflow-x: hidden;
     }
 
-    /* ANIMATIONS */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .fade-up.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .fade-up-delay-1 { transition-delay: 0.1s; }
-    .fade-up-delay-2 { transition-delay: 0.2s; }
-    .fade-up-delay-3 { transition-delay: 0.3s; }
-    .fade-up-delay-4 { transition-delay: 0.4s; }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-12px); }
-    }
-
-    @keyframes float-centered {
-      0%, 100% { transform: translateX(-50%) translateY(0px); }
-      50% { transform: translateX(-50%) translateY(-12px); }
-    }
-
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(124,58,237,0.3); }
-      50% { box-shadow: 0 0 40px rgba(124,58,237,0.6); }
-    }
-
-    @keyframes gradient-shift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    @keyframes shimmer {
-      0% { background-position: -200% center; }
-      100% { background-position: 200% center; }
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    /* CURSOR SPOTLIGHT */
-    .cursor-glow {
-      position: fixed;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,58,237,0.07), transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-      transform: translate(-50%, -50%);
-      transition: transform 0.1s ease;
-    }
-
-    /* PARTICLES CANVAS */
-    #particles-canvas {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .hero > *:not(#particles-canvas):not(.hero-orb) { position: relative; z-index: 1; }
-
-    /* TYPEWRITER */
-    .typewriter-wrap {
-      display: inline-block;
-      min-width: 6ch;
-    }
-    .typewriter-text {
-      background: linear-gradient(135deg, #7c3aed, #f97316, #06b6d4, #7c3aed);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-shift 4s ease infinite;
-    }
-    .typewriter-cursor {
-      display: inline-block;
-      width: 3px;
-      height: 0.9em;
-      background: #a78bfa;
-      margin-left: 3px;
-      vertical-align: middle;
-      animation: blink 1s step-end infinite;
-      border-radius: 2px;
-    }
-
-    /* MARQUEE STRIP */
-    .marquee-strip {
-      overflow: hidden;
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 16px 0;
-    }
-
-    .marquee-track {
-      display: flex;
-      width: max-content;
-      animation: marquee 25s linear infinite;
-    }
-
-    .marquee-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 0 2.5rem;
-      color: var(--muted);
-      font-size: 0.85rem;
-      font-weight: 500;
-      white-space: nowrap;
-      border-right: 1px solid var(--border);
-    }
-
-    .marquee-item .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      flex-shrink: 0;
-    }
-
-    /* MAGNETIC BUTTON WRAPPER */
-    .mag-wrap { display: inline-block; }
-
-    /* NAV */
+    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -182,51 +54,90 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 20px 5%;
-      background: rgba(10,10,15,0.85);
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(255,255,255,0.9);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
-      transition: padding 0.3s;
+      flex-wrap: wrap;
     }
 
-    nav.scrolled { padding: 14px 5%; }
-
     .logo {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.5rem;
+      font-size: 1.1rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #7c3aed, #f97316);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
     }
 
     nav ul {
       list-style: none;
       display: flex;
+      align-items: center;
       gap: 2rem;
     }
 
     nav ul a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.15s;
     }
 
     nav ul a:hover { color: var(--text); }
 
     .nav-cta {
-      background: var(--accent);
+      background: var(--text) !important;
       color: #fff !important;
-      padding: 10px 20px;
+      padding: 8px 18px;
       border-radius: 8px;
-      font-weight: 600;
-      transition: opacity 0.2s, transform 0.2s !important;
+      font-weight: 600 !important;
+      font-size: 0.875rem;
+      transition: opacity 0.15s !important;
     }
 
-    .nav-cta:hover { opacity: 0.85; transform: translateY(-1px) !important; }
+    .nav-cta:hover { opacity: 0.8 !important; }
 
-    /* HERO */
+    /* ── HAMBURGER ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      padding: 0;
+      flex-shrink: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ── HERO ── */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -237,873 +148,687 @@
       padding: 120px 5% 80px;
       position: relative;
       overflow: hidden;
+      background: var(--bg);
     }
 
-    .hero-orb {
+    /* Subtle grid background */
+    .hero::before {
+      content: '';
       position: absolute;
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .hero-orb-1 {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(124,58,237,0.18), transparent 70%);
-      top: 5%; left: 50%;
-      animation: float-centered 8s ease-in-out infinite;
-    }
-
-    .hero-orb-2 {
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(249,115,22,0.12), transparent 70%);
-      bottom: 20%; right: 10%;
-      animation: float 6s ease-in-out infinite reverse;
-    }
-
-    .hero-orb-3 {
-      width: 200px; height: 200px;
-      background: radial-gradient(circle, rgba(6,182,212,0.1), transparent 70%);
-      top: 30%; left: 5%;
-      animation: float 10s ease-in-out infinite;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: 0.5;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(124,58,237,0.15);
-      border: 1px solid rgba(124,58,237,0.3);
-      color: #a78bfa;
-      padding: 6px 16px;
+      background: var(--accent-light);
+      border: 1px solid #c4b5fd;
+      color: var(--accent);
+      padding: 5px 14px;
       border-radius: 100px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
       margin-bottom: 2rem;
-      animation: pulse-glow 3s ease-in-out infinite;
+      position: relative;
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
     }
 
     h1 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 800;
-      line-height: 1.1;
-      max-width: 800px;
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      max-width: 820px;
       margin-bottom: 1.5rem;
+      position: relative;
+      color: var(--text);
     }
 
-    h1 em {
-      font-style: normal;
-      background: linear-gradient(135deg, #7c3aed, #f97316, #06b6d4, #7c3aed);
-      background-size: 300% 300%;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: gradient-shift 4s ease infinite;
+    h1 .highlight {
+      position: relative;
+      color: var(--accent);
     }
 
-    .hero p {
+    h1 .highlight::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -4px;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--accent), #a78bfa);
+    }
+
+    .typewriter-wrap {
+      display: inline-block;
+      min-width: 6ch;
+    }
+
+    .typewriter-text {
+      color: var(--accent);
+    }
+
+    .typewriter-cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.85em;
+      background: var(--accent);
+      margin-left: 2px;
+      vertical-align: middle;
+      border-radius: 2px;
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .hero-sub {
       font-size: 1.1rem;
       color: var(--muted);
-      max-width: 520px;
+      max-width: 500px;
       margin-bottom: 2.5rem;
+      position: relative;
+      line-height: 1.7;
     }
 
     .hero-buttons {
       display: flex;
-      gap: 1rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
       justify-content: center;
+      position: relative;
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #7c3aed, #9333ea);
+      background: var(--text);
       color: #fff;
-      padding: 14px 28px;
+      padding: 12px 24px;
       border-radius: 10px;
-      font-weight: 600;
-      font-size: 1rem;
+      font-weight: 700;
+      font-size: 0.9rem;
       text-decoration: none;
-      transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+      transition: opacity 0.15s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
     }
 
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 30px rgba(124,58,237,0.6);
-    }
+    .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
 
     .btn-secondary {
-      background: transparent;
+      background: var(--bg);
       color: var(--text);
-      padding: 14px 28px;
+      padding: 12px 24px;
       border-radius: 10px;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.9rem;
       text-decoration: none;
-      border: 1px solid var(--border);
-      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+      border: 1px solid var(--border2);
+      transition: border-color 0.15s, background 0.15s;
     }
 
-    .btn-secondary:hover {
-      border-color: var(--accent);
-      background: rgba(124,58,237,0.08);
-      transform: translateY(-2px);
-    }
+    .btn-secondary:hover { border-color: var(--accent); background: var(--accent-light); }
 
-    /* STATS */
-    .stats {
+    /* ── SOCIAL PROOF ── */
+    .social-proof {
+      padding: 1.5rem 5%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg2);
       display: flex;
+      align-items: center;
       justify-content: center;
       gap: 3rem;
       flex-wrap: wrap;
-      padding: 60px 5%;
-      border-top: 1px solid var(--border);
+    }
+
+    .sp-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+
+    .sp-logos {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .sp-logo {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--border2);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
       border-bottom: 1px solid var(--border);
     }
 
-    .stat { text-align: center; }
-
-    .stat-number {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.5rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #7c3aed, #f97316);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block;
-      min-width: 5ch;
+    .stat {
+      padding: 2.5rem 2rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
     }
 
-    .stat-label { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+    .stat:last-child { border-right: none; }
 
-    /* SECTIONS */
-    section { padding: 100px 5%; }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      display: block;
+      min-width: 5ch;
+      display: inline-block;
+    }
+
+    .stat-label {
+      font-size: 0.825rem;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 96px 5%; }
 
     .section-label {
-      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #a78bfa;
+      color: var(--accent);
       margin-bottom: 1rem;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 16px; height: 2px;
+      background: var(--accent);
+      border-radius: 1px;
     }
 
     h2 {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 800;
-      line-height: 1.15;
-      max-width: 600px;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      max-width: 560px;
       margin-bottom: 1rem;
-    }
-
-    h2 em {
-      font-style: normal;
-      background: linear-gradient(135deg, #7c3aed, #f97316);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--text);
     }
 
     .section-sub {
       color: var(--muted);
-      max-width: 500px;
+      max-width: 460px;
       margin-bottom: 3rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
     }
 
-    /* SERVICES */
+    /* ── SERVICES ── */
+    #services { background: var(--bg2); }
+
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
     }
 
     .service-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
+      background: var(--bg);
       padding: 2rem;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-      cursor: default;
+      transition: background 0.2s;
     }
 
-    .service-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-6px);
-      box-shadow: 0 12px 40px rgba(124,58,237,0.15);
-    }
+    .service-card:hover { background: var(--bg2); }
 
-    .service-icon {
-      width: 48px; height: 48px;
-      border-radius: 12px;
+    .service-icon-wrap {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.2rem;
+      font-size: 1.1rem;
+      margin-bottom: 1.1rem;
+      background: var(--bg);
     }
-
-    .icon-purple { background: rgba(124,58,237,0.15); }
-    .icon-orange { background: rgba(249,115,22,0.15); }
-    .icon-cyan { background: rgba(6,182,212,0.15); }
-    .icon-green { background: rgba(34,197,94,0.15); }
 
     .service-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.2rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
     }
 
-    .service-card p { color: var(--muted); font-size: 0.9rem; }
+    .service-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
 
-    /* HOW IT WORKS */
-    .how-it-works { background: var(--surface); }
+    /* ── HOW IT WORKS ── */
+    #how { background: var(--bg); }
 
-    .steps {
+    .steps-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 2rem;
-      margin-top: 3rem;
+      gap: 1.5rem;
     }
 
-    .step {
-      padding: 2rem;
+    .step-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .step-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .step-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      background: var(--accent-light);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+    }
+
+    .step-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .step-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── WHY ELMDALE AI ── */
+    #why { background: var(--bg); }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .why-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .why-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
+    }
+
+    .why-card-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .why-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+
+    .why-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── CASE STUDIES ── */
+    #case-study { background: var(--bg2); }
+
+    .cs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 940px) { .cs-grid { grid-template-columns: 1fr; } }
+
+    .cs-card {
       background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 16px;
-      transition: border-color 0.3s, transform 0.3s;
-    }
-
-    .step:hover {
-      border-color: rgba(124,58,237,0.4);
-      transform: translateY(-4px);
-    }
-
-    .step-number {
-      font-family: 'Syne', sans-serif;
-      font-size: 3rem;
-      font-weight: 800;
-      color: rgba(124,58,237,0.2);
-      line-height: 1;
-      margin-bottom: 1rem;
-    }
-
-    .step h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .step p { color: var(--muted); font-size: 0.9rem; }
-
-    /* CASE STUDY */
-    .case-study-section { background: var(--bg); }
-
-    .cs-card {
-      max-width: 1060px;
-      margin: 0 auto;
-      border-radius: 28px;
       overflow: hidden;
-      border: 1px solid var(--border);
-      background: var(--surface);
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
     }
 
-    /* Top banner */
-    .cs-banner {
-      position: relative;
-      background: linear-gradient(135deg, #0f0a1e 0%, #13101f 50%, #0a0f1a 100%);
-      padding: 3rem 3rem 2rem;
+    .cs-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 30px rgba(91,33,182,0.08);
+      transform: translateY(-2px);
+    }
+
+    .cs-card-top {
+      padding: 1.75rem 1.75rem 1.25rem;
       border-bottom: 1px solid var(--border);
-      overflow: hidden;
+      background: var(--bg2);
     }
 
-    .cs-banner::before {
-      content: '';
-      position: absolute;
-      width: 500px; height: 500px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,58,237,0.18), transparent 70%);
-      top: -150px; right: -100px;
-      pointer-events: none;
-    }
-
-    .cs-banner::after {
-      content: '';
-      position: absolute;
-      width: 300px; height: 300px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(249,115,22,0.1), transparent 70%);
-      bottom: -100px; left: 30%;
-      pointer-events: none;
-    }
-
-    .cs-banner-inner {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .cs-tag {
+    .cs-card-tag {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      background: rgba(124,58,237,0.2);
-      border: 1px solid rgba(124,58,237,0.35);
-      color: #a78bfa;
-      padding: 5px 14px;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 3px 10px;
       border-radius: 100px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .cs-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(1.4rem, 3vw, 2rem);
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 0.5rem;
-    }
-
-    .cs-subtitle {
-      color: var(--muted);
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cs-subtitle span {
-      display: inline-block;
-      width: 4px; height: 4px;
-      border-radius: 50%;
-      background: var(--muted);
-    }
-
-    .cs-metrics {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .cs-metric {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 1.2rem 1.5rem;
-      text-align: center;
-      min-width: 110px;
-      backdrop-filter: blur(8px);
-    }
-
-    .cs-metric-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 2rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, #a78bfa, #f97316);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      line-height: 1;
-    }
-
-    .cs-metric-label {
-      font-size: 0.72rem;
-      color: var(--muted);
-      margin-top: 6px;
-      line-height: 1.3;
-    }
-
-    /* Body */
-    .cs-body {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
-
-    .cs-col {
-      padding: 2.5rem 3rem;
-    }
-
-    .cs-col:first-child {
-      border-right: 1px solid var(--border);
-    }
-
-    .cs-col-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .cs-col-label.before { color: #f87171; }
-    .cs-col-label.after  { color: #4ade80; }
-
-    .cs-col-label::before {
-      content: '';
-      display: inline-block;
-      width: 8px; height: 8px;
-      border-radius: 50%;
-    }
-
-    .cs-col-label.before::before { background: #f87171; }
-    .cs-col-label.after::before  { background: #4ade80; box-shadow: 0 0 8px rgba(74,222,128,0.5); }
-
-    .cs-item {
-      display: flex;
-      gap: 12px;
-      margin-bottom: 1.2rem;
-      align-items: flex-start;
-    }
-
-    .cs-item-icon {
-      width: 28px; height: 28px;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .cs-item-icon.bad  { background: rgba(248,113,113,0.1); color: #f87171; }
-    .cs-item-icon.good { background: rgba(74,222,128,0.1);  color: #4ade80; }
-
-    .cs-item-text {
-      font-size: 0.9rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-
-    .cs-item-text strong {
-      color: var(--text);
-      font-weight: 600;
-      display: block;
-      margin-bottom: 2px;
-      font-size: 0.88rem;
-    }
-
-    /* Flow steps */
-    .cs-flow {
-      padding: 2rem 3rem;
-      border-top: 1px solid var(--border);
-      background: rgba(124,58,237,0.03);
-    }
-
-    .cs-flow-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .cs-flow-steps {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      flex-wrap: wrap;
-      row-gap: 1rem;
-    }
-
-    .cs-flow-step {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0.7rem 1.1rem;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--text);
-      white-space: nowrap;
-    }
-
-    .cs-flow-step .step-icon {
-      font-size: 1rem;
-    }
-
-    .cs-flow-arrow {
-      color: rgba(124,58,237,0.5);
-      font-size: 1.1rem;
-      padding: 0 0.4rem;
-      flex-shrink: 0;
-    }
-
-    /* Quote */
-    .cs-quote {
-      padding: 2rem 3rem;
-      border-top: 1px solid var(--border);
-      display: flex;
-      gap: 1.5rem;
-      align-items: flex-start;
-    }
-
-    .cs-quote-bar {
-      width: 3px;
-      border-radius: 3px;
-      background: linear-gradient(180deg, #7c3aed, #f97316);
-      flex-shrink: 0;
-      align-self: stretch;
-      min-height: 60px;
-    }
-
-    .cs-quote-text {
-      font-size: 1rem;
-      color: var(--text);
-      line-height: 1.65;
-      font-style: italic;
       margin-bottom: 0.75rem;
     }
 
-    .cs-quote-author {
-      font-size: 0.82rem;
-      color: var(--muted);
-      font-weight: 600;
-      font-style: normal;
-    }
-
-    @media (max-width: 700px) {
-      .cs-body { grid-template-columns: 1fr; }
-      .cs-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
-      .cs-col { padding: 2rem; }
-      .cs-banner { padding: 2rem; }
-      .cs-flow { padding: 1.5rem 2rem; }
-      .cs-quote { padding: 1.5rem 2rem; }
-      .cs-flow-steps { flex-direction: column; align-items: flex-start; }
-      .cs-flow-arrow { transform: rotate(90deg); }
-    }
-
-    /* PRICING */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      max-width: 960px;
-      margin: 0 auto;
-    }
-
-    .pricing-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2.5rem;
-      position: relative;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
-
-    .pricing-card:hover { transform: translateY(-4px); }
-
-    .pricing-card.featured {
-      border-color: var(--accent);
-      background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(249,115,22,0.05));
-      box-shadow: 0 8px 40px rgba(124,58,237,0.2);
-    }
-
-    .featured-badge {
-      position: absolute;
-      top: -14px; left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #7c3aed, #f97316);
-      color: #fff;
-      padding: 4px 16px;
-      border-radius: 100px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .pricing-card h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-
-    .price {
-      font-family: 'Syne', sans-serif;
-      font-size: 2.5rem;
+    .cs-card-name {
+      font-size: 1.15rem;
       font-weight: 800;
-      margin: 1rem 0 0.25rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
     }
 
-    .price span { font-size: 1rem; color: var(--muted); font-family: 'Inter', sans-serif; font-weight: 400; }
-
-    .price-desc { color: var(--muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
-
-    .pricing-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-    }
-
-    .pricing-features li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
+    .cs-card-sub {
+      font-size: 0.8rem;
       color: var(--muted);
+      margin-bottom: 1.25rem;
     }
 
-    .pricing-features li::before {
-      content: '✓';
-      color: #a78bfa;
-      font-weight: 700;
-      flex-shrink: 0;
-    }
-
-    .btn-outline {
-      display: block;
-      text-align: center;
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      border: 1px solid var(--border);
-      color: var(--text);
-      transition: border-color 0.2s, background 0.2s;
-      cursor: pointer;
-      background: none;
-      width: 100%;
-    }
-
-    .btn-outline:hover { border-color: var(--accent); background: rgba(124,58,237,0.08); }
-
-    .btn-filled {
-      display: block;
-      text-align: center;
-      padding: 12px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-      background: linear-gradient(135deg, #7c3aed, #9333ea);
-      color: #fff;
-      box-shadow: 0 4px 15px rgba(124,58,237,0.3);
-      transition: opacity 0.2s, transform 0.2s;
-      cursor: pointer;
-      border: none;
-      width: 100%;
-    }
-
-    .btn-filled:hover { opacity: 0.85; transform: translateY(-2px); }
-
-    /* CASE STUDY GALLERY */
-    .cs-gallery-section { background: var(--bg); }
-
-    .cs-gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
-      gap: 1.5rem;
-      max-width: 1060px;
-      margin: 0 auto;
-    }
-
-    @media (max-width: 960px) {
-      .cs-gallery { grid-template-columns: 1fr; }
-    }
-
-    .csg-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      overflow: hidden;
-      transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
-    }
-
-    .csg-card:hover {
-      border-color: rgba(124,58,237,0.4);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 50px rgba(124,58,237,0.1);
-    }
-
-    .csg-header {
-      position: relative;
-      padding: 2rem 2rem 1.5rem;
-      overflow: hidden;
-    }
-
-    .csg-header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      opacity: 0.9;
-    }
-
-    .csg-card-1 .csg-header { background: linear-gradient(135deg, #0d0a1a 0%, #160d2a 100%); }
-    .csg-card-2 .csg-header { background: linear-gradient(135deg, #0a0f1a 0%, #0d1a2a 100%); }
-
-    .csg-glow {
-      position: absolute;
-      width: 280px; height: 280px;
-      border-radius: 50%;
-      pointer-events: none;
-      top: -80px; right: -60px;
-    }
-
-    .csg-card-1 .csg-glow { background: radial-gradient(circle, rgba(124,58,237,0.2), transparent 70%); }
-    .csg-card-2 .csg-glow { background: radial-gradient(circle, rgba(6,182,212,0.18), transparent 70%); }
-
-    .csg-tag {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      border-radius: 100px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
-    }
-
-    .csg-card-1 .csg-tag { background: rgba(124,58,237,0.2); border: 1px solid rgba(124,58,237,0.3); color: #a78bfa; }
-    .csg-card-2 .csg-tag { background: rgba(6,182,212,0.15); border: 1px solid rgba(6,182,212,0.3); color: #67e8f9; }
-
-    .csg-name {
-      position: relative;
-      font-family: 'Syne', sans-serif;
-      font-size: 1.4rem;
-      font-weight: 800;
-      margin-bottom: 0.3rem;
-    }
-
-    .csg-industry {
-      position: relative;
-      color: var(--muted);
-      font-size: 0.82rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .csg-stats {
-      position: relative;
+    .cs-card-stats {
       display: flex;
       gap: 0.75rem;
       flex-wrap: wrap;
     }
 
-    .csg-stat {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 10px;
-      padding: 0.6rem 1rem;
+    .cs-stat-pill {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.5rem 0.85rem;
       text-align: center;
     }
 
-    .csg-stat-num {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.3rem;
+    .cs-stat-num {
+      font-size: 1.2rem;
       font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--accent);
       line-height: 1;
     }
 
-    .csg-card-1 .csg-stat-num { color: #a78bfa; }
-    .csg-card-2 .csg-stat-num { color: #67e8f9; }
-
-    .csg-stat-label {
+    .cs-stat-lbl {
       font-size: 0.68rem;
       color: var(--muted);
-      margin-top: 3px;
+      margin-top: 2px;
     }
 
-    .csg-body { padding: 1.75rem 2rem; }
+    .cs-card-body { padding: 1.5rem 1.75rem; }
 
-    .csg-challenge {
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 0.75rem;
-    }
-
-    .csg-points {
+    .cs-card-points {
       list-style: none;
       display: flex;
       flex-direction: column;
       gap: 0.6rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .csg-points li {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
-    .csg-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      margin-top: 7px;
-    }
-
-    .csg-card-1 .csg-dot { background: #a78bfa; }
-    .csg-card-2 .csg-dot { background: #67e8f9; }
-
-    .csg-divider {
-      height: 1px;
-      background: var(--border);
       margin-bottom: 1.25rem;
     }
 
-    .csg-quote {
+    .cs-card-points li {
       display: flex;
-      gap: 12px;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
       align-items: flex-start;
     }
 
-    .csg-quote-bar {
-      width: 3px;
-      min-height: 50px;
-      border-radius: 3px;
+    .cs-tick {
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--green-light);
+      color: var(--green);
+      font-size: 0.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
-      align-self: stretch;
+      margin-top: 2px;
+      font-weight: 700;
     }
 
-    .csg-card-1 .csg-quote-bar { background: linear-gradient(180deg, #7c3aed, #f97316); }
-    .csg-card-2 .csg-quote-bar { background: linear-gradient(180deg, #06b6d4, #7c3aed); }
+    .cs-card-quote {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
 
-    .csg-quote-text {
-      font-size: 0.875rem;
+    .cs-card-quote p {
+      font-size: 0.83rem;
       color: var(--text);
       font-style: italic;
       line-height: 1.6;
       margin-bottom: 0.4rem;
     }
 
-    .csg-quote-author {
-      font-size: 0.78rem;
+    .cs-card-quote span {
+      font-size: 0.75rem;
       color: var(--muted);
       font-weight: 600;
     }
 
-    /* ENQUIRY MODAL */
+    /* ── CTA BOOKING ── */
+    #booking {
+      background: var(--text);
+      text-align: center;
+      padding: 96px 5%;
+    }
+
+    #booking h2 {
+      color: #fff;
+      max-width: 100%;
+      margin: 0 auto 1rem;
+    }
+
+    #booking p {
+      color: rgba(255,255,255,0.55);
+      max-width: 440px;
+      margin: 0 auto 2rem;
+      font-size: 0.95rem;
+    }
+
+    .booking-pills {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .booking-pill {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    .booking-pill-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #a78bfa;
+    }
+
+    .btn-white {
+      background: #fff;
+      color: var(--text);
+      padding: 13px 28px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .btn-white:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    .fade-in-d1 { transition-delay: 0.1s; }
+    .fade-in-d2 { transition-delay: 0.2s; }
+    .fade-in-d3 { transition-delay: 0.3s; }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      background: var(--bg);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 2rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      border-right: 1px solid var(--border);
+      white-space: nowrap;
+    }
+
+    .marquee-item .m-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    /* ── ENQUIRY MODAL ── */
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(8px);
+      background: rgba(0,0,0,0.4);
+      backdrop-filter: blur(6px);
       z-index: 200;
       display: flex;
       align-items: center;
@@ -1111,50 +836,46 @@
       padding: 1.5rem;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease;
+      transition: opacity 0.25s ease;
     }
 
-    .modal-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
 
     .modal {
-      background: var(--surface);
+      background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 24px;
+      border-radius: 20px;
       width: 100%;
-      max-width: 560px;
+      max-width: 540px;
       max-height: 90vh;
       overflow-y: auto;
-      transform: translateY(20px) scale(0.98);
-      transition: transform 0.3s ease;
+      transform: translateY(16px) scale(0.99);
+      transition: transform 0.25s ease;
       position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
     }
 
-    .modal-overlay.open .modal {
-      transform: translateY(0) scale(1);
-    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
 
     .modal-close {
       position: absolute;
-      top: 1.2rem; right: 1.2rem;
-      background: rgba(255,255,255,0.06);
+      top: 1rem; right: 1rem;
+      background: var(--bg2);
       border: 1px solid var(--border);
       color: var(--muted);
-      width: 32px; height: 32px;
+      width: 30px; height: 30px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 0.85rem;
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s, color 0.2s;
+      transition: background 0.15s;
       z-index: 10;
     }
 
-    .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
+    .modal-close:hover { background: var(--bg3); color: var(--text); }
 
     .modal-header {
-      padding: 2rem 2rem 1.25rem;
+      padding: 1.75rem 1.75rem 1.25rem;
       border-bottom: 1px solid var(--border);
     }
 
@@ -1163,27 +884,23 @@
       font-weight: 700;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #a78bfa;
-      margin-bottom: 0.4rem;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
     }
 
     .modal-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 800;
-      margin-bottom: 0.3rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
     }
 
-    .modal-subtitle {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
+    .modal-subtitle { font-size: 0.825rem; color: var(--muted); }
 
-    /* Progress bar */
     .modal-progress {
       display: flex;
-      gap: 6px;
-      margin-top: 1.25rem;
+      gap: 5px;
+      margin-top: 1.1rem;
     }
 
     .modal-progress-bar {
@@ -1191,37 +908,27 @@
       border-radius: 3px;
       flex: 1;
       background: var(--border);
-      transition: background 0.4s ease;
+      transition: background 0.35s ease;
     }
 
-    .modal-progress-bar.active { background: #7c3aed; }
-    .modal-progress-bar.done   { background: #4ade80; }
+    .modal-progress-bar.active { background: var(--accent); }
+    .modal-progress-bar.done   { background: var(--green); }
 
-    /* Steps */
-    .modal-body { padding: 1.75rem 2rem; }
-
+    .modal-body { padding: 1.5rem 1.75rem; }
     .modal-step { display: none; }
     .modal-step.active { display: block; }
 
-    /* Form fields */
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
     @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
 
-    .form-group {
-      margin-bottom: 1.1rem;
-    }
+    .form-group { margin-bottom: 0.9rem; }
 
     .form-group label {
       display: block;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.35rem;
     }
 
     .form-group input,
@@ -1229,70 +936,58 @@
     .form-group textarea {
       width: 100%;
       background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
+      border: 1px solid var(--border2);
+      border-radius: 8px;
       color: var(--text);
       font-family: 'Inter', sans-serif;
       font-size: 0.875rem;
-      padding: 0.7rem 1rem;
+      padding: 0.65rem 0.9rem;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.15s, box-shadow 0.15s;
       appearance: none;
     }
 
     .form-group input:focus,
     .form-group select:focus,
     .form-group textarea:focus {
-      border-color: #7c3aed;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-light);
     }
 
     .form-group textarea { resize: vertical; min-height: 90px; }
-
-    .form-group select option { background: #13131a; }
-
-    /* Chip checkboxes */
-    .chip-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1.1rem;
-    }
+    .form-group select option { background: #fff; }
 
     .chip-label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 0.5rem;
       display: block;
     }
 
+    .chip-group { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.9rem; }
+
     .chip {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
+      gap: 5px;
+      padding: 5px 12px;
       border-radius: 100px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border2);
       background: var(--bg);
       color: var(--muted);
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 500;
       cursor: pointer;
-      transition: border-color 0.2s, background 0.2s, color 0.2s;
+      transition: all 0.15s;
       user-select: none;
     }
 
     .chip input { display: none; }
+    .chip.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); font-weight: 600; }
 
-    .chip.selected {
-      border-color: #7c3aed;
-      background: rgba(124,58,237,0.12);
-      color: #a78bfa;
-    }
-
-    /* Modal footer */
     .modal-footer {
-      padding: 1.25rem 2rem 1.75rem;
+      padding: 1rem 1.75rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -1301,397 +996,476 @@
 
     .btn-back {
       background: none;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border2);
       color: var(--muted);
-      padding: 10px 20px;
+      padding: 9px 18px;
       border-radius: 8px;
-      font-size: 0.875rem;
+      font-size: 0.825rem;
       font-weight: 600;
       cursor: pointer;
       font-family: 'Inter', sans-serif;
-      transition: border-color 0.2s, color 0.2s;
+      transition: all 0.15s;
     }
 
     .btn-back:hover { border-color: var(--accent); color: var(--text); }
 
     .btn-next {
-      background: linear-gradient(135deg, #7c3aed, #9333ea);
+      background: var(--text);
       color: #fff;
       border: none;
-      padding: 10px 24px;
+      padding: 9px 22px;
       border-radius: 8px;
-      font-size: 0.875rem;
-      font-weight: 600;
+      font-size: 0.825rem;
+      font-weight: 700;
       cursor: pointer;
       font-family: 'Inter', sans-serif;
-      transition: opacity 0.2s, transform 0.2s;
-      box-shadow: 0 4px 15px rgba(124,58,237,0.35);
+      transition: opacity 0.15s;
       margin-left: auto;
     }
 
-    .btn-next:hover { opacity: 0.85; transform: translateY(-1px); }
+    .btn-next:hover { opacity: 0.8; }
 
-    /* Success step */
     .modal-success {
       text-align: center;
-      padding: 2.5rem 2rem;
+      padding: 2.5rem 1.75rem;
     }
 
     .success-icon {
-      width: 64px; height: 64px;
+      width: 56px; height: 56px;
       border-radius: 50%;
-      background: rgba(74,222,128,0.12);
-      border: 1px solid rgba(74,222,128,0.3);
+      background: var(--green-light);
+      border: 1px solid #86efac;
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.8rem;
-      margin: 0 auto 1.25rem;
+      font-size: 1.4rem;
+      margin: 0 auto 1.1rem;
     }
 
     .modal-success h3 {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.4rem;
+      font-size: 1.3rem;
       font-weight: 800;
-      margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
     }
 
     .modal-success p {
       color: var(--muted);
-      font-size: 0.9rem;
-      max-width: 380px;
-      margin: 0 auto 2rem;
+      font-size: 0.875rem;
+      max-width: 360px;
+      margin: 0 auto 1.75rem;
       line-height: 1.6;
     }
 
-    /* BOOKING CTA */
-    .booking-section {
-      background: var(--surface);
-      text-align: center;
-    }
-
-    .booking-cta-box {
-      max-width: 720px;
-      margin: 0 auto;
-      background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(249,115,22,0.06));
-      border: 1px solid rgba(124,58,237,0.25);
-      border-radius: 28px;
-      padding: 5rem 3rem;
-    }
-
-    .booking-cta-box h2 { max-width: 100%; margin: 0 auto 1rem; }
-    .booking-cta-box p { color: var(--muted); max-width: 480px; margin: 0 auto 2.5rem; }
-
-    .booking-features {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
-
-    .booking-feature {
+    /* ── COOKIE BANNER ── */
+    .cookie-banner {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 300;
+      background: var(--text);
+      color: #fff;
+      padding: 1rem 5%;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      color: var(--muted);
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      transform: translateY(100%);
+      transition: transform 0.35s ease;
     }
 
-    .booking-feature span { color: #a78bfa; font-size: 1rem; }
+    .cookie-banner.visible { transform: translateY(0); }
 
-    /* FOOTER */
-    footer {
-      text-align: center;
-      padding: 2rem 5%;
-      border-top: 1px solid var(--border);
-      color: var(--muted);
+    .cookie-banner p {
       font-size: 0.85rem;
+      color: rgba(255,255,255,0.75);
+      flex: 1;
+      min-width: 200px;
     }
 
-    .footer-logo {
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.2rem;
-      background: linear-gradient(135deg, #7c3aed, #f97316);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: block;
-      margin-bottom: 0.5rem;
+    .cookie-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-shrink: 0;
     }
 
-    /* RESPONSIVE */
+    .cookie-accept {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      transition: opacity 0.15s;
+    }
+
+    .cookie-accept:hover { opacity: 0.85; }
+
+    .cookie-decline {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.5);
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      transition: color 0.15s;
+    }
+
+    .cookie-decline:hover { color: rgba(255,255,255,0.8); }
+
     @media (max-width: 640px) {
-      nav ul { display: none; }
-      .stats { gap: 2rem; }
+      nav {
+        height: auto;
+        padding: 0 5%;
+        position: fixed;
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 64px;
+      }
+
+      .hamburger { display: flex; }
+
+      nav ul {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        width: 100%;
+        background: rgba(255,255,255,0.97);
+        border-top: 1px solid var(--border);
+        padding: 0.5rem 0 1rem;
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+      }
+
+      nav ul.nav-open {
+        display: flex;
+        max-height: 400px;
+        padding: 0.5rem 0 1rem;
+      }
+
+      nav ul li {
+        width: 100%;
+      }
+
+      nav ul a {
+        display: block;
+        padding: 0.7rem 1.25rem;
+        font-size: 0.95rem;
+        width: 100%;
+      }
+
+      nav ul .nav-cta {
+        display: block;
+        margin: 0.5rem 1.25rem 0;
+        padding: 10px 18px;
+        text-align: center;
+        border-radius: 8px;
+      }
+
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: none; }
+      .why-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- CURSOR GLOW -->
-  <div class="cursor-glow" id="cursor-glow"></div>
-
   <!-- NAV -->
-  <nav id="navbar">
-    <div class="logo">Elmdale AI</div>
-    <ul>
+  <nav id="main-nav">
+    <div class="nav-inner">
+      <div class="logo">
+        <div class="logo-dot"></div>
+        Elmdale AI
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <ul id="nav-ul">
       <li><a href="services.html">Services</a></li>
-      <li><a href="#how">How it works</a></li>
+      <li><a href="#how">Process</a></li>
       <li><a href="#case-study">Case Studies</a></li>
-      <li><a href="#booking" class="nav-cta" onclick="openModal();return false;">Book a call</a></li>
+      <li><a href="#booking" onclick="openModal();return false;" class="nav-cta">Book a call</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
   <section class="hero">
-    <canvas id="particles-canvas"></canvas>
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-orb hero-orb-3"></div>
-    <div class="hero-badge">⚡ AI Powered Automation</div>
+    <div class="hero-badge"><div class="badge-dot"></div> AI Automation Agency</div>
     <h1>Stop doing <span class="typewriter-wrap"><span class="typewriter-text" id="typewriter">tasks</span><span class="typewriter-cursor"></span></span>.<br />Automate everything.</h1>
-    <p>We build custom AI automations that save your business 10+ hours a week, so you can focus on what actually grows revenue.</p>
+    <p class="hero-sub">We build custom AI workflows that eliminate the manual work eating your week, so you can focus entirely on growth.</p>
     <div class="hero-buttons">
-      <div class="mag-wrap"><a href="#booking" class="btn-primary">Get a free audit →</a></div>
-      <div class="mag-wrap"><a href="#how" class="btn-secondary">See how it works</a></div>
+      <button class="btn-primary" onclick="openModal()">Get a free audit →</button>
+      <a href="#how" class="btn-secondary">See how it works</a>
     </div>
   </section>
 
-  <!-- MARQUEE STRIP -->
-  <div class="marquee-strip">
+  <!-- MARQUEE -->
+  <div class="marquee-wrap">
     <div class="marquee-track">
-      <div class="marquee-item"><span class="dot"></span>Make.com</div>
-      <div class="marquee-item"><span class="dot"></span>Google Sheets</div>
-      <div class="marquee-item"><span class="dot"></span>Gmail</div>
-      <div class="marquee-item"><span class="dot"></span>Groq AI</div>
-      <div class="marquee-item"><span class="dot"></span>OpenAI</div>
-      <div class="marquee-item"><span class="dot"></span>Slack</div>
-      <div class="marquee-item"><span class="dot"></span>HubSpot</div>
-      <div class="marquee-item"><span class="dot"></span>Notion</div>
-      <div class="marquee-item"><span class="dot"></span>Zapier</div>
-      <div class="marquee-item"><span class="dot"></span>Airtable</div>
-      <div class="marquee-item"><span class="dot"></span>WhatsApp</div>
-      <div class="marquee-item"><span class="dot"></span>Calendly</div>
-      <!-- Duplicate for seamless loop -->
-      <div class="marquee-item"><span class="dot"></span>Make.com</div>
-      <div class="marquee-item"><span class="dot"></span>Google Sheets</div>
-      <div class="marquee-item"><span class="dot"></span>Gmail</div>
-      <div class="marquee-item"><span class="dot"></span>Groq AI</div>
-      <div class="marquee-item"><span class="dot"></span>OpenAI</div>
-      <div class="marquee-item"><span class="dot"></span>Slack</div>
-      <div class="marquee-item"><span class="dot"></span>HubSpot</div>
-      <div class="marquee-item"><span class="dot"></span>Notion</div>
-      <div class="marquee-item"><span class="dot"></span>Zapier</div>
-      <div class="marquee-item"><span class="dot"></span>Airtable</div>
-      <div class="marquee-item"><span class="dot"></span>WhatsApp</div>
-      <div class="marquee-item"><span class="dot"></span>Calendly</div>
+      <div class="marquee-item"><span class="m-dot"></span>Make.com</div>
+      <div class="marquee-item"><span class="m-dot"></span>Google Workspace</div>
+      <div class="marquee-item"><span class="m-dot"></span>Gmail</div>
+      <div class="marquee-item"><span class="m-dot"></span>HubSpot</div>
+      <div class="marquee-item"><span class="m-dot"></span>Notion</div>
+      <div class="marquee-item"><span class="m-dot"></span>Slack</div>
+      <div class="marquee-item"><span class="m-dot"></span>Airtable</div>
+      <div class="marquee-item"><span class="m-dot"></span>Shopify</div>
+      <div class="marquee-item"><span class="m-dot"></span>WhatsApp</div>
+      <div class="marquee-item"><span class="m-dot"></span>Calendly</div>
+      <div class="marquee-item"><span class="m-dot"></span>Xero</div>
+      <div class="marquee-item"><span class="m-dot"></span>OpenAI</div>
+      <div class="marquee-item"><span class="m-dot"></span>Make.com</div>
+      <div class="marquee-item"><span class="m-dot"></span>Google Workspace</div>
+      <div class="marquee-item"><span class="m-dot"></span>Gmail</div>
+      <div class="marquee-item"><span class="m-dot"></span>HubSpot</div>
+      <div class="marquee-item"><span class="m-dot"></span>Notion</div>
+      <div class="marquee-item"><span class="m-dot"></span>Slack</div>
+      <div class="marquee-item"><span class="m-dot"></span>Airtable</div>
+      <div class="marquee-item"><span class="m-dot"></span>Shopify</div>
+      <div class="marquee-item"><span class="m-dot"></span>WhatsApp</div>
+      <div class="marquee-item"><span class="m-dot"></span>Calendly</div>
+      <div class="marquee-item"><span class="m-dot"></span>Xero</div>
+      <div class="marquee-item"><span class="m-dot"></span>OpenAI</div>
     </div>
   </div>
 
   <!-- STATS -->
   <div class="stats">
-    <div class="stat fade-up">
-      <div class="stat-number" data-target="10" data-suffix="+">0</div>
+    <div class="stat fade-in">
+      <span class="stat-number" data-target="10" data-suffix="+">0+</span>
       <div class="stat-label">Hours saved per week</div>
     </div>
-    <div class="stat fade-up fade-up-delay-1">
-      <div class="stat-number" data-target="48" data-suffix="h">0</div>
+    <div class="stat fade-in fade-in-d1">
+      <span class="stat-number" data-target="48" data-suffix="h">0h</span>
       <div class="stat-label">Average delivery time</div>
     </div>
-    <div class="stat fade-up fade-up-delay-2">
-      <div class="stat-number" data-target="3" data-suffix="x">0</div>
+    <div class="stat fade-in fade-in-d2">
+      <span class="stat-number" data-target="3" data-suffix="×">0×</span>
       <div class="stat-label">Average ROI in month 1</div>
     </div>
-    <div class="stat fade-up fade-up-delay-3">
-      <div class="stat-number" data-target="100" data-suffix="%">0</div>
+    <div class="stat fade-in fade-in-d3">
+      <span class="stat-number">100%</span>
       <div class="stat-label">Done for you</div>
     </div>
   </div>
 
   <!-- SERVICES -->
   <section id="services">
-    <div class="section-label fade-up">What we do</div>
-    <h2 class="fade-up">Automations that actually <em>work</em></h2>
-    <p class="section-sub fade-up">We build end to end AI workflows using the best tools available, with no bloat and no fluff.</p>
+    <div class="section-label fade-in">What we do</div>
+    <h2 class="fade-in">Automations built around your business</h2>
+    <p class="section-sub fade-in">End to end AI workflows using the best tools available. No bloat, no fluff, just results.</p>
     <div class="services-grid">
-      <div class="service-card fade-up">
-        <div class="service-icon icon-purple">🤖</div>
+      <div class="service-card fade-in">
+        <div class="service-icon-wrap">🤖</div>
         <h3>AI Lead Outreach</h3>
-        <p>Automatically find, research and send personalised cold emails to your ideal clients on autopilot.</p>
+        <p>Automatically research and send personalised cold emails to your ideal clients every day, on autopilot.</p>
       </div>
-      <div class="service-card fade-up fade-up-delay-1">
-        <div class="service-icon icon-orange">📥</div>
+      <div class="service-card fade-in fade-in-d1">
+        <div class="service-icon-wrap">📥</div>
         <h3>Inbox Automation</h3>
-        <p>AI reads, classifies and drafts replies to your emails so you only touch the ones that need you.</p>
+        <p>AI reads, classifies and drafts replies to your emails so you only spend time on what needs you.</p>
       </div>
-      <div class="service-card fade-up fade-up-delay-2">
-        <div class="service-icon icon-cyan">✍️</div>
+      <div class="service-card fade-in fade-in-d2">
+        <div class="service-icon-wrap">✍️</div>
         <h3>Content Pipelines</h3>
-        <p>Turn one idea into a week of content across blogs, social posts and newsletters, all generated and scheduled automatically.</p>
+        <p>Turn one brief into a full week of content across blogs, social and newsletters, all scheduled automatically.</p>
       </div>
-      <div class="service-card fade-up fade-up-delay-3">
-        <div class="service-icon icon-green">🔗</div>
+      <div class="service-card fade-in fade-in-d3">
+        <div class="service-icon-wrap">🔗</div>
         <h3>CRM & Ops Workflows</h3>
-        <p>Connect your tools and eliminate manual data entry. Leads, tasks and invoices all flow without you lifting a finger.</p>
-      </div>
-      <div class="service-card fade-up">
-        <div class="service-icon icon-purple">🤝</div>
-        <h3>Client Onboarding</h3>
-        <p>New client signs up? Your system handles the rest: welcome emails, contracts, project setup, and task creation, all triggered automatically.</p>
-      </div>
-      <div class="service-card fade-up fade-up-delay-1">
-        <div class="service-icon icon-orange">📅</div>
-        <h3>Booking Automation</h3>
-        <p>Eliminate the scheduling back and forth. Every booking automatically triggers confirmations, reminders, CRM updates and post session follow ups.</p>
+        <p>Connect your tools and kill manual data entry. Leads, tasks and invoices keep flowing without you lifting a finger.</p>
       </div>
     </div>
   </section>
 
   <!-- HOW IT WORKS -->
-  <section id="how" class="how-it-works">
-    <div class="section-label fade-up">The process</div>
-    <h2 class="fade-up">Up and running in <em>days</em>, not months</h2>
-    <div class="steps">
-      <div class="step fade-up">
-        <div class="step-number">01</div>
+  <section id="how">
+    <div class="section-label fade-in">The process</div>
+    <h2 class="fade-in">Live in days, not months</h2>
+    <p class="section-sub fade-in">No long retainers or drawn-out projects. We move fast and deliver fast.</p>
+    <div class="steps-grid">
+      <div class="step-card fade-in">
+        <div class="step-num">01</div>
         <h3>Free Audit</h3>
-        <p>We map out your current workflows and identify exactly where AI can save you the most time.</p>
+        <p>We map your workflows and identify exactly where AI saves the most time and money.</p>
       </div>
-      <div class="step fade-up fade-up-delay-1">
-        <div class="step-number">02</div>
+      <div class="step-card fade-in fade-in-d1">
+        <div class="step-num">02</div>
         <h3>We Build It</h3>
-        <p>Our team builds your custom automation, usually delivered within 48 hours.</p>
+        <p>Your custom automation is built and tested, typically delivered within 48 hours.</p>
       </div>
-      <div class="step fade-up fade-up-delay-2">
-        <div class="step-number">03</div>
+      <div class="step-card fade-in fade-in-d2">
+        <div class="step-num">03</div>
         <h3>You Approve</h3>
-        <p>We walk you through everything, make tweaks, and make sure it works perfectly for your business.</p>
+        <p>We walk you through everything and make any tweaks until it's exactly right.</p>
       </div>
-      <div class="step fade-up fade-up-delay-3">
-        <div class="step-number">04</div>
+      <div class="step-card fade-in fade-in-d3">
+        <div class="step-num">04</div>
         <h3>It Runs Forever</h3>
-        <p>Your automation runs 24/7 in the background. We monitor and maintain it so you never have to.</p>
+        <p>Your automation runs 24/7. We monitor and maintain it so you never have to.</p>
       </div>
     </div>
   </section>
 
-  <!-- CASE STUDY GALLERY -->
-  <section id="case-study" class="cs-gallery-section">
-    <div class="section-label fade-up">Real results</div>
-    <h2 class="fade-up">Work that speaks <em>for itself</em></h2>
-    <p class="section-sub fade-up">Real automations built for real businesses. Here's what we delivered.</p>
+  <!-- WHY ELMDALE AI -->
+  <section id="why">
+    <div class="section-label fade-in">Why us</div>
+    <h2 class="fade-in">Why businesses choose Elmdale AI</h2>
+    <p class="section-sub fade-in">We do things differently, and our clients notice the difference from day one.</p>
+    <div class="why-grid">
+      <div class="why-card fade-in">
+        <span class="why-card-icon">⚡</span>
+        <h3>Built in days, not months</h3>
+        <p>We move fast. Your first automation is live within a week.</p>
+      </div>
+      <div class="why-card fade-in fade-in-d1">
+        <span class="why-card-icon">🎯</span>
+        <h3>Tailored to your workflow</h3>
+        <p>No off the shelf tools. Everything is custom built for how you work.</p>
+      </div>
+      <div class="why-card fade-in fade-in-d2">
+        <span class="why-card-icon">💰</span>
+        <h3>Pay per result</h3>
+        <p>Flexible pricing tied to your outcomes, not bloated retainers.</p>
+      </div>
+      <div class="why-card fade-in fade-in-d3">
+        <span class="why-card-icon">🤝</span>
+        <h3>Hands-on support</h3>
+        <p>You get direct access to the person building your automations.</p>
+      </div>
+    </div>
+  </section>
 
-    <div class="cs-gallery">
+  <!-- CASE STUDIES -->
+  <section id="case-study">
+    <div class="section-label fade-in">Real results</div>
+    <h2 class="fade-in">Work that speaks for itself</h2>
+    <p class="section-sub fade-in">Real automations built for real businesses.</p>
+    <div class="cs-grid">
 
-      <!-- CARD 1: Castle View Tutoring -->
-      <div class="csg-card csg-card-1 fade-up">
-        <div class="csg-header">
-          <div class="csg-glow"></div>
-          <div class="csg-tag">📚 Education</div>
-          <div class="csg-name">Castle View Tutoring</div>
-          <div class="csg-industry">Online Tutoring Platform · United Kingdom</div>
-          <div class="csg-stats">
-            <div class="csg-stat">
-              <div class="csg-stat-num">12h</div>
-              <div class="csg-stat-label">Saved weekly</div>
+      <!-- Card 1 -->
+      <div class="cs-card fade-in">
+        <div class="cs-card-top">
+          <div class="cs-card-tag">📚 Education</div>
+          <div class="cs-card-name">Castle View Tutoring</div>
+          <div class="cs-card-sub">Online Tutoring Platform · United Kingdom</div>
+          <div class="cs-card-stats">
+            <div class="cs-stat-pill">
+              <div class="cs-stat-num">12h</div>
+              <div class="cs-stat-lbl">Saved weekly</div>
             </div>
-            <div class="csg-stat">
-              <div class="csg-stat-num">4×</div>
-              <div class="csg-stat-label">Faster enquiry response</div>
+            <div class="cs-stat-pill">
+              <div class="cs-stat-num">4×</div>
+              <div class="cs-stat-lbl">Faster responses</div>
             </div>
-            <div class="csg-stat">
-              <div class="csg-stat-num">48h</div>
-              <div class="csg-stat-label">Delivery time</div>
+            <div class="cs-stat-pill">
+              <div class="cs-stat-num">48h</div>
+              <div class="cs-stat-lbl">Delivery time</div>
             </div>
           </div>
         </div>
-        <div class="csg-body">
-          <div class="csg-challenge">What we automated</div>
-          <ul class="csg-points">
-            <li><span class="csg-dot"></span>New student enquiries are instantly AI matched to the best fit tutor, with no manual review needed</li>
-            <li><span class="csg-dot"></span>Automated booking links sent immediately so students can schedule their free consultation themselves</li>
-            <li><span class="csg-dot"></span>Tutors notified the moment a match is confirmed with full student details</li>
-            <li><span class="csg-dot"></span>Follow up sequences triggered automatically for students who haven't booked yet</li>
+        <div class="cs-card-body">
+          <ul class="cs-card-points">
+            <li><span class="cs-tick">✓</span>New enquiries are AI matched to the best fit tutor instantly, with no manual review</li>
+            <li><span class="cs-tick">✓</span>Automated booking link sent so students can schedule their free consultation themselves</li>
+            <li><span class="cs-tick">✓</span>Tutors notified instantly with full student details on every match</li>
+            <li><span class="cs-tick">✓</span>Follow up sequences triggered automatically for students who haven't booked</li>
           </ul>
-          <div class="csg-divider"></div>
-          <div class="csg-quote">
-            <div class="csg-quote-bar"></div>
-            <div>
-              <div class="csg-quote-text">"The whole intake process now runs itself. Students are matched and booked faster than we could ever do manually."</div>
-              <div class="csg-quote-author">Founder, Castle View Tutoring</div>
-            </div>
+          <div class="cs-card-quote">
+            <p>"The whole intake process now runs itself. Students are matched and booked faster than we could ever do manually."</p>
+            <span>Founder, Castle View Tutoring</span>
           </div>
         </div>
       </div>
 
-      <!-- CARD 2: Blindspot Marketing Agency -->
-      <div class="csg-card csg-card-2 fade-up fade-up-delay-1">
-        <div class="csg-header">
-          <div class="csg-glow"></div>
-          <div class="csg-tag">🖥️ Digital Agency</div>
-          <div class="csg-name">Blindspot Marketing Agency</div>
-          <div class="csg-industry">Boutique Marketing Agency · United Kingdom</div>
-          <div class="csg-stats">
-            <div class="csg-stat">
-              <div class="csg-stat-num">3</div>
-              <div class="csg-stat-label">Core pages launched</div>
+      <!-- Card 2 -->
+      <div class="cs-card fade-in fade-in-d1">
+        <div class="cs-card-top">
+          <div class="cs-card-tag">🖥️ Digital Agency</div>
+          <div class="cs-card-name">Blindspot Marketing Agency</div>
+          <div class="cs-card-sub">Boutique Marketing Agency · United Kingdom</div>
+          <div class="cs-card-stats">
+            <div class="cs-stat-pill">
+              <div class="cs-stat-num">3</div>
+              <div class="cs-stat-lbl">Core pages launched</div>
             </div>
-            <div class="csg-stat">
-              <div class="csg-stat-num">1</div>
-              <div class="csg-stat-label">Custom quote builder</div>
+            <div class="cs-stat-pill">
+              <div class="cs-stat-num">1</div>
+              <div class="cs-stat-lbl">Custom quote builder</div>
             </div>
-            <div class="csg-stat">
-              <div class="csg-stat-num">24/7</div>
-              <div class="csg-stat-label">Lead capture flow</div>
+            <div class="cs-stat-pill">
+              <div class="cs-stat-num">24/7</div>
+              <div class="cs-stat-lbl">Lead capture flow</div>
             </div>
           </div>
         </div>
-        <div class="csg-body">
-          <div class="csg-challenge">What we built</div>
-          <ul class="csg-points">
-            <li><span class="csg-dot"></span>Designed and built the Blindspot website to clearly position the agency, its services and its work</li>
-            <li><span class="csg-dot"></span>Created a dedicated services page with a custom package builder so prospects can request tailored quotes</li>
-            <li><span class="csg-dot"></span>Built a work page that turns portfolio pieces into clear case studies and supports the boutique agency positioning</li>
-            <li><span class="csg-dot"></span>Set up enquiry and booking automations so new leads can be captured, routed and followed up automatically</li>
+        <div class="cs-card-body">
+          <ul class="cs-card-points">
+            <li><span class="cs-tick">✓</span>Designed and built the Blindspot website to clearly position the agency, its services and its work</li>
+            <li><span class="cs-tick">✓</span>Created a dedicated services page with a custom package builder so prospects can request tailored quotes</li>
+            <li><span class="cs-tick">✓</span>Built a work page that turns portfolio pieces into clear case studies and supports the boutique agency positioning</li>
+            <li><span class="cs-tick">✓</span>Set up enquiry and booking automations so new leads can be captured, routed and followed up automatically</li>
           </ul>
-          <div class="csg-divider"></div>
-          <div class="csg-quote">
-            <div class="csg-quote-bar"></div>
-            <div>
-              <div class="csg-quote-text">"The site now reflects the standard of the agency properly, and the automation layer means new enquiries are handled without manual chasing."</div>
-              <div class="csg-quote-author">Founder, Blindspot Marketing Agency</div>
-            </div>
+          <div class="cs-card-quote">
+            <p>"The site now reflects the standard of the agency properly, and the automation layer means new enquiries are handled without manual chasing."</p>
+            <span>Founder, Blindspot Marketing Agency</span>
           </div>
         </div>
       </div>
 
     </div>
   </section>
-
 
   <!-- BOOKING -->
-  <section id="booking" class="booking-section">
-    <div class="booking-cta-box fade-up">
-      <div class="section-label">Book a call</div>
-      <h2>Let's talk about <em>your</em> automation</h2>
-      <p>30 minutes, no fluff, just a clear plan for what we can automate in your business. Free, no commitment.</p>
-      <div class="booking-features">
-        <div class="booking-feature"><span>✓</span> Free 30 minute call</div>
-        <div class="booking-feature"><span>✓</span> No commitment</div>
-        <div class="booking-feature"><span>✓</span> Walk away with a clear plan</div>
-      </div>
-      <!-- Replace YOUR_USERNAME with your Calendly username -->
-      <button class="btn-primary" onclick="openModal()">
-        Book your free call →
-      </button>
+  <section id="booking">
+    <h2 class="fade-in">Ready to automate<br />your business?</h2>
+    <p>30 minutes, no fluff, just a clear plan for what we can build for you.</p>
+    <div class="booking-pills">
+      <div class="booking-pill"><div class="booking-pill-dot"></div>Free 30 minute call</div>
+      <div class="booking-pill"><div class="booking-pill-dot"></div>No commitment</div>
+      <div class="booking-pill"><div class="booking-pill-dot"></div>Walk away with a clear plan</div>
     </div>
+    <button class="btn-white" onclick="openModal()">Book your free call →</button>
   </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo"><div class="logo-dot"></div> Elmdale AI</div>
+    <p>© 2026 Elmdale AI. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="mailto:hello@elmdale.ai">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        hello@elmdale.ai
+      </a>
+      <a href="https://wa.me/447700000000" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://linkedin.com/company/elmdale-ai" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </footer>
 
   <!-- ENQUIRY MODAL -->
   <div class="modal-overlay" id="enquiryModal">
     <div class="modal" role="dialog" aria-modal="true">
       <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
-
-      <!-- HEADER -->
       <div class="modal-header">
         <div class="modal-step-label" id="modal-step-label">Step 1 of 3</div>
         <div class="modal-title" id="modal-title">Let's get to know your business</div>
@@ -1702,31 +1476,20 @@
           <div class="modal-progress-bar" id="prog-3"></div>
         </div>
       </div>
-
-      <!-- STEP 1: About you -->
       <div class="modal-step active" id="step-1">
         <div class="modal-body">
           <div class="form-row">
-            <div class="form-group">
-              <label>Your name *</label>
-              <input type="text" id="f-name" placeholder="Jane Smith" />
-            </div>
-            <div class="form-group">
-              <label>Business name *</label>
-              <input type="text" id="f-business" placeholder="Acme Ltd" />
-            </div>
+            <div class="form-group"><label>Your name *</label><input type="text" id="f-name" placeholder="Jane Smith" /></div>
+            <div class="form-group"><label>Business name *</label><input type="text" id="f-business" placeholder="Acme Ltd" /></div>
           </div>
           <div class="form-row">
-            <div class="form-group">
-              <label>Email address *</label>
-              <input type="email" id="f-email" placeholder="jane@acme.com" />
-            </div>
+            <div class="form-group"><label>Email address *</label><input type="email" id="f-email" placeholder="jane@acme.com" /></div>
             <div class="form-group">
               <label>Industry *</label>
               <select id="f-industry">
                 <option value="" disabled selected>Select industry</option>
                 <option>Digital Marketing / Agency</option>
-                <option>Ecommerce / Retail</option>
+                <option>E-commerce / Retail</option>
                 <option>Education / Tutoring</option>
                 <option>Professional Services</option>
                 <option>Real Estate</option>
@@ -1737,42 +1500,31 @@
               </select>
             </div>
           </div>
-          <div class="form-group">
-            <label>Business website</label>
-            <input type="text" id="f-website" placeholder="www.yourbusiness.com" />
-          </div>
+          <div class="form-group"><label>Business website</label><input type="text" id="f-website" placeholder="www.yourbusiness.com" /></div>
         </div>
-        <div class="modal-footer">
-          <button class="btn-next" onclick="nextStep(1)">Next →</button>
-        </div>
+        <div class="modal-footer"><button class="btn-next" onclick="nextStep(1)">Next →</button></div>
       </div>
-
-      <!-- STEP 2: About their operations -->
       <div class="modal-step" id="step-2">
         <div class="modal-body">
           <div class="form-group">
             <label>How many people are in your team?</label>
             <select id="f-size">
               <option value="" disabled selected>Select team size</option>
-              <option>Just me</option>
-              <option>2–5 people</option>
-              <option>6–20 people</option>
-              <option>21–50 people</option>
-              <option>50+ people</option>
+              <option>Just me</option><option>2–5 people</option><option>6–20 people</option><option>21–50 people</option><option>50+ people</option>
             </select>
           </div>
-          <div class="chip-label">Which tools does your business currently use? (select all that apply)</div>
+          <div class="chip-label">Which tools does your business currently use?</div>
           <div class="chip-group" id="tools-chips">
-            <label class="chip"><input type="checkbox" value="Gmail / Google Workspace" onchange="toggleChip(this)">Gmail / Google Workspace</label>
+            <label class="chip"><input type="checkbox" value="Gmail / Google Workspace" onchange="toggleChip(this)">Gmail / Google</label>
             <label class="chip"><input type="checkbox" value="Microsoft 365" onchange="toggleChip(this)">Microsoft 365</label>
             <label class="chip"><input type="checkbox" value="HubSpot" onchange="toggleChip(this)">HubSpot</label>
             <label class="chip"><input type="checkbox" value="Notion" onchange="toggleChip(this)">Notion</label>
             <label class="chip"><input type="checkbox" value="Slack" onchange="toggleChip(this)">Slack</label>
             <label class="chip"><input type="checkbox" value="Airtable" onchange="toggleChip(this)">Airtable</label>
             <label class="chip"><input type="checkbox" value="Shopify" onchange="toggleChip(this)">Shopify</label>
-            <label class="chip"><input type="checkbox" value="WhatsApp Business" onchange="toggleChip(this)">WhatsApp Business</label>
+            <label class="chip"><input type="checkbox" value="WhatsApp Business" onchange="toggleChip(this)">WhatsApp</label>
             <label class="chip"><input type="checkbox" value="Xero / QuickBooks" onchange="toggleChip(this)">Xero / QuickBooks</label>
-            <label class="chip"><input type="checkbox" value="None / Not sure" onchange="toggleChip(this)">None / Not sure</label>
+            <label class="chip"><input type="checkbox" value="None / Not sure" onchange="toggleChip(this)">Not sure</label>
           </div>
           <div class="form-group">
             <label>What's your biggest time drain right now?</label>
@@ -1793,23 +1545,17 @@
           <button class="btn-next" onclick="nextStep(2)">Next →</button>
         </div>
       </div>
-
-      <!-- STEP 3: What they want automated -->
       <div class="modal-step" id="step-3">
         <div class="modal-body">
           <div class="form-group">
             <label>What would you like us to automate? *</label>
-            <textarea id="f-automate" placeholder="e.g. When a new lead fills in our contact form, I want them to automatically receive a personalised email, be added to our CRM, and a task created in Notion for our team…"></textarea>
+            <textarea id="f-automate" placeholder="e.g. When a new lead fills in our contact form, I want them to automatically receive a personalised email, be added to our CRM, and a task created for our team…"></textarea>
           </div>
           <div class="form-group">
-            <label>How many hours per week do you estimate you lose to manual tasks?</label>
+            <label>How many hours per week do you lose to manual tasks?</label>
             <select id="f-hours">
               <option value="" disabled selected>Select a range</option>
-              <option>1–3 hours</option>
-              <option>3–5 hours</option>
-              <option>5–10 hours</option>
-              <option>10–20 hours</option>
-              <option>20+ hours</option>
+              <option>1–3 hours</option><option>3–5 hours</option><option>5–10 hours</option><option>10–20 hours</option><option>20+ hours</option>
             </select>
           </div>
           <div class="form-group">
@@ -1822,288 +1568,186 @@
           <button class="btn-next" onclick="submitForm()">Book my free call →</button>
         </div>
       </div>
-
-      <!-- SUCCESS -->
       <div class="modal-step" id="step-success">
         <div class="modal-success">
           <div class="success-icon">✓</div>
           <h3>You're all set!</h3>
-          <p>Thanks for sharing, we've got everything we need to prepare for your call. Pick a time that works for you below and we'll be ready to hit the ground running.</p>
-          <button class="btn-primary" onclick="Calendly.initPopupWidget({url:'https://calendly.com/YOUR_USERNAME/30min'});return false;">
-            Choose your time slot →
-          </button>
+          <p>Thanks for sharing, we've got everything we need to prepare for your call. Pick a time that works for you below.</p>
+          <button class="btn-primary" onclick="Calendly.initPopupWidget({url:'https://calendly.com/YOUR_USERNAME/30min'});return false;">Choose your time slot →</button>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-logo">Elmdale AI</span>
-    <p>© 2026 Elmdale AI. All rights reserved.</p>
-  </footer>
+  <!-- COOKIE BANNER -->
+  <div class="cookie-banner" id="cookieBanner" role="region" aria-label="Cookie notice">
+    <p>We use cookies to improve your experience. By continuing, you agree to our use of cookies.</p>
+    <div class="cookie-actions">
+      <button class="cookie-accept" id="cookieAccept">Accept</button>
+      <button class="cookie-decline" id="cookieDecline">Decline</button>
+    </div>
+  </div>
 
-  <!-- Calendly JS -->
-  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
   <script>
-    // ── Nav shrink on scroll ──
-    window.addEventListener('scroll', () => {
-      document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-    });
+    // Fade in on scroll
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.fade-in').forEach(el => io.observe(el));
 
-    // ── Cursor spotlight glow ──
-    const glow = document.getElementById('cursor-glow');
-    document.addEventListener('mousemove', e => {
-      glow.style.left = e.clientX + 'px';
-      glow.style.top  = e.clientY + 'px';
-    });
-
-    // ── Particle network canvas ──
-    const canvas = document.getElementById('particles-canvas');
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-
-    function resizeCanvas() {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+    // Counter animation
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target);
+      const suffix = el.dataset.suffix || '';
+      const step = target / (1200 / 16);
+      let cur = 0;
+      const t = setInterval(() => {
+        cur += step;
+        if (cur >= target) { cur = target; clearInterval(t); }
+        el.textContent = Math.floor(cur) + suffix;
+      }, 16);
     }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    const cio = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); cio.unobserve(e.target); } });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-target]').forEach(el => cio.observe(el));
 
-    function Particle() {
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-      this.vx = (Math.random() - 0.5) * 0.4;
-      this.vy = (Math.random() - 0.5) * 0.4;
-      this.r  = Math.random() * 1.5 + 0.5;
-    }
+    // Modal
+    const stepMeta = [
+      { label: 'Step 1 of 3', title: "Let's get to know your business",  sub: 'Tell us a little about yourself so we can prepare before the call.' },
+      { label: 'Step 2 of 3', title: 'How does your business run?',       sub: 'Help us understand your current setup and biggest pain points.' },
+      { label: 'Step 3 of 3', title: 'What do you want automated?',       sub: "The more detail you give us, the better prepared we'll be." },
+    ];
 
-    for (let i = 0; i < 70; i++) particles.push(new Particle());
+    function openModal()  { goToStep(1); document.getElementById('enquiryModal').classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeModal() { document.getElementById('enquiryModal').classList.remove('open'); document.body.style.overflow = ''; }
+    document.getElementById('enquiryModal').addEventListener('click', function(e) { if (e.target === this) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-    function drawParticles() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach(p => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width)  p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(124,58,237,0.5)';
-        ctx.fill();
+    function goToStep(n) {
+      document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
+      document.getElementById('step-' + (n === 'success' ? 'success' : n)).classList.add('active');
+      const isSuccess = n === 'success';
+      ['modal-step-label','modal-title','modal-subtitle'].forEach(id => {
+        document.getElementById(id).style.display = isSuccess ? 'none' : '';
       });
-      // Draw connecting lines between nearby particles
-      for (let i = 0; i < particles.length; i++) {
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = particles[i].x - particles[j].x;
-          const dy = particles[i].y - particles[j].y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x, particles[i].y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(124,58,237,${0.15 * (1 - dist/120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
+      document.querySelector('.modal-progress').style.display = isSuccess ? 'none' : '';
+      if (!isSuccess) {
+        const m = stepMeta[n - 1];
+        document.getElementById('modal-step-label').textContent = m.label;
+        document.getElementById('modal-title').textContent      = m.title;
+        document.getElementById('modal-subtitle').textContent   = m.sub;
+        [1,2,3].forEach(i => {
+          document.getElementById('prog-' + i).className = 'modal-progress-bar' + (i < n ? ' done' : i === n ? ' active' : '');
+        });
+      }
+      document.querySelector('.modal').scrollTop = 0;
+    }
+
+    function nextStep(cur) {
+      if (cur === 1) {
+        if (!document.getElementById('f-name').value.trim() ||
+            !document.getElementById('f-business').value.trim() ||
+            !document.getElementById('f-email').value.trim() ||
+            !document.getElementById('f-industry').value) {
+          alert('Please fill in all required fields.'); return;
         }
       }
-      requestAnimationFrame(drawParticles);
+      if (cur === 3) { submitForm(); return; }
+      goToStep(cur + 1);
     }
-    drawParticles();
 
-    // ── Typewriter rotating text ──
+    function prevStep(cur) { goToStep(cur - 1); }
+
+    async function submitForm() {
+      const automate = document.getElementById('f-automate').value.trim();
+      if (!automate) { alert("Please describe what you'd like to automate."); return; }
+      const selectedTools = [...document.querySelectorAll('#tools-chips input:checked')].map(i => i.value).join(', ') || 'None selected';
+      const payload = {
+        name: document.getElementById('f-name').value.trim(),
+        business: document.getElementById('f-business').value.trim(),
+        email: document.getElementById('f-email').value.trim(),
+        industry: document.getElementById('f-industry').value,
+        website: document.getElementById('f-website').value.trim() || 'Not provided',
+        teamSize: document.getElementById('f-size').value || 'Not provided',
+        tools: selectedTools,
+        timeDrain: document.getElementById('f-drain').value || 'Not provided',
+        automate,
+        hoursLost: document.getElementById('f-hours').value || 'Not provided',
+        extra: document.getElementById('f-extra').value.trim() || 'None',
+        submittedAt: new Date().toLocaleString('en-GB'),
+      };
+      const WEBHOOK_URL = 'https://hook.eu1.make.com/g4fkegh8omrq4rxxu759n2q4f7crydjv';
+      try { await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) }); }
+      catch(e) { console.error('Webhook error:', e); }
+      goToStep('success');
+    }
+
+    function toggleChip(input) { input.closest('.chip').classList.toggle('selected', input.checked); }
+
+    // Typewriter
     const words = ['tasks', 'emails', 'follow ups', 'reporting', 'data entry', 'outreach'];
     let wordIndex = 0, charIndex = 0, deleting = false;
-    const el = document.getElementById('typewriter');
-
+    const twEl = document.getElementById('typewriter');
     function type() {
       const word = words[wordIndex];
       if (!deleting) {
-        el.textContent = word.slice(0, ++charIndex);
-        if (charIndex === word.length) {
-          deleting = true;
-          setTimeout(type, 1800);
-          return;
-        }
+        twEl.textContent = word.slice(0, ++charIndex);
+        if (charIndex === word.length) { deleting = true; setTimeout(type, 1800); return; }
       } else {
-        el.textContent = word.slice(0, --charIndex);
-        if (charIndex === 0) {
-          deleting = false;
-          wordIndex = (wordIndex + 1) % words.length;
-        }
+        twEl.textContent = word.slice(0, --charIndex);
+        if (charIndex === 0) { deleting = false; wordIndex = (wordIndex + 1) % words.length; }
       }
       setTimeout(type, deleting ? 60 : 100);
     }
     type();
 
-    // ── Magnetic buttons ──
-    document.querySelectorAll('.mag-wrap').forEach(wrap => {
-      const btn = wrap.querySelector('a, button');
-      wrap.addEventListener('mousemove', e => {
-        const rect = wrap.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width  / 2;
-        const y = e.clientY - rect.top  - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.25}px, ${y * 0.25}px)`;
-      });
-      wrap.addEventListener('mouseleave', () => {
-        btn.style.transform = '';
+    // Hamburger menu
+    const hamburger = document.getElementById('hamburger');
+    const navUl = document.getElementById('nav-ul');
+
+    hamburger.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = navUl.classList.toggle('nav-open');
+      hamburger.classList.toggle('is-open', isOpen);
+      hamburger.setAttribute('aria-expanded', isOpen);
+    });
+
+    // Close nav on outside click
+    document.addEventListener('click', function(e) {
+      if (!document.getElementById('main-nav').contains(e.target)) {
+        navUl.classList.remove('nav-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    // Close nav when a link is clicked
+    navUl.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', function() {
+        navUl.classList.remove('nav-open');
+        hamburger.classList.remove('is-open');
+        hamburger.setAttribute('aria-expanded', 'false');
       });
     });
 
-    // ── Scroll fade-in animations ──
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
+    // Cookie banner
+    (function() {
+      var banner = document.getElementById('cookieBanner');
+      var consent = localStorage.getItem('elmdale_cookie_consent');
+      if (!consent) {
+        setTimeout(function() { banner.classList.add('visible'); }, 600);
+      }
+      document.getElementById('cookieAccept').addEventListener('click', function() {
+        localStorage.setItem('elmdale_cookie_consent', 'accepted');
+        banner.classList.remove('visible');
       });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // ── Animated number counters ──
-    function animateCounter(el) {
-      const target = parseInt(el.dataset.target);
-      const suffix = el.dataset.suffix || '';
-      const step = target / (1500 / 16);
-      let current = 0;
-      const timer = setInterval(() => {
-        current += step;
-        if (current >= target) { current = target; clearInterval(timer); }
-        el.textContent = Math.floor(current) + suffix;
-      }, 16);
-    }
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounter(entry.target);
-          counterObserver.unobserve(entry.target);
-        }
+      document.getElementById('cookieDecline').addEventListener('click', function() {
+        localStorage.setItem('elmdale_cookie_consent', 'declined');
+        banner.classList.remove('visible');
       });
-    }, { threshold: 0.5 });
-    document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
-
-    // ── Enquiry Modal ──
-    const stepMeta = [
-      { label: 'Step 1 of 3', title: "Let's get to know your business", sub: 'Tell us a little about yourself so we can prepare before the call.' },
-      { label: 'Step 2 of 3', title: 'How does your business run?',      sub: 'Help us understand your current setup and biggest pain points.' },
-      { label: 'Step 3 of 3', title: 'What do you want automated?',      sub: 'The more detail you give us, the better prepared we\'ll be.' },
-    ];
-
-    function openModal() {
-      goToStep(1);
-      document.getElementById('enquiryModal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      document.getElementById('enquiryModal').classList.remove('open');
-      document.body.style.overflow = '';
-    }
-
-    // Close on backdrop click
-    document.getElementById('enquiryModal').addEventListener('click', function(e) {
-      if (e.target === this) closeModal();
-    });
-
-    // Close on Escape
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-    function goToStep(n) {
-      document.querySelectorAll('.modal-step').forEach(s => s.classList.remove('active'));
-      const step = document.getElementById('step-' + (n === 'success' ? 'success' : n));
-      if (step) step.classList.add('active');
-
-      if (n !== 'success') {
-        const m = stepMeta[n - 1];
-        document.getElementById('modal-step-label').textContent = m.label;
-        document.getElementById('modal-title').textContent      = m.title;
-        document.getElementById('modal-subtitle').textContent   = m.sub;
-        document.getElementById('modal-step-label').style.display = '';
-        document.getElementById('modal-title').style.display       = '';
-        document.getElementById('modal-subtitle').style.display    = '';
-        document.querySelector('.modal-progress').style.display    = '';
-        [1,2,3].forEach(i => {
-          const bar = document.getElementById('prog-' + i);
-          bar.className = 'modal-progress-bar' + (i < n ? ' done' : i === n ? ' active' : '');
-        });
-      } else {
-        document.getElementById('modal-step-label').style.display = 'none';
-        document.getElementById('modal-title').style.display       = 'none';
-        document.getElementById('modal-subtitle').style.display    = 'none';
-        document.querySelector('.modal-progress').style.display    = 'none';
-      }
-
-      // Scroll modal to top
-      document.querySelector('.modal').scrollTop = 0;
-    }
-
-    function nextStep(current) {
-      // Basic validation
-      if (current === 1) {
-        const name     = document.getElementById('f-name').value.trim();
-        const business = document.getElementById('f-business').value.trim();
-        const email    = document.getElementById('f-email').value.trim();
-        const industry = document.getElementById('f-industry').value;
-        if (!name || !business || !email || !industry) {
-          alert('Please fill in all required fields before continuing.');
-          return;
-        }
-      }
-      if (current === 3) { submitForm(); return; }
-      goToStep(current + 1);
-    }
-
-    function prevStep(current) {
-      goToStep(current - 1);
-    }
-
-    async function submitForm() {
-      const automate = document.getElementById('f-automate').value.trim();
-      if (!automate) {
-        alert('Please describe what you\'d like to automate.');
-        return;
-      }
-
-      // Collect all form data
-      const selectedTools = [...document.querySelectorAll('#tools-chips input:checked')]
-        .map(i => i.value).join(', ') || 'None selected';
-
-      const payload = {
-        name:     document.getElementById('f-name').value.trim(),
-        business: document.getElementById('f-business').value.trim(),
-        email:    document.getElementById('f-email').value.trim(),
-        industry: document.getElementById('f-industry').value,
-        website:  document.getElementById('f-website').value.trim() || 'Not provided',
-        teamSize: document.getElementById('f-size').value || 'Not provided',
-        tools:    selectedTools,
-        timeDrain: document.getElementById('f-drain').value || 'Not provided',
-        automate: automate,
-        hoursLost: document.getElementById('f-hours').value || 'Not provided',
-        extra:    document.getElementById('f-extra').value.trim() || 'None',
-        submittedAt: new Date().toLocaleString('en-GB'),
-      };
-
-      // Replace with your Make.com webhook URL
-      const WEBHOOK_URL = 'https://hook.eu1.make.com/g4fkegh8omrq4rxxu759n2q4f7crydjv';
-
-      try {
-        await fetch(WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-      } catch (e) {
-        // Silent fail — still show success to user
-        console.error('Webhook error:', e);
-      }
-
-      goToStep('success');
-    }
-
-    function toggleChip(input) {
-      input.closest('.chip').classList.toggle('selected', input.checked);
-    }
+    })();
   </script>
-
 </body>
 </html>
