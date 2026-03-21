@@ -73,22 +73,28 @@
       text-decoration: none;
     }
 
-    .logo-icon {
-      width: 30px; height: 30px;
-      border-radius: 7px;
+    .logo-dot {
+      position: relative;
+      width: 8px; height: 8px;
+      border-radius: 50%;
       background: var(--accent);
-      display: flex;
-      align-items: center;
-      justify-content: center;
       flex-shrink: 0;
     }
 
-    .logo-icon svg {
-      width: 16px; height: 16px;
+    .logo-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid var(--accent);
+      animation: dot-pulse 2s ease-out infinite;
+      opacity: 0;
     }
 
-    .logo-wordmark { display: flex; align-items: baseline; gap: 1px; }
-    .logo-ai { color: var(--accent); }
+    @keyframes dot-pulse {
+      0%   { transform: scale(0.8); opacity: 0.7; }
+      100% { transform: scale(2);   opacity: 0; }
+    }
 
     nav ul {
       list-style: none;
@@ -216,7 +222,7 @@
     }
 
     h1 {
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
       font-weight: 900;
       line-height: 1.05;
       letter-spacing: -0.03em;
@@ -243,7 +249,6 @@
 
     .typewriter-wrap {
       display: inline-block;
-      min-width: 6ch;
     }
 
     .typewriter-text {
@@ -575,54 +580,122 @@
     /* ── HOW IT WORKS ── */
     #how { background: var(--bg); }
 
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5rem;
+    /* aspect-ratio matches viewBox so SVG user units scale uniformly —
+       circles stay circular and cx/cy % align exactly with CSS left/top % */
+    .steps-trail {
+      position: relative;
+      aspect-ratio: 1000 / 680;
+      width: 100%;
       margin-top: 3rem;
     }
 
-    .step-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.75rem;
-      transition: border-color 0.2s, transform 0.2s;
+    .trail-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
     }
 
-    .step-card:hover {
+    .trail-path {
+      fill: none;
+      stroke: var(--accent2);
+      stroke-width: 3.5;
+      stroke-dasharray: 14 10;
+      stroke-linecap: round;
+      animation: trail-march 1.2s linear infinite;
+    }
+
+    @keyframes trail-march {
+      to { stroke-dashoffset: -24; }
+    }
+
+    .trail-node {
+      fill: var(--bg);
+      stroke: var(--accent2);
+      stroke-width: 2.5;
+      animation: node-pulse 2.5s ease-in-out infinite;
+    }
+
+    circle.trail-node:nth-of-type(2) { animation-delay: 0.6s; }
+    circle.trail-node:nth-of-type(3) { animation-delay: 1.2s; }
+    circle.trail-node:nth-of-type(4) { animation-delay: 1.8s; }
+
+    @keyframes node-pulse {
+      0%, 100% { filter: drop-shadow(0 0 2px rgba(249,115,22,0.3)); }
+      50%       { filter: drop-shadow(0 0 10px rgba(249,115,22,0.7)); }
+    }
+
+    .trail-node-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      fill: var(--accent2);
+      text-anchor: middle;
+      dominant-baseline: central;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Outer nodes at 14% / 86% → card edges sit at ~5% and ~95% of container */
+    .step-card {
+      position: absolute;
+      width: 18%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .step-card.step-1 { left: 20%; top: calc(45% + 34px); }
+    .step-card.step-2 { left: 38%; top: calc(12% + 34px); }
+    .step-card.step-3 { left: 62%; top: calc(45% + 34px); }
+    .step-card.step-4 { left: 80%; top: calc(12% + 34px); }
+
+    .step-num { display: none; } /* circles live in SVG on desktop */
+
+    .step-body {
+      padding: 1.25rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .step-body:hover {
       border-color: rgba(249,115,22,0.4);
       transform: translateY(-4px);
     }
 
-    .step-num {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--accent2);
-      width: 2.25rem;
-      height: 2.25rem;
-      border-radius: 50%;
-      border: 2px solid var(--accent2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-
-    .step-card h3 {
-      font-size: 0.95rem;
-      font-weight: 700;
-      margin-bottom: 0.4rem;
-    }
-
-    .step-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+    .step-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .step-card p  { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
 
     @media (max-width: 768px) {
-      .steps-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-    @media (max-width: 480px) {
-      .steps-grid { grid-template-columns: 1fr; }
+      .steps-trail { aspect-ratio: unset; }
+      .trail-svg { display: none; }
+      .step-card {
+        position: static;
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+        gap: 1rem;
+        transform: none;
+        margin-bottom: 1.5rem;
+      }
+      .step-num {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        border: 2px solid var(--accent2);
+        color: var(--accent2);
+        font-size: 0.8rem;
+        font-weight: 800;
+      }
+      .step-body { flex: 1; }
     }
 
     /* ── WHY ELMDALE AI ── */
@@ -667,157 +740,181 @@
     }
 
     /* ── CASE STUDIES ── */
-    #case-study { background: var(--bg2); }
+    #case-study { background: var(--bg); }
 
     .cs-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+      gap: 2rem;
     }
 
-    @media (max-width: 940px) { .cs-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 1040px) { .cs-grid { grid-template-columns: 1fr; } }
 
     .cs-card {
-      background: var(--bg);
+      background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 24px;
       overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
     }
 
     .cs-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 8px 30px rgba(91,33,182,0.08);
-      transform: translateY(-2px);
+      border-color: rgba(249,115,22,0.35);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px rgba(249,115,22,0.08);
+      transform: translateY(-5px);
     }
 
-    .cs-card-top {
-      padding: 1.75rem 1.75rem 1.25rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg2);
+    .cs-visual {
+      height: 230px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .cs-card-tag {
+    .cs-visual svg { width: 100%; height: 100%; display: block; }
+
+    .cs-visual-fade {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 90px;
+      background: linear-gradient(transparent, var(--surface));
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .cs-inner { padding: 1.5rem 2rem 2rem; }
+
+    .cs-type {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.72rem;
-      font-weight: 600;
-      background: var(--accent-light);
-      color: var(--accent);
-      padding: 3px 10px;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.2);
+      padding: 4px 12px;
       border-radius: 100px;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
     }
 
-    .cs-card-name {
-      font-size: 1.15rem;
+    .cs-type-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--accent2);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    .cs-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 0.25rem;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
     }
 
-    .cs-card-sub {
-      font-size: 0.8rem;
+    .cs-where {
+      font-size: 0.78rem;
       color: var(--muted);
       margin-bottom: 1.25rem;
     }
 
-    .cs-card-stats {
+    .cs-metrics {
       display: flex;
       gap: 0.75rem;
-      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
     }
 
-    .cs-stat-pill {
-      background: var(--bg);
+    .cs-metric {
+      flex: 1;
+      background: rgba(255,255,255,0.03);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.5rem 0.85rem;
+      border-radius: 12px;
+      padding: 0.875rem 0.75rem;
       text-align: center;
     }
 
-    .cs-stat-num {
-      font-size: 1.2rem;
+    .cs-metric-val {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.4rem;
       font-weight: 800;
-      letter-spacing: -0.02em;
-      color: var(--accent);
+      background: linear-gradient(135deg, #f97316, #fb923c);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       line-height: 1;
+      margin-bottom: 4px;
     }
 
-    .cs-stat-lbl {
-      font-size: 0.68rem;
+    .cs-metric-lbl {
+      font-size: 0.65rem;
       color: var(--muted);
-      margin-top: 2px;
+      line-height: 1.3;
     }
 
-    .cs-card-body { padding: 1.5rem 1.75rem; }
-
-    .cs-card-points {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
+    .cs-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
       margin-bottom: 1.25rem;
     }
 
-    .cs-card-points li {
+    .cs-tools {
       display: flex;
-      gap: 8px;
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.5;
-      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.5rem;
     }
 
-    .cs-tick {
-      width: 16px; height: 16px;
-      border-radius: 50%;
-      background: var(--green-light);
-      color: var(--green);
-      font-size: 0.6rem;
+    .cs-tool {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--muted);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+
+    .cs-footer {
       display: flex;
       align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      margin-top: 2px;
-      font-weight: 700;
+      gap: 1rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
     }
 
-    .cs-card-quote {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-    }
-
-    .cs-card-quote p {
-      font-size: 0.83rem;
-      color: var(--text);
+    .cs-quote {
+      font-size: 0.78rem;
       font-style: italic;
-      line-height: 1.6;
-      margin-bottom: 0.4rem;
-    }
-
-    .cs-card-quote span {
-      font-size: 0.75rem;
       color: var(--muted);
-      font-weight: 600;
+      line-height: 1.55;
+      flex: 1;
     }
 
-    .cs-visit-link {
+    .cs-visit {
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      margin-top: 1.25rem;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--muted);
+      gap: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent2);
       text-decoration: none;
-      letter-spacing: 0.02em;
-      transition: color 0.2s;
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.2);
+      padding: 8px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background 0.2s, border-color 0.2s;
     }
-    .cs-visit-link:hover { color: #fff; }
+
+    .cs-visit:hover {
+      background: rgba(249,115,22,0.2);
+      border-color: rgba(249,115,22,0.45);
+    }
+
 
     /* ── CTA BOOKING ── */
     #booking {
@@ -1334,14 +1431,8 @@
   <nav id="main-nav">
     <div class="nav-inner">
       <a href="#" class="logo">
-        <div class="logo-icon">
-          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M3 4h10M3 8h7M3 12h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
-          </svg>
-        </div>
-        <div class="logo-wordmark">
-          <span>Elmdale</span><span class="logo-ai">&nbsp;AI</span>
-        </div>
+        <span class="logo-dot"></span>
+        Elmdale AI
       </a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
@@ -1360,7 +1451,7 @@
   <!-- HERO -->
   <section class="hero">
     <canvas id="neural-canvas"></canvas>
-    <h1>Stop doing <span class="typewriter-wrap"><span class="typewriter-text" id="typewriter">tasks</span><span class="typewriter-cursor"></span></span>.<br />Automate everything.</h1>
+    <h1>Stop doing<br /><span class="typewriter-wrap"><span class="typewriter-text" id="typewriter">tasks</span><span class="typewriter-cursor"></span></span>.<br />Automate everything.</h1>
 
     <!-- CHAT BAR -->
     <div class="chat-bar-wrap">
@@ -1471,26 +1562,48 @@
     <div class="section-label fade-in">The process</div>
     <h2 class="fade-in">Live in days, not months</h2>
     <p class="section-sub fade-in">No long retainers or drawn-out projects. We move fast and deliver fast.</p>
-    <div class="steps-grid">
-      <div class="step-card fade-in">
-        <div class="step-num">01</div>
-        <h3>Free Audit</h3>
-        <p>We map your workflows and identify exactly where AI saves the most time and money.</p>
+    <div class="steps-trail">
+      <svg class="trail-svg" viewBox="0 0 1000 680" preserveAspectRatio="none" aria-hidden="true">
+        <!-- Path curves through each node centre. Nodes at 14%, 36%, 64%, 86% -->
+        <path class="trail-path" d="M 200 306 C 290 340 290 40 380 82 C 500 40 500 340 620 306 C 710 340 710 40 800 82"/>
+        <!-- Circles in SVG = same coordinate space as path, guaranteed alignment -->
+        <circle class="trail-node" cx="20%" cy="45%" r="26"/>
+        <circle class="trail-node" cx="38%" cy="12%" r="26"/>
+        <circle class="trail-node" cx="62%" cy="45%" r="26"/>
+        <circle class="trail-node" cx="80%" cy="12%" r="26"/>
+        <text class="trail-node-label" x="20%" y="45%">01</text>
+        <text class="trail-node-label" x="38%" y="12%">02</text>
+        <text class="trail-node-label" x="62%" y="45%">03</text>
+        <text class="trail-node-label" x="80%" y="12%">04</text>
+      </svg>
+
+      <div class="step-card step-1 fade-in">
+        <div class="step-num" aria-hidden="true">01</div>
+        <div class="step-body">
+          <h3>Free Audit</h3>
+          <p>We map your workflows and identify exactly where AI saves the most time and money.</p>
+        </div>
       </div>
-      <div class="step-card fade-in fade-in-d1">
-        <div class="step-num">02</div>
-        <h3>We Build It</h3>
-        <p>Your custom automation is built and tested, typically delivered within 48 hours.</p>
+      <div class="step-card step-2 fade-in fade-in-d1">
+        <div class="step-num" aria-hidden="true">02</div>
+        <div class="step-body">
+          <h3>We Build It</h3>
+          <p>Your custom automation is built and tested, typically delivered within 3-5 days.</p>
+        </div>
       </div>
-      <div class="step-card fade-in fade-in-d2">
-        <div class="step-num">03</div>
-        <h3>You Approve</h3>
-        <p>We walk you through everything and make any tweaks until it's exactly right.</p>
+      <div class="step-card step-3 fade-in fade-in-d2">
+        <div class="step-num" aria-hidden="true">03</div>
+        <div class="step-body">
+          <h3>You Approve</h3>
+          <p>We walk you through everything and make any tweaks until it's exactly right.</p>
+        </div>
       </div>
-      <div class="step-card fade-in fade-in-d3">
-        <div class="step-num">04</div>
-        <h3>It Runs Forever</h3>
-        <p>Your automation runs 24/7. We monitor and maintain it so you never have to.</p>
+      <div class="step-card step-4 fade-in fade-in-d3">
+        <div class="step-num" aria-hidden="true">04</div>
+        <div class="step-body">
+          <h3>It Runs Forever</h3>
+          <p>Your automation runs 24/7. We monitor and maintain it so you never have to.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1531,75 +1644,176 @@
     <p class="section-sub fade-in">Real automations built for real businesses.</p>
     <div class="cs-grid">
 
-      <!-- Card 1 -->
+      <!-- Card 1: Castle View Tutoring -->
       <div class="cs-card fade-in">
-        <div class="cs-card-top">
-          <div class="cs-card-tag">📚 Education</div>
-          <div class="cs-card-name">Castle View Tutoring</div>
-          <div class="cs-card-sub">Online Tutoring Platform · United Kingdom</div>
-          <div class="cs-card-stats">
-            <div class="cs-stat-pill">
-              <div class="cs-stat-num">12h</div>
-              <div class="cs-stat-lbl">Saved weekly</div>
-            </div>
-            <div class="cs-stat-pill">
-              <div class="cs-stat-num">4×</div>
-              <div class="cs-stat-lbl">Faster responses</div>
-            </div>
-            <div class="cs-stat-pill">
-              <div class="cs-stat-num">3–5 days</div>
-              <div class="cs-stat-lbl">Delivery time</div>
-            </div>
-          </div>
+        <div class="cs-visual">
+          <svg viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="cv-bg" cx="25%" cy="50%" r="85%">
+                <stop offset="0%" stop-color="#18103a"/>
+                <stop offset="100%" stop-color="#07070f"/>
+              </radialGradient>
+              <pattern id="cv-dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="12" cy="12" r="0.75" fill="rgba(255,255,255,0.18)"/>
+              </pattern>
+            </defs>
+            <rect width="600" height="220" fill="url(#cv-bg)"/>
+            <rect width="600" height="220" fill="url(#cv-dots)" opacity="0.5"/>
+            <circle cx="175" cy="100" r="60" fill="rgba(249,115,22,0.06)"/>
+            <circle cx="65" cy="100" r="45" fill="rgba(124,58,237,0.06)"/>
+            <circle cx="535" cy="100" r="45" fill="rgba(74,222,128,0.06)"/>
+            <text x="300" y="24" text-anchor="middle" fill="rgba(255,255,255,0.22)" font-size="9" font-family="Inter,sans-serif" letter-spacing="0.14em" font-weight="700">AUTOMATED INTAKE PIPELINE</text>
+            <!-- L1 purple -->
+            <line x1="93" y1="100" x2="147" y2="100" stroke="rgba(124,58,237,0.45)" stroke-width="1.5" stroke-dasharray="4 4"><animate attributeName="stroke-dashoffset" values="16;0" dur="0.9s" repeatCount="indefinite"/></line>
+            <g transform="translate(93,100)"><circle r="2.5" fill="rgba(167,139,250,0.95)"><animateMotion path="M0,0 L54,0" dur="0.9s" repeatCount="indefinite"/></circle></g>
+            <!-- L2 orange -->
+            <line x1="203" y1="100" x2="272" y2="100" stroke="rgba(249,115,22,0.45)" stroke-width="1.5" stroke-dasharray="4 4"><animate attributeName="stroke-dashoffset" values="16;0" dur="0.9s" begin="0.18s" repeatCount="indefinite"/></line>
+            <g transform="translate(203,100)"><circle r="2.5" fill="rgba(249,115,22,0.95)"><animateMotion path="M0,0 L69,0" dur="0.9s" begin="0.18s" repeatCount="indefinite"/></circle></g>
+            <!-- L3 teal -->
+            <line x1="328" y1="100" x2="397" y2="100" stroke="rgba(6,182,212,0.45)" stroke-width="1.5" stroke-dasharray="4 4"><animate attributeName="stroke-dashoffset" values="16;0" dur="0.9s" begin="0.36s" repeatCount="indefinite"/></line>
+            <g transform="translate(328,100)"><circle r="2.5" fill="rgba(6,182,212,0.95)"><animateMotion path="M0,0 L69,0" dur="0.9s" begin="0.36s" repeatCount="indefinite"/></circle></g>
+            <!-- L4 green -->
+            <line x1="453" y1="100" x2="507" y2="100" stroke="rgba(74,222,128,0.45)" stroke-width="1.5" stroke-dasharray="4 4"><animate attributeName="stroke-dashoffset" values="16;0" dur="0.9s" begin="0.54s" repeatCount="indefinite"/></line>
+            <g transform="translate(453,100)"><circle r="2.5" fill="rgba(74,222,128,0.95)"><animateMotion path="M0,0 L54,0" dur="0.9s" begin="0.54s" repeatCount="indefinite"/></circle></g>
+            <!-- N1 Enquiry -->
+            <circle cx="65" cy="100" r="38" fill="rgba(124,58,237,0.06)"/>
+            <circle cx="65" cy="100" r="28" fill="rgba(124,58,237,0.16)" stroke="rgba(124,58,237,0.55)" stroke-width="1.5"/>
+            <rect x="57" y="88" width="16" height="21" rx="1.5" stroke="rgba(255,255,255,0.82)" stroke-width="1.3" fill="rgba(255,255,255,0.07)"/>
+            <line x1="60" y1="94" x2="70" y2="94" stroke="rgba(255,255,255,0.82)" stroke-width="1.1" stroke-linecap="round"/>
+            <line x1="60" y1="98" x2="70" y2="98" stroke="rgba(255,255,255,0.82)" stroke-width="1.1" stroke-linecap="round"/>
+            <line x1="60" y1="102" x2="66" y2="102" stroke="rgba(255,255,255,0.82)" stroke-width="1.1" stroke-linecap="round"/>
+            <text x="65" y="148" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9.5" font-family="Inter,sans-serif" font-weight="500">Enquiry</text>
+            <!-- N2 AI Match (with pulse) -->
+            <circle cx="175" cy="100" r="28" fill="rgba(249,115,22,0.18)" stroke="rgba(249,115,22,0.6)" stroke-width="1.5"/>
+            <circle cx="175" cy="100" r="36" stroke="rgba(249,115,22,0.3)" stroke-width="1" fill="none"><animate attributeName="r" values="32;44;32" dur="2.5s" repeatCount="indefinite"/><animate attributeName="stroke-opacity" values="0.3;0;0.3" dur="2.5s" repeatCount="indefinite"/></circle>
+            <path d="M175,88 L177.2,95.8 L185,98.5 L177.2,101.2 L175,109 L172.8,101.2 L165,98.5 L172.8,95.8 Z" fill="rgba(255,255,255,0.9)"/>
+            <text x="175" y="148" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9.5" font-family="Inter,sans-serif" font-weight="500">AI Match</text>
+            <!-- N3 Booked -->
+            <circle cx="300" cy="100" r="38" fill="rgba(6,182,212,0.06)"/>
+            <circle cx="300" cy="100" r="28" fill="rgba(6,182,212,0.16)" stroke="rgba(6,182,212,0.55)" stroke-width="1.5"/>
+            <rect x="290" y="89" width="20" height="20" rx="2" stroke="rgba(255,255,255,0.82)" stroke-width="1.3" fill="rgba(255,255,255,0.07)"/>
+            <line x1="290" y1="96" x2="310" y2="96" stroke="rgba(255,255,255,0.82)" stroke-width="1"/>
+            <line x1="295" y1="87" x2="295" y2="91" stroke="rgba(255,255,255,0.82)" stroke-width="1.3" stroke-linecap="round"/>
+            <line x1="305" y1="87" x2="305" y2="91" stroke="rgba(255,255,255,0.82)" stroke-width="1.3" stroke-linecap="round"/>
+            <polyline points="294,103 298,107 307,98" stroke="rgba(255,255,255,0.82)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="300" y="148" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9.5" font-family="Inter,sans-serif" font-weight="500">Booked</text>
+            <!-- N4 Notified -->
+            <circle cx="425" cy="100" r="38" fill="rgba(249,115,22,0.06)"/>
+            <circle cx="425" cy="100" r="28" fill="rgba(249,115,22,0.16)" stroke="rgba(249,115,22,0.55)" stroke-width="1.5"/>
+            <path d="M418,104 C418,96 421,91 425,91 C429,91 432,96 432,104 Z" stroke="rgba(255,255,255,0.82)" stroke-width="1.3" stroke-linejoin="round" fill="rgba(255,255,255,0.08)"/>
+            <line x1="417" y1="104" x2="433" y2="104" stroke="rgba(255,255,255,0.82)" stroke-width="1.3" stroke-linecap="round"/>
+            <path d="M423,105 Q425,108.5 427,105" stroke="rgba(255,255,255,0.82)" stroke-width="1.3" stroke-linecap="round" fill="none"/>
+            <circle cx="425" cy="91" r="1.8" fill="rgba(255,255,255,0.82)"/>
+            <text x="425" y="148" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9.5" font-family="Inter,sans-serif" font-weight="500">Notified</text>
+            <!-- N5 Follow-up -->
+            <circle cx="535" cy="100" r="38" fill="rgba(74,222,128,0.06)"/>
+            <circle cx="535" cy="100" r="28" fill="rgba(74,222,128,0.16)" stroke="rgba(74,222,128,0.55)" stroke-width="1.5"/>
+            <rect x="523" y="91" width="24" height="17" rx="2" stroke="rgba(255,255,255,0.82)" stroke-width="1.3" fill="rgba(255,255,255,0.07)"/>
+            <polyline points="523,92 535,101 547,92" stroke="rgba(255,255,255,0.82)" stroke-width="1.3" stroke-linejoin="round" fill="none"/>
+            <text x="535" y="148" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9.5" font-family="Inter,sans-serif" font-weight="500">Follow-up</text>
+          </svg>
+          <div class="cs-visual-fade"></div>
         </div>
-        <div class="cs-card-body">
-          <ul class="cs-card-points">
-            <li><span class="cs-tick">✓</span>New enquiries are AI matched to the best fit tutor instantly, with no manual review</li>
-            <li><span class="cs-tick">✓</span>Automated booking link sent so students can schedule their free consultation themselves</li>
-            <li><span class="cs-tick">✓</span>Tutors notified instantly with full student details on every match</li>
-            <li><span class="cs-tick">✓</span>Follow up sequences triggered automatically for students who haven't booked</li>
-          </ul>
-          <div class="cs-card-quote">
-            <p>"The whole intake process now runs itself. Students are matched and booked faster than we could ever do manually."</p>
-            <span>Founder, Castle View Tutoring</span>
+        <div class="cs-inner">
+          <div class="cs-type"><span class="cs-type-dot"></span>Education · AI Automation</div>
+          <div class="cs-name">Castle View Tutoring</div>
+          <div class="cs-where">Online Tutoring Platform · United Kingdom</div>
+          <div class="cs-metrics">
+            <div class="cs-metric"><div class="cs-metric-val">12h</div><div class="cs-metric-lbl">Saved weekly</div></div>
+            <div class="cs-metric"><div class="cs-metric-val">4×</div><div class="cs-metric-lbl">Faster responses</div></div>
+            <div class="cs-metric"><div class="cs-metric-val">3–5d</div><div class="cs-metric-lbl">Delivery</div></div>
           </div>
-          <a href="https://castleviewtutoring.com" target="_blank" rel="noopener" class="cs-visit-link">Visit site →</a>
+          <p class="cs-desc">Built a fully automated intake pipeline that matches student enquiries to the right tutor using AI, fires off the booking link, notifies tutors instantly, and chases non-bookers — all with zero manual work.</p>
+          <div class="cs-tools">
+            <span class="cs-tool">Make.com</span><span class="cs-tool">AI Matching</span><span class="cs-tool">Calendly</span><span class="cs-tool">Gmail</span><span class="cs-tool">Airtable</span>
+          </div>
+          <div class="cs-footer">
+            <p class="cs-quote">"The whole intake process now runs itself. Students are matched and booked faster than we could ever do manually."</p>
+            <a href="https://castleviewtutoring.com" target="_blank" rel="noopener" class="cs-visit">Visit site →</a>
+          </div>
         </div>
       </div>
 
-      <!-- Card 2 -->
+      <!-- Card 2: Blindspot Marketing Agency -->
       <div class="cs-card fade-in fade-in-d1">
-        <div class="cs-card-top">
-          <div class="cs-card-tag">🖥️ Digital Agency</div>
-          <div class="cs-card-name">Blindspot Marketing Agency</div>
-          <div class="cs-card-sub">Boutique Marketing Agency · United Kingdom</div>
-          <div class="cs-card-stats">
-            <div class="cs-stat-pill">
-              <div class="cs-stat-num">3</div>
-              <div class="cs-stat-lbl">Core pages launched</div>
-            </div>
-            <div class="cs-stat-pill">
-              <div class="cs-stat-num">1</div>
-              <div class="cs-stat-lbl">Custom quote builder</div>
-            </div>
-            <div class="cs-stat-pill">
-              <div class="cs-stat-num">24/7</div>
-              <div class="cs-stat-lbl">Lead capture flow</div>
-            </div>
-          </div>
+        <div class="cs-visual">
+          <svg viewBox="0 0 600 220" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="bs-hero" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#0e0820"/>
+                <stop offset="100%" stop-color="#080812"/>
+              </linearGradient>
+              <linearGradient id="bs-accent" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#7c3aed" stop-opacity="0.75"/>
+                <stop offset="100%" stop-color="#f97316" stop-opacity="0.75"/>
+              </linearGradient>
+              <pattern id="bs-dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+                <circle cx="12" cy="12" r="0.75" fill="rgba(255,255,255,0.15)"/>
+              </pattern>
+            </defs>
+            <rect width="600" height="220" fill="#07070e"/>
+            <!-- Browser chrome -->
+            <rect width="600" height="32" fill="#0f0f1a"/>
+            <line x1="0" y1="32" x2="600" y2="32" stroke="#1e1e2e" stroke-width="1"/>
+            <circle cx="22" cy="16" r="5.5" fill="#f87171" opacity="0.85"/>
+            <circle cx="38" cy="16" r="5.5" fill="#fbbf24" opacity="0.85"/>
+            <circle cx="54" cy="16" r="5.5" fill="#4ade80" opacity="0.85"/>
+            <rect x="160" y="9" width="280" height="14" rx="7" fill="#0b0b16" stroke="#252535" stroke-width="0.75"/>
+            <circle cx="173" cy="16" r="2.5" fill="rgba(124,58,237,0.65)"/>
+            <text x="300" y="20" text-anchor="middle" fill="rgba(255,255,255,0.22)" font-size="8" font-family="monospace">blindspot.agency</text>
+            <!-- Site nav -->
+            <rect x="0" y="32" width="600" height="30" fill="#0a0a14"/>
+            <line x1="0" y1="62" x2="600" y2="62" stroke="#1a1a28" stroke-width="0.75"/>
+            <text x="26" y="52" fill="rgba(255,255,255,0.78)" font-size="11" font-family="Inter,sans-serif" font-weight="800" letter-spacing="0.1em">BLINDSPOT</text>
+            <rect x="352" y="38" width="38" height="10" rx="3" fill="rgba(255,255,255,0.07)"/>
+            <rect x="398" y="38" width="38" height="10" rx="3" fill="rgba(255,255,255,0.07)"/>
+            <rect x="446" y="38" width="38" height="10" rx="3" fill="rgba(255,255,255,0.07)"/>
+            <rect x="498" y="35" width="76" height="16" rx="8" fill="rgba(124,58,237,0.5)" stroke="rgba(124,58,237,0.7)" stroke-width="0.75"/>
+            <!-- Hero -->
+            <rect x="0" y="62" width="600" height="92" fill="url(#bs-hero)"/>
+            <rect x="0" y="62" width="600" height="92" fill="url(#bs-dots)" opacity="0.35"/>
+            <rect x="26" y="78" width="195" height="12" rx="2.5" fill="rgba(255,255,255,0.65)"/>
+            <rect x="26" y="96" width="245" height="12" rx="2.5" fill="rgba(255,255,255,0.65)"/>
+            <rect x="26" y="115" width="175" height="7" rx="2" fill="rgba(255,255,255,0.18)"/>
+            <rect x="26" y="127" width="145" height="7" rx="2" fill="rgba(255,255,255,0.18)"/>
+            <rect x="26" y="141" width="66" height="20" rx="10" fill="rgba(124,58,237,0.8)"/>
+            <rect x="100" y="141" width="66" height="20" rx="10" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <!-- Floating card -->
+            <rect x="352" y="70" width="222" height="78" rx="10" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)" stroke-width="0.75"/>
+            <rect x="352" y="70" width="222" height="4" rx="2" fill="url(#bs-accent)"/>
+            <rect x="366" y="84" width="95" height="7" rx="2" fill="rgba(255,255,255,0.22)"/>
+            <rect x="366" y="97" width="168" height="5" rx="2" fill="rgba(255,255,255,0.1)"/>
+            <rect x="366" y="107" width="150" height="5" rx="2" fill="rgba(255,255,255,0.1)"/>
+            <rect x="366" y="117" width="128" height="5" rx="2" fill="rgba(255,255,255,0.1)"/>
+            <rect x="366" y="129" width="52" height="14" rx="7" fill="rgba(249,115,22,0.22)" stroke="rgba(249,115,22,0.38)" stroke-width="0.75"/>
+            <rect x="426" y="129" width="68" height="14" rx="7" fill="rgba(124,58,237,0.22)" stroke="rgba(124,58,237,0.38)" stroke-width="0.75"/>
+            <!-- Service cards -->
+            <rect x="20" y="162" width="175" height="50" rx="7" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.75"/>
+            <rect x="207" y="162" width="175" height="50" rx="7" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.75"/>
+            <rect x="394" y="162" width="186" height="50" rx="7" fill="rgba(255,255,255,0.025)" stroke="rgba(255,255,255,0.07)" stroke-width="0.75"/>
+            <circle cx="36" cy="176" r="6" fill="rgba(124,58,237,0.38)"/><rect x="48" y="172" width="78" height="6" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="30" y="185" width="138" height="5" rx="2" fill="rgba(255,255,255,0.08)"/><rect x="30" y="194" width="108" height="5" rx="2" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="223" cy="176" r="6" fill="rgba(249,115,22,0.38)"/><rect x="235" y="172" width="78" height="6" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="217" y="185" width="138" height="5" rx="2" fill="rgba(255,255,255,0.08)"/><rect x="217" y="194" width="108" height="5" rx="2" fill="rgba(255,255,255,0.08)"/>
+            <circle cx="410" cy="176" r="6" fill="rgba(6,182,212,0.38)"/><rect x="422" y="172" width="78" height="6" rx="2" fill="rgba(255,255,255,0.18)"/><rect x="404" y="185" width="150" height="5" rx="2" fill="rgba(255,255,255,0.08)"/><rect x="404" y="194" width="118" height="5" rx="2" fill="rgba(255,255,255,0.08)"/>
+          </svg>
+          <div class="cs-visual-fade"></div>
         </div>
-        <div class="cs-card-body">
-          <ul class="cs-card-points">
-            <li><span class="cs-tick">✓</span>Designed and built the Blindspot website to clearly position the agency, its services and its work</li>
-            <li><span class="cs-tick">✓</span>Created a dedicated services page with a custom package builder so prospects can request tailored quotes</li>
-            <li><span class="cs-tick">✓</span>Built a work page that turns portfolio pieces into clear case studies and supports the boutique agency positioning</li>
-            <li><span class="cs-tick">✓</span>Set up enquiry and booking automations so new leads can be captured, routed and followed up automatically</li>
-          </ul>
-          <div class="cs-card-quote">
-            <p>"The site now reflects the standard of the agency properly, and the automation layer means new enquiries are handled without manual chasing."</p>
-            <span>Founder, Blindspot Marketing Agency</span>
+        <div class="cs-inner">
+          <div class="cs-type"><span class="cs-type-dot"></span>Digital Agency · Web &amp; Automation</div>
+          <div class="cs-name">Blindspot Marketing Agency</div>
+          <div class="cs-where">Boutique Marketing Agency · United Kingdom</div>
+          <div class="cs-metrics">
+            <div class="cs-metric"><div class="cs-metric-val">3</div><div class="cs-metric-lbl">Core pages built</div></div>
+            <div class="cs-metric"><div class="cs-metric-val">1</div><div class="cs-metric-lbl">Custom quote builder</div></div>
+            <div class="cs-metric"><div class="cs-metric-val">24/7</div><div class="cs-metric-lbl">Lead capture</div></div>
           </div>
-          <a href="https://morlj015.github.io/blindspot-agency/" target="_blank" rel="noopener" class="cs-visit-link">Visit site →</a>
+          <p class="cs-desc">Designed and built the full Blindspot website — positioning, services page with a custom package builder, and a portfolio that turns work into case studies. Layered on full lead capture and booking automation.</p>
+          <div class="cs-tools">
+            <span class="cs-tool">Web Design</span><span class="cs-tool">Make.com</span><span class="cs-tool">Calendly</span><span class="cs-tool">HubSpot</span><span class="cs-tool">Gmail</span>
+          </div>
+          <div class="cs-footer">
+            <p class="cs-quote">"The site now reflects the standard of the agency properly, and new enquiries are handled without any manual chasing."</p>
+            <a href="https://morlj015.github.io/blindspot-agency/" target="_blank" rel="noopener" class="cs-visit">Visit site →</a>
+          </div>
         </div>
       </div>
 
@@ -1915,6 +2129,7 @@
       }
       sendBtn.disabled = false;
     }
+
 
     // Typewriter
     const words = ['tasks', 'emails', 'follow ups', 'reporting', 'data entry', 'outreach'];
