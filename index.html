@@ -1344,7 +1344,7 @@
       <div class="stat-label">Hours saved per week</div>
     </div>
     <div class="stat fade-in fade-in-d1">
-      <span class="stat-number" data-target="48" data-suffix="h">0h</span>
+      <span class="stat-number">3–5 days</span>
       <div class="stat-label">Average delivery time</div>
     </div>
     <div class="stat fade-in fade-in-d2">
@@ -1479,7 +1479,7 @@
               <div class="cs-stat-lbl">Faster responses</div>
             </div>
             <div class="cs-stat-pill">
-              <div class="cs-stat-num">48h</div>
+              <div class="cs-stat-num">3–5 days</div>
               <div class="cs-stat-lbl">Delivery time</div>
             </div>
           </div>
@@ -1869,6 +1869,8 @@
     });
 
     const NODE_COUNT = 28;
+    const CONNECT_DIST = 220; // only connect nodes within this distance
+    const ATTRACT_R    = 200;
     let nnNodes = [];
 
     function initNetwork() {
@@ -1880,9 +1882,11 @@
         nnNodes.push({
           baseX, baseY,
           x: baseX, y: baseY,
+          // velocity for smooth damped movement
+          vx: 0, vy: 0,
           phase: Math.random() * Math.PI * 2,
-          floatAmp: 5 + Math.random() * 8,
-          floatSpeed: 0.0006 + Math.random() * 0.0006,
+          floatAmp: 4 + Math.random() * 5,
+          floatSpeed: 0.0003 + Math.random() * 0.0003,
         });
       }
     }
@@ -1898,36 +1902,44 @@
     function drawNetwork(t) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      // Update positions: float + cursor attraction
+      // Update positions with spring-damper towards float target + cursor pull
       nnNodes.forEach(n => {
-        const fx = n.baseX + Math.sin(t * n.floatSpeed + n.phase) * n.floatAmp;
-        const fy = n.baseY + Math.cos(t * n.floatSpeed * 1.3 + n.phase) * n.floatAmp;
-        const dx = nnMouse.x - fx;
-        const dy = nnMouse.y - fy;
+        const tx = n.baseX + Math.sin(t * n.floatSpeed + n.phase) * n.floatAmp;
+        const ty = n.baseY + Math.cos(t * n.floatSpeed * 1.3 + n.phase) * n.floatAmp;
+
+        const dx = nnMouse.x - tx;
+        const dy = nnMouse.y - ty;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        const attractR = 200;
-        if (dist < attractR && dist > 0) {
-          const force = (1 - dist / attractR) * 0.28;
-          n.x = fx + dx * force;
-          n.y = fy + dy * force;
-        } else {
-          n.x = fx;
-          n.y = fy;
+        let goalX = tx, goalY = ty;
+        if (dist < ATTRACT_R && dist > 0) {
+          const force = (1 - dist / ATTRACT_R) * 0.14;
+          goalX = tx + dx * force;
+          goalY = ty + dy * force;
         }
+
+        // Spring towards goal, dampen velocity
+        n.vx += (goalX - n.x) * 0.06;
+        n.vy += (goalY - n.y) * 0.06;
+        n.vx *= 0.78;
+        n.vy *= 0.78;
+        n.x  += n.vx;
+        n.y  += n.vy;
       });
 
-      // Draw connections between every pair of nodes
+      // Draw connections between nearby nodes only
       for (let i = 0; i < nnNodes.length; i++) {
         for (let j = i + 1; j < nnNodes.length; j++) {
           const a = nnNodes[i], b = nnNodes[j];
-          const mx = (a.x + b.x) / 2;
-          const my = (a.y + b.y) / 2;
-          const mdx = nnMouse.x - mx;
-          const mdy = nnMouse.y - my;
-          const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
-          const near = mDist < 180;
-          const alpha = near ? 0.5 : 0.08;
-          const lw    = near ? 1.0 : 0.4;
+          const dx = b.x - a.x, dy = b.y - a.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist > CONNECT_DIST) continue;
+          const proximity = 1 - dist / CONNECT_DIST;
+          // Brighten if cursor is near either node
+          const aDist = Math.sqrt((nnMouse.x-a.x)**2 + (nnMouse.y-a.y)**2);
+          const bDist = Math.sqrt((nnMouse.x-b.x)**2 + (nnMouse.y-b.y)**2);
+          const cursorNear = aDist < 160 || bDist < 160;
+          const alpha = cursorNear ? proximity * 0.7 : proximity * 0.12;
+          const lw    = cursorNear ? 1.0 : 0.5;
           const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
           grad.addColorStop(0, `rgba(249,115,22,${alpha})`);
           grad.addColorStop(1, `rgba(251,146,60,${alpha * 0.5})`);
