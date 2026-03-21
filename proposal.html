@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automation Proposal | Elmdale AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── Design Tokens ─────────────────────────────────────────────── */
+    :root {
+      --bg:           #ffffff;
+      --text:         #0a0a12;
+      --muted:        #6b6b80;
+      --accent:       #5b21b6;
+      --accent-light: #ede9fe;
+      --border:       #e4e4ec;
+      --green:        #16a34a;
+      --font:         'Inter', sans-serif;
+      --page-width:   210mm;
+      --page-pad:     14mm;
+    }
+
+    /* ─── Reset & Base ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 15px;
+      background: #f0eff5;
+    }
+
+    body {
+      font-family: var(--font);
+      color: var(--text);
+      background: var(--bg);
+      width: var(--page-width);
+      margin: 0 auto;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ─── Screen wrapper — gives a shadow preview on screen ─────────── */
+    @media screen {
+      html { padding: 32px 0 64px; }
+      body { box-shadow: 0 4px 40px rgba(0,0,0,0.12); }
+    }
+
+    /* ─── Page sections ─────────────────────────────────────────────── */
+    .page-section {
+      padding: var(--page-pad) var(--page-pad);
+    }
+
+    /* ─── Utility ───────────────────────────────────────────────────── */
+    .placeholder {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 4px;
+      padding: 0 4px;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    p {
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    hr.rule {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 18px 0;
+    }
+
+    /* ─── SECTION 1 — COVER ─────────────────────────────────────────── */
+    .cover {
+      padding: var(--page-pad) var(--page-pad) 10mm;
+    }
+
+    .cover-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 48px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .proposal-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+
+    .cover-heading {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .cover-sub {
+      font-size: 1.05rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+
+    .cover-meta {
+      display: flex;
+      gap: 0;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-top: 18px;
+    }
+
+    .cover-meta-item {
+      padding-right: 18px;
+      margin-right: 18px;
+      border-right: 1px solid var(--border);
+      line-height: 1.6;
+    }
+
+    .cover-meta-item:last-child {
+      border-right: none;
+      padding-right: 0;
+      margin-right: 0;
+    }
+
+    .cover-meta-item strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* ─── SECTION 2 — INTRO ─────────────────────────────────────────── */
+    .intro {
+      background: var(--bg);
+    }
+
+    /* ─── SECTION 3 — WHAT WE'LL BUILD ─────────────────────────────── */
+    .builds {
+      background: var(--bg);
+    }
+
+    .automation-card {
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--accent);
+      border-radius: 8px;
+      padding: 20px 22px;
+      margin-bottom: 16px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .automation-card:last-child { margin-bottom: 0; }
+
+    .automation-name {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .automation-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.6;
+    }
+
+    .included-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .included-list {
+      list-style: none;
+      margin-bottom: 14px;
+    }
+
+    .included-list li {
+      font-size: 0.855rem;
+      color: var(--text);
+      padding: 3px 0;
+      padding-left: 18px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .included-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      border: 1.5px solid var(--accent);
+    }
+
+    .saving-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--green);
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 20px;
+      padding: 3px 10px;
+    }
+
+    /* ─── SECTION 4 — INVESTMENT ────────────────────────────────────── */
+    .investment-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+      margin-bottom: 14px;
+    }
+
+    .investment-table th {
+      text-align: left;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 8px 12px;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .investment-table th:last-child { text-align: right; }
+
+    .investment-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+      color: var(--text);
+    }
+
+    .investment-table td:last-child { text-align: right; font-weight: 600; }
+
+    .investment-table tr.total-row td {
+      font-weight: 700;
+      color: var(--accent);
+      border-bottom: none;
+      border-top: 2px solid var(--accent);
+      background: var(--accent-light);
+    }
+
+    .investment-table tr.total-row td:first-child {
+      border-radius: 0 0 0 6px;
+    }
+
+    .investment-table tr.total-row td:last-child {
+      border-radius: 0 0 6px 0;
+    }
+
+    .investment-note {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── SECTION 5 — TIMELINE ──────────────────────────────────────── */
+    .timeline-steps {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      margin-top: 6px;
+    }
+
+    .timeline-step {
+      flex: 1;
+      position: relative;
+      text-align: center;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .timeline-step:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--accent);
+      font-size: 1.1rem;
+      font-weight: 700;
+      z-index: 1;
+    }
+
+    .timeline-step-inner {
+      background: var(--accent-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 14px;
+      margin: 0 20px;
+    }
+
+    .timeline-step:first-child .timeline-step-inner { margin-left: 0; }
+    .timeline-step:last-child .timeline-step-inner  { margin-right: 0; }
+
+    .timeline-step-num {
+      display: inline-block;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 26px;
+      margin-bottom: 8px;
+    }
+
+    .timeline-step-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .timeline-step-sub {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    /* ─── SECTION 6 — NEXT STEPS ────────────────────────────────────── */
+    .next-steps-list {
+      list-style: none;
+      counter-reset: steps;
+    }
+
+    .next-steps-list li {
+      counter-increment: steps;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .next-steps-list li:last-child { border-bottom: none; }
+
+    .next-steps-list li::before {
+      content: counter(steps);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-top: 1px;
+    }
+
+    /* ─── ACCEPT NOTE ───────────────────────────────────────────────── */
+    .accept-note {
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: var(--accent-light);
+      border-radius: 8px;
+      font-size: 0.83rem;
+      color: var(--accent);
+      font-weight: 500;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────────────── */
+    .page-footer {
+      margin-top: 24px;
+      padding: 12px var(--page-pad);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .page-footer .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .page-footer .footer-logo-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .page-footer .footer-contact a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .page-footer .footer-contact a:hover { color: var(--accent); }
+
+    /* ─── SECTION DIVIDERS ──────────────────────────────────────────── */
+    .section-sep {
+      height: 1px;
+      background: var(--border);
+      margin: 0 var(--page-pad);
+    }
+
+    /* ─── PRINT STYLES ──────────────────────────────────────────────── */
+    @media print {
+      @page {
+        size: A4;
+        margin: 14mm;
+      }
+
+      html {
+        background: white;
+        padding: 0;
+        font-size: 13px;
+      }
+
+      body {
+        width: 100%;
+        box-shadow: none;
+        margin: 0;
+      }
+
+      .page-footer {
+        position: running(footer);
+      }
+
+      /* Ensure the footer prints on every page */
+      @page {
+        @bottom-left   { content: element(footer-left); }
+        @bottom-right  { content: element(footer-right); }
+      }
+
+      .builds {
+        page-break-before: auto;
+      }
+
+      .automation-card,
+      .timeline-steps,
+      .accept-note,
+      .next-steps-list li {
+        page-break-inside: avoid;
+        break-inside: avoid;
+      }
+
+      /* Remove screen-only shadow & bg */
+      .cover { border-bottom: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 1 — COVER
+  ════════════════════════════════════════════════════════════════ -->
+  <section class="cover page-section" style="padding-bottom: 0;">
+    <div class="cover-top">
+      <div class="logo">
+        <div class="logo-dot"></div>
+        <span class="logo-text">Elmdale AI</span>
+      </div>
+      <span class="proposal-badge">Proposal</span>
+    </div>
+
+    <h1 class="cover-heading">Automation<br>Proposal</h1>
+    <p class="cover-sub">Prepared exclusively for <span class="placeholder">[Client Business Name]</span></p>
+
+    <hr class="rule" />
+
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <strong>Date</strong><br>
+        <span class="placeholder">[Date]</span>
+      </div>
+      <div class="cover-meta-item">
+        <strong>Prepared by</strong><br>
+        Elmdale AI
+      </div>
+      <div class="cover-meta-item">
+        <strong>Valid for</strong><br>
+        14 days
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep" style="margin-top: 14mm;"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 2 — INTRODUCTION
+  ════════════════════════════════════════════════════════════════ -->
+  <section class="intro page-section">
+    <p class="section-label">Introduction</p>
+    <h2>Overview</h2>
+    <p>
+      Following our conversation, we've put together a tailored automation proposal for <span class="placeholder">[Client Business Name]</span>.
+      Based on what you shared with us, we believe the following workflow(s) will save your team significant time
+      and eliminate the manual processes currently slowing you down.
+    </p>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 3 — WHAT WE'LL BUILD
+  ════════════════════════════════════════════════════════════════ -->
+  <section class="builds page-section">
+    <p class="section-label">Scope of work</p>
+    <h2>What We'll Build</h2>
+
+    <!-- Card 1 -->
+    <div class="automation-card">
+      <div class="automation-name">AI Lead Outreach Pipeline</div>
+      <p class="automation-desc">
+        An end to end system that researches your target prospects, writes personalised outreach emails
+        tailored to each lead, and sends them automatically on a daily schedule, so your pipeline
+        stays active without you lifting a finger.
+      </p>
+      <div class="included-label">What's included</div>
+      <ul class="included-list">
+        <li>Prospect research automation (LinkedIn / web enrichment)</li>
+        <li>AI email copywriting personalised to each lead</li>
+        <li>Automated daily send via your existing email account</li>
+        <li>Reply detection &amp; CRM status updates</li>
+      </ul>
+      <span class="saving-badge">Estimated saving: 5 to 8 hours/week</span>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="automation-card">
+      <div class="automation-name">Client Onboarding Automation</div>
+      <p class="automation-desc">
+        The moment a new client signs up, this workflow instantly triggers a branded welcome email,
+        sends the contract for e signature, creates their CRM record, and spins up a project in your
+        project management tool, all without any manual steps.
+      </p>
+      <div class="included-label">What's included</div>
+      <ul class="included-list">
+        <li>Trigger on new client sign up / payment confirmation</li>
+        <li>Automated welcome email &amp; onboarding sequence</li>
+        <li>Contract generation &amp; e signature request</li>
+        <li>CRM record creation &amp; project workspace setup</li>
+      </ul>
+      <span class="saving-badge">Estimated saving: 3 to 5 hours/week</span>
+    </div>
+
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 4 — INVESTMENT
+  ════════════════════════════════════════════════════════════════ -->
+  <section class="page-section">
+    <p class="section-label">Pricing</p>
+    <h2>Investment</h2>
+
+    <table class="investment-table">
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Description</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>AI Lead Outreach Pipeline</td>
+          <td style="color: var(--muted);">Build + setup</td>
+          <td><span class="placeholder">£XXX</span></td>
+        </tr>
+        <tr>
+          <td>Client Onboarding Automation</td>
+          <td style="color: var(--muted);">Build + setup</td>
+          <td><span class="placeholder">£XXX</span></td>
+        </tr>
+        <tr class="total-row">
+          <td><strong>Total</strong></td>
+          <td></td>
+          <td><span class="placeholder">£XXX</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="investment-note">
+      All prices are one-time unless otherwise stated. Monthly maintenance available from
+      <span class="placeholder">£XXX</span>/month.
+    </p>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 5 — TIMELINE
+  ════════════════════════════════════════════════════════════════ -->
+  <section class="page-section" style="page-break-inside: avoid; break-inside: avoid;">
+    <p class="section-label">Delivery</p>
+    <h2>Timeline</h2>
+
+    <div class="timeline-steps">
+      <div class="timeline-step">
+        <div class="timeline-step-inner">
+          <div class="timeline-step-num">1</div>
+          <div class="timeline-step-title">Proposal approved</div>
+          <div class="timeline-step-sub">You confirm &amp; invoice sent</div>
+        </div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-inner">
+          <div class="timeline-step-num">2</div>
+          <div class="timeline-step-title">Build begins</div>
+          <div class="timeline-step-sub">Day 1, work starts immediately</div>
+        </div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-step-inner">
+          <div class="timeline-step-num">3</div>
+          <div class="timeline-step-title">Delivered &amp; live</div>
+          <div class="timeline-step-sub">Day 2 to 3, tested &amp; handed over</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-sep"></div>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       SECTION 6 — NEXT STEPS
+  ════════════════════════════════════════════════════════════════ -->
+  <section class="page-section">
+    <p class="section-label">Getting started</p>
+    <h2>Next Steps</h2>
+
+    <ol class="next-steps-list">
+      <li>Review this proposal and reply with any questions, we're happy to adjust scope.</li>
+      <li>Confirm you're happy to proceed and we'll get the paperwork ready.</li>
+      <li>We'll send an invoice for 50% upfront to begin work.</li>
+      <li>Build starts immediately, delivered and tested within 48 hours.</li>
+    </ol>
+
+    <div class="accept-note">
+      This proposal was generated by Elmdale AI. To accept, simply reply to this email.
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════════════════
+       FOOTER — appears at the bottom of the content; on print it
+       repeats via the browser's native footer area via @page margin
+  ════════════════════════════════════════════════════════════════ -->
+  <footer class="page-footer">
+    <div class="footer-logo">
+      <div class="footer-logo-dot"></div>
+      Elmdale AI
+    </div>
+    <div class="footer-contact">
+      <a href="mailto:hello@elmdale.ai">hello@elmdale.ai</a>
+      &nbsp;·&nbsp;
+      <a href="https://elmdale.ai">elmdale.ai</a>
+    </div>
+  </footer>
+
+</body>
+</html>
