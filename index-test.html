@@ -151,6 +151,17 @@
       background: var(--bg);
     }
 
+    #neural-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero > *:not(#neural-canvas) { position: relative; z-index: 1; }
+
     /* Subtle grid background */
     .hero::before {
       content: '';
@@ -447,48 +458,116 @@
     /* ── HOW IT WORKS ── */
     #how { background: var(--bg); }
 
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+    .steps-trail {
+      position: relative;
+      min-height: 680px;
+      margin-top: 3rem;
+    }
+
+    .trail-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .trail-path {
+      fill: none;
+      stroke: var(--accent2);
+      stroke-width: 4;
+      stroke-dasharray: 14 10;
+      stroke-linecap: round;
+      animation: trail-march 1.2s linear infinite;
+    }
+
+    @keyframes trail-march {
+      to { stroke-dashoffset: -24; }
     }
 
     .step-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.75rem;
-      position: relative;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 20%;
+      transform: translateX(-50%);
     }
 
-    .step-card:hover {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px var(--accent-light);
-    }
+    .step-card.step-1 { left: 10%; top: calc(45% - 1.75rem); }
+    .step-card.step-2 { left: 35%; top: calc(12% - 1.75rem); }
+    .step-card.step-3 { left: 62%; top: calc(45% - 1.75rem); }
+    .step-card.step-4 { left: 88%; top: calc(12% - 1.75rem); }
 
     .step-num {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      color: var(--accent);
-      background: var(--accent-light);
-      display: inline-flex;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--accent2);
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 2.5px solid var(--accent2);
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 28px; height: 28px;
-      border-radius: 8px;
-      margin-bottom: 1rem;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+      flex-shrink: 0;
+      animation: node-pulse 2.5s ease-in-out infinite;
+    }
+
+    .step-card.step-2 .step-num { animation-delay: 0.6s; }
+    .step-card.step-3 .step-num { animation-delay: 1.2s; }
+    .step-card.step-4 .step-num { animation-delay: 1.8s; }
+
+    @keyframes node-pulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(249,115,22,0.5); }
+      50% { box-shadow: 0 0 0 10px rgba(249,115,22,0); }
+    }
+
+    .step-body {
+      padding: 1.25rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      width: 100%;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .step-body:hover {
+      border-color: rgba(249,115,22,0.4);
+      transform: translateY(-4px);
     }
 
     .step-card h3 {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.5rem;
       letter-spacing: -0.01em;
     }
 
     .step-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    @media (max-width: 768px) {
+      .steps-trail { min-height: unset; }
+      .trail-svg { display: none; }
+      .step-card {
+        position: static;
+        width: 100%;
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+        gap: 1rem;
+        transform: none;
+        margin-bottom: 1.5rem;
+      }
+      .step-num { margin-bottom: 0; flex-shrink: 0; }
+      .step-body { flex: 1; }
+    }
 
     /* ── WHY ELMDALE AI ── */
     #why { background: var(--bg); }
@@ -669,6 +748,20 @@
       color: var(--muted);
       font-weight: 600;
     }
+
+    .cs-visit-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 1.25rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .cs-visit-link:hover { color: #fff; }
 
     /* ── CTA BOOKING ── */
     #booking {
@@ -1204,6 +1297,7 @@
 
   <!-- HERO -->
   <section class="hero">
+    <canvas id="neural-canvas"></canvas>
     <div class="hero-badge"><div class="badge-dot"></div> AI Automation Agency</div>
     <h1>Stop doing <span class="typewriter-wrap"><span class="typewriter-text" id="typewriter">tasks</span><span class="typewriter-cursor"></span></span>.<br />Automate everything.</h1>
     <p class="hero-sub">We build custom AI workflows that eliminate the manual work eating your week, so you can focus entirely on growth.</p>
@@ -1297,26 +1391,38 @@
     <div class="section-label fade-in">The process</div>
     <h2 class="fade-in">Live in days, not months</h2>
     <p class="section-sub fade-in">No long retainers or drawn-out projects. We move fast and deliver fast.</p>
-    <div class="steps-grid">
-      <div class="step-card fade-in">
+    <div class="steps-trail">
+      <svg class="trail-svg" viewBox="0 0 1000 680" preserveAspectRatio="none" aria-hidden="true">
+        <path class="trail-path" d="M 100 306 C 175 306 275 82 350 82 C 425 82 545 306 620 306 C 695 306 805 82 880 82"/>
+      </svg>
+
+      <div class="step-card step-1 fade-in">
         <div class="step-num">01</div>
-        <h3>Free Audit</h3>
-        <p>We map your workflows and identify exactly where AI saves the most time and money.</p>
+        <div class="step-body">
+          <h3>Free Audit</h3>
+          <p>We map your workflows and identify exactly where AI saves the most time and money.</p>
+        </div>
       </div>
-      <div class="step-card fade-in fade-in-d1">
+      <div class="step-card step-2 fade-in fade-in-d1">
         <div class="step-num">02</div>
-        <h3>We Build It</h3>
-        <p>Your custom automation is built and tested, typically delivered within 48 hours.</p>
+        <div class="step-body">
+          <h3>We Build It</h3>
+          <p>Your custom automation is built and tested, typically delivered within 48 hours.</p>
+        </div>
       </div>
-      <div class="step-card fade-in fade-in-d2">
+      <div class="step-card step-3 fade-in fade-in-d2">
         <div class="step-num">03</div>
-        <h3>You Approve</h3>
-        <p>We walk you through everything and make any tweaks until it's exactly right.</p>
+        <div class="step-body">
+          <h3>You Approve</h3>
+          <p>We walk you through everything and make any tweaks until it's exactly right.</p>
+        </div>
       </div>
-      <div class="step-card fade-in fade-in-d3">
+      <div class="step-card step-4 fade-in fade-in-d3">
         <div class="step-num">04</div>
-        <h3>It Runs Forever</h3>
-        <p>Your automation runs 24/7. We monitor and maintain it so you never have to.</p>
+        <div class="step-body">
+          <h3>It Runs Forever</h3>
+          <p>Your automation runs 24/7. We monitor and maintain it so you never have to.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -1389,6 +1495,7 @@
             <p>"The whole intake process now runs itself. Students are matched and booked faster than we could ever do manually."</p>
             <span>Founder, Castle View Tutoring</span>
           </div>
+          <a href="https://castleviewtutoring.com" target="_blank" rel="noopener" class="cs-visit-link">Visit site →</a>
         </div>
       </div>
 
@@ -1424,6 +1531,7 @@
             <p>"The site now reflects the standard of the agency properly, and the automation layer means new enquiries are handled without manual chasing."</p>
             <span>Founder, Blindspot Marketing Agency</span>
           </div>
+          <a href="https://morlj015.github.io/blindspot-agency/" target="_blank" rel="noopener" class="cs-visit-link">Visit site →</a>
         </div>
       </div>
 
@@ -1748,6 +1856,126 @@
         banner.classList.remove('visible');
       });
     })();
+
+    // ── Neural network canvas ──
+    const canvas = document.getElementById('neural-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const nnMouse = { x: -9999, y: -9999 };
+    document.addEventListener('mousemove', e => {
+      const rect = canvas.getBoundingClientRect();
+      nnMouse.x = e.clientX - rect.left;
+      nnMouse.y = e.clientY - rect.top;
+    });
+
+    const LAYERS = [4, 6, 7, 6, 4];
+    let nnNodes = [];
+
+    function initNetwork() {
+      nnNodes = [];
+      const totalLayers = LAYERS.length;
+      const layerSpacing = canvas.width / (totalLayers + 1);
+      LAYERS.forEach((count, li) => {
+        const baseX = layerSpacing * (li + 1);
+        const nodeSpacing = canvas.height / (count + 1);
+        for (let ni = 0; ni < count; ni++) {
+          const baseY = nodeSpacing * (ni + 1);
+          nnNodes.push({
+            baseX, baseY,
+            x: baseX, y: baseY,
+            layer: li, index: ni,
+            phase: Math.random() * Math.PI * 2,
+            floatAmp: 6 + Math.random() * 6,
+          });
+        }
+      });
+    }
+
+    function resizeCanvas() {
+      canvas.width  = canvas.offsetWidth;
+      canvas.height = canvas.offsetHeight;
+      initNetwork();
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    function drawNetwork(t) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      nnNodes.forEach(n => {
+        const fx = n.baseX + Math.sin(t * 0.0008 + n.phase) * n.floatAmp;
+        const fy = n.baseY + Math.cos(t * 0.001  + n.phase) * n.floatAmp;
+        const dx = nnMouse.x - fx;
+        const dy = nnMouse.y - fy;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const attractR = 220;
+        if (dist < attractR && dist > 0) {
+          const force = (1 - dist / attractR) * 0.22;
+          n.x = fx + dx * force;
+          n.y = fy + dy * force;
+        } else {
+          n.x = fx;
+          n.y = fy;
+        }
+      });
+
+      for (let li = 0; li < LAYERS.length - 1; li++) {
+        const layerA = nnNodes.filter(n => n.layer === li);
+        const layerB = nnNodes.filter(n => n.layer === li + 1);
+        layerA.forEach(a => {
+          layerB.forEach(b => {
+            const mx = (a.x + b.x) / 2;
+            const my = (a.y + b.y) / 2;
+            const mdx = nnMouse.x - mx;
+            const mdy = nnMouse.y - my;
+            const mDist = Math.sqrt(mdx * mdx + mdy * mdy);
+            const near = mDist < 180;
+            const alpha = near ? 0.55 : 0.10;
+            const lw    = near ? 1.2  : 0.5;
+            const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+            grad.addColorStop(0, `rgba(249,115,22,${alpha})`);
+            grad.addColorStop(1, `rgba(251,146,60,${alpha * 0.5})`);
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = lw;
+            ctx.stroke();
+          });
+        });
+      }
+
+      nnNodes.forEach(n => {
+        const dx = nnMouse.x - n.x;
+        const dy = nnMouse.y - n.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        const near = dist < 160;
+        const r     = near ? 5.5 : 3.5;
+        const gSize = near ? 22  : 12;
+
+        const glow = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, gSize);
+        glow.addColorStop(0, `rgba(249,115,22,${near ? 0.55 : 0.22})`);
+        glow.addColorStop(1, 'rgba(249,115,22,0)');
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, gSize, 0, Math.PI * 2);
+        ctx.fillStyle = glow;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = near ? 'rgba(251,146,60,0.95)' : 'rgba(249,115,22,0.65)';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r + 2.5, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(249,115,22,${near ? 0.45 : 0.15})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      });
+
+      requestAnimationFrame(drawNetwork);
+    }
+    requestAnimationFrame(drawNetwork);
   </script>
 </body>
 </html>
