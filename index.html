@@ -63,20 +63,32 @@
     }
 
     .logo {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 800;
       color: var(--text);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
+      text-decoration: none;
     }
 
-    .logo-dot {
-      width: 8px; height: 8px;
-      border-radius: 50%;
+    .logo-icon {
+      width: 30px; height: 30px;
+      border-radius: 7px;
       background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
     }
+
+    .logo-icon svg {
+      width: 16px; height: 16px;
+    }
+
+    .logo-wordmark { display: flex; align-items: baseline; gap: 1px; }
+    .logo-ai { color: var(--accent); }
 
     nav ul {
       list-style: none;
@@ -1277,10 +1289,16 @@
   <!-- NAV -->
   <nav id="main-nav">
     <div class="nav-inner">
-      <div class="logo">
-        <div class="logo-dot"></div>
-        Elmdale AI
-      </div>
+      <a href="/" class="logo">
+        <div class="logo-icon">
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 4h10M3 8h7M3 12h10" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="logo-wordmark">
+          <span>Elmdale</span><span class="logo-ai">&nbsp;AI</span>
+        </div>
+      </a>
       <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
         <span></span>
         <span></span>
@@ -1938,7 +1956,7 @@
           const aDist = Math.sqrt((nnMouse.x-a.x)**2 + (nnMouse.y-a.y)**2);
           const bDist = Math.sqrt((nnMouse.x-b.x)**2 + (nnMouse.y-b.y)**2);
           const cursorNear = aDist < 160 || bDist < 160;
-          const alpha = cursorNear ? proximity * 0.7 : proximity * 0.12;
+          const alpha = cursorNear ? proximity * 0.7 : proximity * 0.18 + 0.06;
           const lw    = cursorNear ? 1.0 : 0.5;
           const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
           grad.addColorStop(0, `rgba(249,115,22,${alpha})`);
