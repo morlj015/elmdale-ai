@@ -3481,12 +3481,24 @@
     }
 
     function resizeCanvas() {
-      canvas.width  = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      initNetwork();
+      const w = canvas.offsetWidth;
+      const h = canvas.offsetHeight;
+      // Only reinitialise nodes if dimensions actually changed (avoids mobile scroll thrash)
+      if (Math.abs(canvas.width - w) > 2 || Math.abs(canvas.height - h) > 2) {
+        canvas.width  = w;
+        canvas.height = h;
+        initNetwork();
+      }
     }
-    resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+    initNetwork();
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(resizeCanvas, 150);
+    });
 
     function drawNetwork(t) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
