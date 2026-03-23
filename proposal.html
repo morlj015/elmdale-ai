@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <link rel="icon" id="favicon" type="image/png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Automation Proposal | Elmdale AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -720,5 +721,51 @@
     </div>
   </footer>
 
+  <script>
+    (function () {
+      var c = document.createElement('canvas');
+      c.width = c.height = 64;
+      var ctx = c.getContext('2d');
+      var r = 14;
+      ctx.beginPath();
+      ctx.moveTo(r, 0); ctx.lineTo(64 - r, 0);
+      ctx.arcTo(64, 0, 64, r, r);
+      ctx.lineTo(64, 64 - r);
+      ctx.arcTo(64, 64, 64 - r, 64, r);
+      ctx.lineTo(r, 64);
+      ctx.arcTo(0, 64, 0, 64 - r, r);
+      ctx.lineTo(0, r);
+      ctx.arcTo(0, 0, r, 0, r);
+      ctx.closePath();
+      var bg = ctx.createLinearGradient(0, 0, 64, 64);
+      bg.addColorStop(0, '#4c1d95');
+      bg.addColorStop(1, '#1a0845');
+      ctx.fillStyle = bg;
+      ctx.fill();
+      ctx.strokeStyle = 'rgba(255,255,255,0.92)';
+      ctx.lineWidth = 4.5;
+      ctx.lineCap = 'round';
+      ctx.lineJoin = 'round';
+      ctx.beginPath();
+      ctx.moveTo(32, 32);
+      ctx.bezierCurveTo(26, 18, 8, 18, 8, 32);
+      ctx.bezierCurveTo(8, 46, 26, 46, 32, 32);
+      ctx.bezierCurveTo(38, 18, 56, 18, 56, 32);
+      ctx.bezierCurveTo(56, 46, 38, 46, 32, 32);
+      ctx.stroke();
+      ctx.shadowColor = '#f97316';
+      ctx.shadowBlur = 8;
+      ctx.fillStyle = '#f97316';
+      ctx.beginPath();
+      ctx.arc(32, 32, 6.5, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.shadowBlur = 0;
+      ctx.fillStyle = 'rgba(255,255,255,0.95)';
+      ctx.beginPath();
+      ctx.arc(32, 32, 3, 0, Math.PI * 2);
+      ctx.fill();
+      document.getElementById('favicon').href = c.toDataURL('image/png');
+    })();
+  </script>
 </body>
 </html>

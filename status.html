@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System Status | Elmdale AI</title>
+  <meta name="description" content="Live status of the platforms Elmdale AI automations depend on. Check if an outage is affecting your workflow.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%235b21b6'/><text x='50%25' y='55%25' font-family='Inter,sans-serif' font-size='18' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='middle'>E</text></svg>" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg2: #f9f9fb;
+      --bg3: #f3f3f8;
+      --border: #e4e4ec;
+      --border2: #d0d0e0;
+      --text: #0a0a12;
+      --muted: #6b6b80;
+      --accent: #5b21b6;
+      --accent-light: #ede9fe;
+      --accent2: #f97316;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --yellow: #ca8a04;
+      --yellow-light: #fef9c3;
+      --orange: #ea580c;
+      --orange-light: #fff7ed;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      background: linear-gradient(135deg, #4c1d95, #1a0845);
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .logo-inf-run {
+      animation: inf-chase 3s linear infinite;
+    }
+
+    @keyframes inf-chase {
+      0%   { stroke-dashoffset: 150; }
+      100% { stroke-dashoffset: -150; }
+    }
+
+    .logo-node {
+      transform-origin: 16px 16px;
+      animation: node-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes node-pulse {
+      0%, 100% { transform: scale(1);   opacity: 1; }
+      50%       { transform: scale(1.5); opacity: 0.6; }
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── OVERALL BANNER ── */
+    .overall-banner {
+      margin-top: 64px;
+      padding: 2.5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.4s;
+    }
+
+    .overall-banner.ok        { background: var(--green-light); }
+    .overall-banner.degraded  { background: var(--yellow-light); }
+    .overall-banner.outage    { background: var(--red-light); }
+    .overall-banner.loading   { background: var(--bg3); }
+
+    .overall-left { display: flex; align-items: center; gap: 1.1rem; }
+
+    .overall-icon {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .overall-banner.ok       .overall-icon { background: var(--green);  color: #fff; }
+    .overall-banner.degraded .overall-icon { background: var(--yellow); color: #fff; }
+    .overall-banner.outage   .overall-icon { background: var(--red);    color: #fff; }
+    .overall-banner.loading  .overall-icon { background: var(--border2); color: #fff; }
+
+    .overall-title {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .overall-sub {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: 1px;
+    }
+
+    .overall-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .last-updated {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .btn-refresh {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--border2);
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .btn-refresh:hover { border-color: var(--accent); }
+    .btn-refresh.spinning svg { animation: spin 0.8s linear infinite; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── PAGE BODY ── */
+    .page-body {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 3rem 5%;
+    }
+
+    /* ── AUTO-REFRESH NOTICE ── */
+    .refresh-notice {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .refresh-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    /* ── CATEGORY GROUPS ── */
+    .category-block { margin-bottom: 2.5rem; }
+
+    .category-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ── SERVICE ROWS ── */
+    .service-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 0.5rem;
+      transition: border-color 0.2s;
+    }
+
+    .service-row:hover { border-color: var(--border2); }
+
+    .service-left {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      min-width: 0;
+    }
+
+    .service-logo {
+      width: 36px; height: 36px;
+      border-radius: 9px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .service-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .service-desc {
+      font-size: 0.8rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .service-right {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    /* ── STATUS PILL ── */
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0.3rem 0.75rem;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pill-ok       { background: var(--green-light);  color: var(--green); }
+    .pill-ok       .status-dot { background: var(--green); }
+
+    .pill-degraded { background: var(--yellow-light); color: var(--yellow); }
+    .pill-degraded .status-dot { background: var(--yellow); }
+
+    .pill-partial  { background: var(--orange-light); color: var(--orange); }
+    .pill-partial  .status-dot { background: var(--orange); }
+
+    .pill-outage   { background: var(--red-light);    color: var(--red); }
+    .pill-outage   .status-dot { background: var(--red); }
+
+    .pill-unknown  { background: var(--bg3);           color: var(--muted); }
+    .pill-unknown  .status-dot { background: var(--border2); }
+
+    .pill-loading  { background: var(--bg3);           color: var(--muted); }
+    .pill-loading  .status-dot {
+      background: var(--border2);
+      animation: pulse-bg 1s ease-in-out infinite;
+    }
+
+    @keyframes pulse-bg {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 1; }
+    }
+
+    .btn-status-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .btn-status-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── INCIDENT CALLOUT ── */
+    .incident-notice {
+      display: none;
+      align-items: flex-start;
+      gap: 0.8rem;
+      background: var(--red-light);
+      border: 1px solid #fca5a5;
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--red);
+      line-height: 1.6;
+    }
+
+    .incident-notice.visible { display: flex; }
+    .incident-notice strong  { color: var(--red); }
+
+    /* ── INFO BOX ── */
+    .info-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      margin-top: 3rem;
+    }
+
+    .info-box h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.4rem;
+    }
+
+    .info-box p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 0.75rem;
+    }
+
+    .info-box p:last-child { margin-bottom: 0; }
+
+    .info-box a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .info-box a:hover { text-decoration: underline; }
+
+    /* ── CONTACT STRIP ── */
+    .contact-strip {
+      margin-top: 2rem;
+      background: linear-gradient(135deg, var(--accent-light) 0%, #fff7ed 100%);
+      border: 1px solid var(--border2);
+      border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-strip h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.2rem;
+    }
+
+    .contact-strip p {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .contact-buttons {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .btn-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.55rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .btn-contact:hover { opacity: 0.85; }
+    .btn-contact.email     { background: var(--accent); color: #fff; }
+    .btn-contact.whatsapp  { background: #16a34a;       color: #fff; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    footer p { font-size: 0.8rem; color: var(--muted); }
+
+    .footer-links { display: flex; align-items: center; gap: 1.25rem; }
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      .service-desc { display: none; }
+      .overall-banner { padding: 1.75rem 5%; }
+      .contact-strip { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="logo">
+      <span class="logo-icon">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16,16 C13,9 4,9 4,16 C4,23 13,23 16,16 C19,9 28,9 28,16 C28,23 19,23 16,16 Z"
+            stroke="rgba(255,255,255,0.25)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="logo-inf-run" d="M16,16 C13,9 4,9 4,16 C4,23 13,23 16,16 C19,9 28,9 28,16 C28,23 19,23 16,16 Z"
+            stroke="white" stroke-width="3" fill="none" stroke-linecap="round"
+            stroke-dasharray="28 122"/>
+          <circle class="logo-node" cx="16" cy="16" r="4" fill="#f97316"/>
+          <circle cx="16" cy="16" r="1.8" fill="white"/>
+        </svg>
+      </span>
+      Elmdale AI
+    </a>
+    <ul>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="index.html#how">Process</a></li>
+      <li><a href="support.html">Support</a></li>
+      <li><a href="status.html" style="color: var(--accent); font-weight: 700;">Status</a></li>
+      <li><a href="index.html#booking" class="nav-cta">Book a call</a></li>
+    </ul>
+  </nav>
+
+  <!-- OVERALL BANNER -->
+  <div class="overall-banner loading" id="overall-banner">
+    <div class="overall-left">
+      <div class="overall-icon" id="overall-icon">⏳</div>
+      <div>
+        <div class="overall-title" id="overall-title">Checking platform status…</div>
+        <div class="overall-sub" id="overall-sub">Fetching live data from each service</div>
+      </div>
+    </div>
+    <div class="overall-right">
+      <span class="last-updated" id="last-updated"></span>
+      <button class="btn-refresh" id="btn-refresh" onclick="refreshAll()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+        Refresh
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE BODY -->
+  <div class="page-body">
+
+    <div class="refresh-notice">
+      <div class="refresh-dot"></div>
+      Refreshes automatically every 60 seconds
+    </div>
+
+    <!-- INCIDENT NOTICE (shown if any outage detected) -->
+    <div class="incident-notice" id="incident-notice">
+      <span style="font-size:1.1rem; flex-shrink:0;">⚠️</span>
+      <div>
+        <strong>One or more services are reporting issues.</strong> If your automation has stopped working this may be the cause. These outages are outside our control but we monitor them closely. Head to the <a href="support.html#troubleshoot" style="color:var(--red);text-decoration:underline;">troubleshooting guide</a> for next steps, or contact us directly.
+      </div>
+    </div>
+
+    <!-- SERVICES LIST -->
+    <div id="services-container"></div>
+
+    <!-- INFO BOX -->
+    <div class="info-box">
+      <h3>How this page works</h3>
+      <p>This page fetches live status data directly from the official status pages of each platform. We check every 60 seconds. Status information is sourced from each provider and reflects what they are reporting publicly.</p>
+      <p>If a service shows as operational here but your automation is still not working, the issue may be specific to your account or workflow rather than a platform-wide outage. Visit the <a href="support.html">troubleshooting guide</a> for a full checklist of things to check, or contact us and we will investigate.</p>
+      <p>Some services do not publish a machine-readable status feed. For those, we link directly to their status page so you can check manually.</p>
+    </div>
+
+    <!-- CONTACT STRIP -->
+    <div class="contact-strip">
+      <div>
+        <h3>Still having trouble?</h3>
+        <p>If everything looks operational here but your automation is not running, get in touch and we will look into it.</p>
+      </div>
+      <div class="contact-buttons">
+        <a href="mailto:hello@elmdale.ai?subject=Automation issue&body=Hi team,%0D%0A%0D%0AMy automation is not working. The status page shows all services operational.%0D%0A%0D%0AHere is what I have noticed:%0D%0A" class="btn-contact email">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+          Email us
+        </a>
+        <a href="https://wa.me/447700000000?text=Hi%2C%20I%20have%20checked%20the%20status%20page%20and%20everything%20looks%20fine%20but%20my%20automation%20is%20still%20not%20working." target="_blank" rel="noopener" class="btn-contact whatsapp">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo">
+      <span class="logo-icon">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16,16 C13,9 4,9 4,16 C4,23 13,23 16,16 C19,9 28,9 28,16 C28,23 19,23 16,16 Z"
+            stroke="rgba(255,255,255,0.25)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="logo-inf-run" d="M16,16 C13,9 4,9 4,16 C4,23 13,23 16,16 C19,9 28,9 28,16 C28,23 19,23 16,16 Z"
+            stroke="white" stroke-width="3" fill="none" stroke-linecap="round"
+            stroke-dasharray="28 122"/>
+          <circle class="logo-node" cx="16" cy="16" r="4" fill="#f97316"/>
+          <circle cx="16" cy="16" r="1.8" fill="white"/>
+        </svg>
+      </span>
+      Elmdale AI
+    </a>
+    <p>© 2026 Elmdale AI. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="mailto:hello@elmdale.ai">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        hello@elmdale.ai
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    // ── SERVICE DEFINITIONS ──────────────────────────────────────────────────
+    // statuspage.io services expose /api/v2/status.json with CORS enabled.
+    // For services without a machine-readable API, statusUrl is null and we
+    // link to their page directly.
+    const services = [
+      {
+        category: 'Automation Platforms',
+        items: [
+          {
+            name: 'Make.com',
+            desc: 'Core workflow automation platform',
+            icon: '⚡',
+            statusUrl: 'https://status.make.com/api/v2/status.json',
+            pageUrl: 'https://status.make.com',
+            parser: 'statuspage'
+          },
+          {
+            name: 'Zapier',
+            desc: 'Workflow automation and app connections',
+            icon: '🔗',
+            statusUrl: 'https://status.zapier.com/api/v2/status.json',
+            pageUrl: 'https://status.zapier.com',
+            parser: 'statuspage'
+          },
+          {
+            name: 'n8n',
+            desc: 'Open source workflow automation',
+            icon: '🔀',
+            statusUrl: 'https://status.n8n.io/api/v2/status.json',
+            pageUrl: 'https://status.n8n.io',
+            parser: 'statuspage'
+          }
+        ]
+      },
+      {
+        category: 'AI Providers',
+        items: [
+          {
+            name: 'OpenAI',
+            desc: 'GPT models and API',
+            icon: '🤖',
+            statusUrl: 'https://status.openai.com/api/v2/status.json',
+            pageUrl: 'https://status.openai.com',
+            parser: 'statuspage'
+          },
+          {
+            name: 'Anthropic (Claude)',
+            desc: 'Claude AI models and API',
+            icon: '🧠',
+            statusUrl: 'https://status.anthropic.com/api/v2/status.json',
+            pageUrl: 'https://status.anthropic.com',
+            parser: 'statuspage'
+          }
+        ]
+      },
+      {
+        category: 'Productivity and Communication',
+        items: [
+          {
+            name: 'Google Workspace',
+            desc: 'Gmail, Drive, Sheets, Calendar',
+            icon: '📧',
+            statusUrl: null,
+            pageUrl: 'https://workspace.google.com/status',
+            parser: null
+          },
+          {
+            name: 'Slack',
+            desc: 'Team messaging and notifications',
+            icon: '💬',
+            statusUrl: 'https://slack-status.com/api/v2.0.0/current',
+            pageUrl: 'https://slack-status.com',
+            parser: 'slack'
+          },
+          {
+            name: 'Notion',
+            desc: 'Docs and project management',
+            icon: '📝',
+            statusUrl: 'https://status.notion.so/api/v2/status.json',
+            pageUrl: 'https://status.notion.so',
+            parser: 'statuspage'
+          },
+          {
+            name: 'Airtable',
+            desc: 'Database and spreadsheet tool',
+            icon: '📊',
+            statusUrl: 'https://status.airtable.com/api/v2/status.json',
+            pageUrl: 'https://status.airtable.com',
+            parser: 'statuspage'
+          }
+        ]
+      },
+      {
+        category: 'CRM and Sales',
+        items: [
+          {
+            name: 'HubSpot',
+            desc: 'CRM, marketing and sales tools',
+            icon: '🎯',
+            statusUrl: 'https://status.hubspot.com/api/v2/status.json',
+            pageUrl: 'https://status.hubspot.com',
+            parser: 'statuspage'
+          },
+          {
+            name: 'Salesforce',
+            desc: 'Enterprise CRM platform',
+            icon: '☁️',
+            statusUrl: null,
+            pageUrl: 'https://status.salesforce.com',
+            parser: null
+          }
+        ]
+      },
+      {
+        category: 'Payments and Finance',
+        items: [
+          {
+            name: 'Stripe',
+            desc: 'Payment processing and billing',
+            icon: '💳',
+            statusUrl: 'https://status.stripe.com/api/v2/status.json',
+            pageUrl: 'https://status.stripe.com',
+            parser: 'statuspage'
+          },
+          {
+            name: 'Xero',
+            desc: 'Accounting and invoicing',
+            icon: '🧾',
+            statusUrl: null,
+            pageUrl: 'https://status.xero.com',
+            parser: null
+          }
+        ]
+      }
+    ];
+
+    // ── STATE ────────────────────────────────────────────────────────────────
+    const state = {}; // serviceId -> { status, label }
+
+    // ── RENDER SKELETON ──────────────────────────────────────────────────────
+    function renderSkeleton() {
+      const container = document.getElementById('services-container');
+      container.innerHTML = services.map(group => `
+        <div class="category-block">
+          <div class="category-label">${group.category}</div>
+          ${group.items.map(svc => `
+            <div class="service-row" id="row-${slug(svc.name)}">
+              <div class="service-left">
+                <div class="service-logo">${svc.icon}</div>
+                <div>
+                  <div class="service-name">${svc.name}</div>
+                  <div class="service-desc">${svc.desc}</div>
+                </div>
+              </div>
+              <div class="service-right">
+                <span class="status-pill pill-loading" id="pill-${slug(svc.name)}">
+                  <span class="status-dot"></span>
+                  Checking…
+                </span>
+                <a href="${svc.pageUrl}" target="_blank" rel="noopener" class="btn-status-link">
+                  Status page
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </a>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+
+    // ── FETCH ONE SERVICE ────────────────────────────────────────────────────
+    async function fetchService(svc) {
+      if (!svc.statusUrl) {
+        return { status: 'unknown', label: 'Check manually' };
+      }
+
+      try {
+        const res = await fetch(svc.statusUrl, { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const data = await res.json();
+
+        if (svc.parser === 'statuspage') {
+          const indicator = data?.status?.indicator ?? 'unknown';
+          const description = data?.status?.description ?? '';
+          return mapStatuspage(indicator, description);
+        }
+
+        if (svc.parser === 'slack') {
+          const s = data?.status ?? 'unknown';
+          if (s === 'ok') return { status: 'ok', label: 'Operational' };
+          if (s === 'active') return { status: 'outage', label: 'Active incident' };
+          if (s === 'upcoming') return { status: 'degraded', label: 'Upcoming maintenance' };
+          return { status: 'unknown', label: 'Unknown' };
+        }
+
+        return { status: 'unknown', label: 'Unknown' };
+      } catch {
+        return { status: 'unknown', label: 'Unable to fetch' };
+      }
+    }
+
+    function mapStatuspage(indicator, description) {
+      switch (indicator) {
+        case 'none':
+          return { status: 'ok', label: description || 'Operational' };
+        case 'minor':
+          return { status: 'degraded', label: description || 'Degraded performance' };
+        case 'major':
+          return { status: 'partial', label: description || 'Partial outage' };
+        case 'critical':
+          return { status: 'outage', label: description || 'Major outage' };
+        default:
+          return { status: 'unknown', label: 'Unknown' };
+      }
+    }
+
+    // ── UPDATE PILL ──────────────────────────────────────────────────────────
+    function setPill(name, result) {
+      const pill = document.getElementById('pill-' + slug(name));
+      if (!pill) return;
+
+      const classMap = {
+        ok:       'pill-ok',
+        degraded: 'pill-degraded',
+        partial:  'pill-partial',
+        outage:   'pill-outage',
+        unknown:  'pill-unknown'
+      };
+
+      pill.className = 'status-pill ' + (classMap[result.status] || 'pill-unknown');
+      pill.innerHTML = `<span class="status-dot"></span>${result.label}`;
+    }
+
+    // ── REFRESH ALL ──────────────────────────────────────────────────────────
+    async function refreshAll() {
+      const btn = document.getElementById('btn-refresh');
+      btn.classList.add('spinning');
+
+      const allItems = services.flatMap(g => g.items);
+      const results = await Promise.allSettled(allItems.map(svc => fetchService(svc)));
+
+      let hasIssue = false;
+      let hasOutage = false;
+
+      results.forEach((res, i) => {
+        const svc = allItems[i];
+        const result = res.status === 'fulfilled' ? res.value : { status: 'unknown', label: 'Error' };
+        state[svc.name] = result;
+        setPill(svc.name, result);
+        if (result.status === 'degraded' || result.status === 'partial') hasIssue = true;
+        if (result.status === 'outage') { hasIssue = true; hasOutage = true; }
+      });
+
+      updateOverallBanner(hasIssue, hasOutage, allItems.length);
+
+      const now = new Date();
+      document.getElementById('last-updated').textContent =
+        'Last updated at ' + now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+
+      if (hasIssue) {
+        document.getElementById('incident-notice').classList.add('visible');
+      } else {
+        document.getElementById('incident-notice').classList.remove('visible');
+      }
+
+      btn.classList.remove('spinning');
+    }
+
+    // ── OVERALL BANNER ───────────────────────────────────────────────────────
+    function updateOverallBanner(hasIssue, hasOutage, total) {
+      const banner = document.getElementById('overall-banner');
+      const icon   = document.getElementById('overall-icon');
+      const title  = document.getElementById('overall-title');
+      const sub    = document.getElementById('overall-sub');
+
+      banner.classList.remove('loading', 'ok', 'degraded', 'outage');
+
+      if (hasOutage) {
+        banner.classList.add('outage');
+        icon.textContent = '🔴';
+        title.textContent = 'One or more platforms are down';
+        sub.textContent = 'This may be affecting your automations. See details below.';
+      } else if (hasIssue) {
+        banner.classList.add('degraded');
+        icon.textContent = '⚠️';
+        title.textContent = 'Some platforms are experiencing issues';
+        sub.textContent = 'Performance may be degraded. Your automations could be affected.';
+      } else {
+        banner.classList.add('ok');
+        icon.textContent = '✅';
+        title.textContent = 'All systems operational';
+        sub.textContent = 'All ' + total + ' monitored platforms are reporting normal operation.';
+      }
+    }
+
+    // ── HELPERS ──────────────────────────────────────────────────────────────
+    function slug(name) {
+      return name.toLowerCase().replace(/[^a-z0-9]/g, '');
+    }
+
+    // ── INIT ─────────────────────────────────────────────────────────────────
+    renderSkeleton();
+    refreshAll();
+    setInterval(refreshAll, 60000);
+  </script>
+
+</body>
+</html>

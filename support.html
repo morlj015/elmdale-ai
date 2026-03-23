@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Support &amp; Learning Hub | Elmdale AI</title>
+  <meta name="description" content="Learn what AI and automation actually mean for your business. Plain English guides, FAQs and real examples from the Elmdale AI team.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%235b21b6'/><text x='50%25' y='55%25' font-family='Inter,sans-serif' font-size='18' font-weight='900' fill='white' text-anchor='middle' dominant-baseline='middle'>E</text></svg>" type="image/svg+xml">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg2: #f9f9fb;
+      --bg3: #f3f3f8;
+      --border: #e4e4ec;
+      --border2: #d0d0e0;
+      --text: #0a0a12;
+      --muted: #6b6b80;
+      --accent: #5b21b6;
+      --accent-light: #ede9fe;
+      --accent2: #f97316;
+      --accent2-light: #fff7ed;
+      --green: #16a34a;
+      --green-light: #dcfce7;
+      --yellow: #ca8a04;
+      --yellow-light: #fef9c3;
+      --orange: #ea580c;
+      --orange-light: #fff7ed;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      background: rgba(255,255,255,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 22px; height: 22px;
+      background: linear-gradient(135deg, #4c1d95, #1a0845);
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+
+    .logo-inf-run {
+      animation: inf-chase 3s linear infinite;
+    }
+
+    @keyframes inf-chase {
+      0%   { stroke-dashoffset: 150; }
+      100% { stroke-dashoffset: -150; }
+    }
+
+    .logo-node {
+      transform-origin: 16px 16px;
+      animation: node-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes node-pulse {
+      0%, 100% { transform: scale(1);   opacity: 1; }
+      50%       { transform: scale(1.5); opacity: 0.6; }
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--text); }
+
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 0.45rem 1.1rem;
+      border-radius: 8px;
+      font-weight: 600 !important;
+      transition: opacity 0.2s !important;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .support-hero {
+      padding: 120px 5% 60px;
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .support-hero .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 1.25rem;
+    }
+
+    .support-hero h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+
+    .support-hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .support-hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto 2rem;
+    }
+
+    /* ── SEARCH ── */
+    .search-wrap {
+      max-width: 560px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .search-wrap svg {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+
+    #search-input {
+      width: 100%;
+      padding: 0.9rem 1rem 0.9rem 2.8rem;
+      border: 1.5px solid var(--border2);
+      border-radius: 12px;
+      font-size: 0.95rem;
+      font-family: inherit;
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    #search-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(91,33,182,0.1);
+    }
+
+    #search-input::placeholder { color: var(--muted); }
+
+    .search-results-count {
+      margin-top: 0.6rem;
+      font-size: 0.82rem;
+      color: var(--muted);
+      min-height: 1.2em;
+    }
+
+    /* ── LAYOUT ── */
+    .support-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: calc(100vh - 280px);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      border-right: 1px solid var(--border);
+      padding: 2rem 0;
+      position: sticky;
+      top: 64px;
+      height: calc(100vh - 64px);
+      overflow-y: auto;
+    }
+
+    .sidebar-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .sidebar-nav { list-style: none; margin-bottom: 2rem; }
+
+    .sidebar-nav li a {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.55rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--muted);
+      text-decoration: none;
+      border-left: 2px solid transparent;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
+    }
+
+    .sidebar-nav li a:hover {
+      color: var(--text);
+      background: var(--bg2);
+    }
+
+    .sidebar-nav li a.active {
+      color: var(--accent);
+      background: var(--accent-light);
+      border-left-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .sidebar-nav li a .nav-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .sidebar-progress {
+      margin: 0 1.5rem 1.5rem;
+      background: var(--bg3);
+      border-radius: 8px;
+      padding: 0.9rem 1rem;
+    }
+
+    .sidebar-progress .prog-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+
+    .prog-bar-wrap {
+      height: 5px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .prog-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 99px;
+      transition: width 0.4s ease;
+    }
+
+    /* ── CONTENT ── */
+    .content-area {
+      padding: 3rem 4rem;
+    }
+
+    .module {
+      display: none;
+    }
+
+    .module.active {
+      display: block;
+      animation: fade-in 0.25s ease;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .module-header {
+      margin-bottom: 2.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .module-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-basics { background: var(--accent-light); color: var(--accent); }
+    .tag-business { background: var(--accent2-light); color: var(--accent2); }
+    .tag-faq { background: var(--green-light); color: var(--green); }
+    .tag-urgent { background: #fef2f2; color: #dc2626; }
+
+    .issue-card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+
+    .issue-card .issue-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.9rem;
+      padding: 1.1rem 1.25rem;
+      background: var(--bg2);
+    }
+
+    .issue-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .issue-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    .issue-desc {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .issue-card .issue-fix {
+      padding: 0.9rem 1.25rem;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .issue-card .issue-fix strong { color: var(--text); }
+
+    .contact-cta {
+      background: linear-gradient(135deg, var(--accent-light) 0%, #fff7ed 100%);
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      padding: 2rem;
+      text-align: center;
+      margin-top: 2rem;
+    }
+
+    .contact-cta h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-cta p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 460px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .contact-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-contact {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0.65rem 1.3rem;
+      border-radius: 9px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-contact:hover { opacity: 0.85; transform: translateY(-1px); }
+
+    .btn-contact.email { background: var(--accent); color: #fff; }
+    .btn-contact.whatsapp { background: #16a34a; color: #fff; }
+
+    .checklist {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0 1.5rem;
+    }
+
+    .checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .checklist li:last-child { border-bottom: none; }
+
+    .checklist li .check-num {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+
+    .module-header h2 {
+      font-size: 1.9rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+
+    .module-header p {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 600px;
+    }
+
+    .reading-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 2rem 0 0.75rem;
+    }
+
+    .article h3:first-child { margin-top: 0; }
+
+    .article p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+
+    .article p strong { color: var(--text); font-weight: 700; }
+
+    .article ul, .article ol {
+      padding-left: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .article li {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 0.3rem;
+    }
+
+    .article li strong { color: var(--text); }
+
+    /* ── CALLOUT CARDS ── */
+    .callout {
+      display: flex;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      border-radius: 12px;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    .callout .callout-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+
+    .callout.tip { background: var(--accent-light); color: var(--accent); }
+    .callout.tip p { color: var(--accent); margin: 0; }
+    .callout.example { background: var(--accent2-light); color: var(--accent2); }
+    .callout.example p { color: #7c3a00; margin: 0; }
+    .callout.note { background: var(--green-light); }
+    .callout.note p { color: var(--green); margin: 0; }
+
+    /* ── EXAMPLE CARDS ── */
+    .example-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .example-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.1rem;
+    }
+
+    .example-card .ex-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .example-card h4 {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .example-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ── STAT CARDS ── */
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .stat-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .stat-card .stat-val {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--accent);
+      letter-spacing: -0.04em;
+    }
+
+    .stat-card .stat-desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+
+    /* ── FAQ ── */
+    .faq-list { margin: 0; }
+
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 0.75rem;
+      overflow: hidden;
+    }
+
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      background: var(--bg);
+      transition: background 0.15s;
+    }
+
+    .faq-q:hover { background: var(--bg2); }
+
+    .faq-q .faq-chevron {
+      flex-shrink: 0;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--bg3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s, background 0.15s;
+    }
+
+    .faq-item.open .faq-chevron {
+      transform: rotate(180deg);
+      background: var(--accent-light);
+    }
+
+    .faq-item.open .faq-q { background: var(--accent-light); color: var(--accent); }
+
+    .faq-a {
+      display: none;
+      padding: 0 1.25rem 1.1rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.75;
+      background: var(--bg);
+    }
+
+    .faq-item.open .faq-a { display: block; }
+
+    /* ── MODULE NAV BUTTONS ── */
+    .module-nav-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      gap: 1rem;
+    }
+
+    .btn-module {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--border2);
+      background: var(--bg);
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-module:hover { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+    .btn-module.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-module.primary:hover { opacity: 0.88; background: var(--accent); color: #fff; }
+    .btn-module:disabled, .btn-module[disabled] { opacity: 0.4; pointer-events: none; }
+
+    /* ── SEARCH NO RESULTS ── */
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 4rem 2rem;
+      color: var(--muted);
+    }
+
+    .no-results svg { margin-bottom: 1rem; opacity: 0.35; }
+    .no-results h3 { font-size: 1.1rem; color: var(--text); margin-bottom: 0.4rem; }
+    .no-results p  { font-size: 0.9rem; }
+
+    /* ── STATUS MODULE ── */
+    .status-summary {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.1rem 1.25rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-bottom: 2rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+
+    .status-summary.ok       { background: var(--green-light);  border-color: #86efac; }
+    .status-summary.degraded { background: var(--yellow-light); border-color: #fde047; }
+    .status-summary.outage   { background: var(--red-light);    border-color: #fca5a5; }
+    .status-summary.loading  { background: var(--bg3);          border-color: var(--border); }
+
+    .ss-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .ss-title {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 1px;
+    }
+
+    .ss-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    .ss-right {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .ss-updated {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+
+    .btn-refresh {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0.4rem 0.85rem;
+      border-radius: 7px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1.5px solid var(--border2);
+      background: var(--bg);
+      color: var(--text);
+      transition: border-color 0.2s;
+    }
+
+    .btn-refresh:hover { border-color: var(--accent); }
+    .btn-refresh.spinning svg { animation: spin 0.8s linear infinite; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .status-incident {
+      display: none;
+      align-items: flex-start;
+      gap: 0.75rem;
+      background: var(--red-light);
+      border: 1px solid #fca5a5;
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: var(--red);
+      line-height: 1.6;
+    }
+
+    .status-incident.visible { display: flex; }
+
+    .status-refresh-note {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
+    }
+
+    .refresh-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
+    }
+
+    .svc-category-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.5rem 0 0.6rem;
+    }
+
+    .svc-category-label:first-of-type { margin-top: 0; }
+
+    .svc-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 0.4rem;
+      transition: border-color 0.15s;
+    }
+
+    .svc-row:hover { border-color: var(--border2); }
+
+    .svc-left {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+
+    .svc-logo {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+
+    .svc-name { font-size: 0.875rem; font-weight: 700; }
+    .svc-desc { font-size: 0.75rem; color: var(--muted); }
+
+    .svc-right {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      flex-shrink: 0;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0.25rem 0.65rem;
+      border-radius: 99px;
+      font-size: 0.73rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .status-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .pill-ok       { background: var(--green-light);  color: var(--green); }
+    .pill-ok       .status-dot { background: var(--green); }
+    .pill-degraded { background: var(--yellow-light); color: var(--yellow); }
+    .pill-degraded .status-dot { background: var(--yellow); }
+    .pill-partial  { background: var(--orange-light); color: var(--orange); }
+    .pill-partial  .status-dot { background: var(--orange); }
+    .pill-outage   { background: var(--red-light);    color: var(--red); }
+    .pill-outage   .status-dot { background: var(--red); }
+    .pill-unknown  { background: var(--bg3);           color: var(--muted); }
+    .pill-unknown  .status-dot { background: var(--border2); }
+    .pill-loading  { background: var(--bg3);           color: var(--muted); }
+    .pill-loading  .status-dot { background: var(--border2); animation: pulse-bg 1s ease-in-out infinite; }
+
+    @keyframes pulse-bg {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 1; }
+    }
+
+    .btn-svc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      border: 1px solid var(--border);
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .btn-svc-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ── PLATFORM STATUS ── */
+    #sp-status {
+      background: var(--bg2);
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 5%;
+    }
+
+    .hp-status-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+
+    .hp-status-left {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .hp-status-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hp-status-overall {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      border-radius: 99px;
+    }
+
+    .hp-overall-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+    }
+
+    .hp-overall-ok       { background: var(--green-light); color: var(--green); }
+    .hp-overall-ok       .hp-overall-dot { background: var(--green); }
+    .hp-overall-degraded { background: #fef9c3; color: #ca8a04; }
+    .hp-overall-degraded .hp-overall-dot { background: #ca8a04; }
+    .hp-overall-outage   { background: #fef2f2; color: #dc2626; }
+    .hp-overall-outage   .hp-overall-dot { background: #dc2626; }
+    .hp-overall-loading  { background: var(--bg3); color: var(--muted); }
+    .hp-overall-loading  .hp-overall-dot { background: var(--border2); animation: hp-blink 1s ease-in-out infinite; }
+
+    @keyframes hp-blink {
+      0%, 100% { opacity: 0.4; }
+      50%       { opacity: 1; }
+    }
+
+    .hp-status-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0.6rem;
+    }
+
+    .hp-svc-box {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.4rem;
+      padding: 0.85rem 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      text-decoration: none;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+
+    .hp-svc-box:hover { transform: translateY(-2px); border-color: var(--border2); }
+
+    .hp-svc-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .hp-svc-icon { font-size: 1.1rem; }
+
+    .hp-svc-status-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .hp-svc-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .hp-svc-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    .hp-box-ok       { border-top: 2px solid #22c55e; }
+    .hp-box-ok       .hp-svc-status-dot { background: #22c55e; }
+    .hp-box-ok       .hp-svc-label { color: var(--green); }
+    .hp-box-degraded { border-top: 2px solid #eab308; }
+    .hp-box-degraded .hp-svc-status-dot { background: #eab308; }
+    .hp-box-degraded .hp-svc-label { color: #ca8a04; }
+    .hp-box-outage   { border-top: 2px solid #ef4444; }
+    .hp-box-outage   .hp-svc-status-dot { background: #ef4444; }
+    .hp-box-outage   .hp-svc-label { color: #dc2626; }
+    .hp-box-loading  { border-top: 2px solid var(--border2); }
+    .hp-box-loading  .hp-svc-status-dot { background: var(--border2); animation: hp-blink 1s ease-in-out infinite; }
+    .hp-box-loading  .hp-svc-label { color: var(--muted); }
+    .hp-box-unknown  { border-top: 2px solid var(--border2); }
+    .hp-box-unknown  .hp-svc-status-dot { background: var(--border2); }
+    .hp-box-unknown  .hp-svc-label { color: var(--muted); }
+
+    @media (max-width: 900px) {
+      .hp-status-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 540px) {
+      .hp-status-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ── HIGHLIGHT MATCHES ── */
+    mark {
+      background: rgba(249,115,22,0.2);
+      color: inherit;
+      border-radius: 2px;
+      padding: 0 1px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 800;
+      font-size: 0.95rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    footer p { font-size: 0.8rem; color: var(--muted); }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .footer-links a {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .support-layout { grid-template-columns: 1fr; }
+
+      .sidebar {
+        position: static;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 1rem 0;
+      }
+
+      .sidebar-nav li a { padding: 0.5rem 1.25rem; }
+      .content-area { padding: 2rem 1.5rem; }
+      .example-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      nav ul { display: none; }
+      .stat-row { grid-template-columns: 1fr; }
+      .module-nav-row { flex-direction: column; align-items: stretch; }
+      .btn-module { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="logo">
+      <span class="logo-icon">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16,16 C13,9 4,9 4,16 C4,23 13,23 16,16 C19,9 28,9 28,16 C28,23 19,23 16,16 Z"
+            stroke="rgba(255,255,255,0.25)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="logo-inf-run" d="M16,16 C13,9 4,9 4,16 C4,23 13,23 16,16 C19,9 28,9 28,16 C28,23 19,23 16,16 Z"
+            stroke="white" stroke-width="3" fill="none" stroke-linecap="round"
+            stroke-dasharray="28 122"/>
+          <circle class="logo-node" cx="16" cy="16" r="4" fill="#f97316"/>
+          <circle cx="16" cy="16" r="1.8" fill="white"/>
+        </svg>
+      </span>
+      Elmdale AI
+    </a>
+    <ul>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="index.html#how">Process</a></li>
+      <li><a href="index.html#case-study">Case Studies</a></li>
+      <li><a href="support.html" style="color: var(--accent); font-weight:700;">Support</a></li>
+      <li><a href="#" onclick="return false;" class="nav-cta">Book a call</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div class="support-hero">
+    <div class="eyebrow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      Learning Hub
+    </div>
+    <h1>Everything you need to<br/><em>understand AI</em> for your business</h1>
+    <p>No jargon. No technical background required. Just clear, honest explanations from people who do this every day.</p>
+    <div class="search-wrap">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search-input" placeholder="Search for anything, e.g. what is an LLM…" autocomplete="off" />
+    </div>
+    <div class="search-results-count" id="search-count"></div>
+  </div>
+
+  <!-- PLATFORM STATUS STRIP -->
+  <section id="sp-status">
+    <div class="hp-status-header">
+      <div class="hp-status-left">
+        <span class="hp-status-label">Platform Status</span>
+        <span class="hp-status-overall hp-overall-loading" id="sp-overall">
+          <span class="hp-overall-dot"></span>
+          <span id="sp-overall-text">Checking…</span>
+        </span>
+      </div>
+    </div>
+    <div class="hp-status-grid" id="sp-status-grid"></div>
+  </section>
+
+  <!-- BODY -->
+  <div class="support-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-progress">
+        <div class="prog-label">Your progress</div>
+        <div class="prog-bar-wrap">
+          <div class="prog-bar-fill" id="prog-bar" style="width: 14%"></div>
+        </div>
+      </div>
+
+      <div class="sidebar-label">Learning Modules</div>
+      <ul class="sidebar-nav" id="sidebar-nav">
+        <li><a href="#" data-module="welcome" class="active"><span class="nav-icon">👋</span> Start Here</a></li>
+        <li><a href="#" data-module="what-is-ai"><span class="nav-icon">🤖</span> What is AI?</a></li>
+        <li><a href="#" data-module="what-is-llm"><span class="nav-icon">🧠</span> What is an LLM?</a></li>
+        <li><a href="#" data-module="automations"><span class="nav-icon">⚙️</span> What is an Automation?</a></li>
+        <li><a href="#" data-module="business-case"><span class="nav-icon">📈</span> The Business Case</a></li>
+        <li><a href="#" data-module="examples"><span class="nav-icon">💡</span> Real World Examples</a></li>
+        <li><a href="#" data-module="faq"><span class="nav-icon">❓</span> Common Questions</a></li>
+        <li><a href="#" data-module="troubleshoot"><span class="nav-icon">🔴</span> Something's Not Working</a></li>
+      </ul>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="content-area">
+
+      <!-- NO RESULTS -->
+      <div class="no-results" id="no-results">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <h3>Nothing found</h3>
+        <p>Try different words, or browse the modules in the sidebar.</p>
+      </div>
+
+      <!-- MODULE 1: WELCOME -->
+      <div class="module active" id="module-welcome" data-searchable>
+        <div class="module-header">
+          <div class="module-tag tag-basics">⭐ Start Here</div>
+          <h2>Welcome to the Learning Hub</h2>
+          <p>This is your guide to understanding AI and automation without needing a tech background.</p>
+          <div class="reading-time">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            2 minute read
+          </div>
+        </div>
+        <div class="article">
+          <h3>Who this is for</h3>
+          <p>You do not need to write a single line of code to benefit from AI automation. This hub is designed for business owners, managers, and team members who want to understand what AI can do for them, in plain language, with real examples.</p>
+          <p>Whether you have heard the words "LLM", "workflow automation", or "AI agent" and had no idea what they meant, you are in the right place.</p>
+
+          <div class="callout tip">
+            <span class="callout-icon">💡</span>
+            <p><strong>Tip:</strong> Work through the modules in order for the best experience, or jump straight to the topic you need using the sidebar on the left.</p>
+          </div>
+
+          <h3>What you will learn</h3>
+          <p>By the time you reach the end of this hub, you will be able to:</p>
+          <ul>
+            <li>Explain what AI and LLMs actually are, in your own words</li>
+            <li>Understand how automations work and what problems they solve</li>
+            <li>Identify at least three areas in your business where automation could save you time</li>
+            <li>Feel confident asking the right questions when talking to an AI company</li>
+          </ul>
+
+          <h3>A note on jargon</h3>
+          <p>The tech industry loves complicated words for simple ideas. We have done our best to strip all of that away. Wherever we do use a technical term, we explain it immediately in plain English. If anything is still unclear, search for it in the bar above or reach out to us directly.</p>
+        </div>
+        <div class="module-nav-row">
+          <span></span>
+          <button class="btn-module primary" onclick="goToModule('what-is-ai')">Next: What is AI? →</button>
+        </div>
+      </div>
+
+      <!-- MODULE 2: WHAT IS AI -->
+      <div class="module" id="module-what-is-ai" data-searchable>
+        <div class="module-header">
+          <div class="module-tag tag-basics">🤖 Basics</div>
+          <h2>What is AI?</h2>
+          <p>Artificial Intelligence explained in a way that actually makes sense.</p>
+          <div class="reading-time">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            4 minute read
+          </div>
+        </div>
+        <div class="article">
+          <h3>The simple version</h3>
+          <p>Artificial Intelligence, or AI, is software that is designed to do things that would normally require human intelligence. That includes reading text, understanding questions, recognising images, making decisions, and generating responses that sound natural.</p>
+          <p>If you have ever asked Siri a question, used Google to auto-complete a sentence, or seen a spam filter catch an email before it reached your inbox, you have already used AI.</p>
+
+          <h3>How is AI different from regular software?</h3>
+          <p>Traditional software follows fixed instructions. You write rules, and the program follows them exactly. If you did not write a rule for a situation, the program does not know what to do.</p>
+          <p>AI is different. Instead of following rigid rules, <strong>AI learns from examples</strong>. You show it millions of emails and label which ones are spam. Over time, it figures out the patterns on its own and starts making accurate predictions on emails it has never seen before.</p>
+
+          <div class="callout example">
+            <span class="callout-icon">📧</span>
+            <p><strong>Real example:</strong> A spam filter trained on 10 million emails learns that phrases like "click here to claim your prize" almost always appear in unwanted messages. It does not need a human to write that rule. It discovered it from the data.</p>
+          </div>
+
+          <h3>Is AI new?</h3>
+          <p>The concept goes back to the 1950s, but the AI you hear about today is genuinely different from earlier versions. Three things changed everything: far more data to learn from, much cheaper computing power, and new mathematical techniques that made AI dramatically more capable.</p>
+          <p>The AI tools available right now are the most powerful that have ever existed, and they are improving quickly.</p>
+
+          <h3>What AI can and cannot do</h3>
+          <p>It is worth being honest here. AI is remarkable at certain tasks and surprisingly poor at others.</p>
+          <ul>
+            <li><strong>Good at:</strong> reading and writing text, summarising information, answering questions, recognising patterns, translating languages, generating ideas</li>
+            <li><strong>Less reliable at:</strong> maths that requires precise calculation, tasks that need real-time information it was not trained on, anything requiring physical actions in the world</li>
+          </ul>
+
+          <div class="callout note">
+            <span class="callout-icon">✅</span>
+            <p>The key insight is that AI is best used as a <strong>force multiplier for knowledge work</strong>. Anything that involves reading, writing, categorising, or responding, AI can usually do faster and at much greater scale than a human.</p>
+          </div>
+        </div>
+        <div class="module-nav-row">
+          <button class="btn-module" onclick="goToModule('welcome')">← Back</button>
+          <button class="btn-module primary" onclick="goToModule('what-is-llm')">Next: What is an LLM? →</button>
+        </div>
+      </div>
+
+      <!-- MODULE 3: WHAT IS AN LLM -->
+      <div class="module" id="module-what-is-llm" data-searchable>
+        <div class="module-header">
+          <div class="module-tag tag-basics">🧠 Basics</div>
+          <h2>What is an LLM?</h2>
+          <p>Large Language Models are the engine behind tools like ChatGPT. Here is what they actually are.</p>
+          <div class="reading-time">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            5 minute read
+          </div>
+        </div>
+        <div class="article">
+          <h3>Starting with language</h3>
+          <p>An LLM stands for <strong>Large Language Model</strong>. The "language" part tells you its specialty: it is designed to understand and produce human language. The "large" part tells you how it was built: by processing an enormous amount of text.</p>
+          <p>We are talking about hundreds of billions of words from books, websites, academic papers, code repositories, and much more. By studying all of that text, the model develops a surprisingly deep understanding of how language works.</p>
+
+          <h3>How does it actually work?</h3>
+          <p>At a very simplified level, an LLM learns to predict what word is likely to come next in a sentence. If you write "The cat sat on the…" the model has read enough text to know that words like "mat", "floor", or "chair" are plausible continuations. It assigns probabilities to thousands of possible next words and picks the most appropriate one in context.</p>
+          <p>Do this over and over, word by word, and you get coherent, fluent, contextually appropriate text. That is the core mechanism behind every modern AI writing tool.</p>
+
+          <div class="callout tip">
+            <span class="callout-icon">💡</span>
+            <p>The model is not "thinking" in the way humans do. It is performing extraordinarily sophisticated pattern matching. But the output can be so accurate and useful that, for practical purposes, the distinction often does not matter.</p>
+          </div>
+
+          <h3>What can you use an LLM for?</h3>
+          <p>Because LLMs understand language so well, they are useful in any situation involving text. Businesses use them for:</p>
+          <ul>
+            <li>Drafting and editing emails, proposals, and reports</li>
+            <li>Summarising long documents into short briefings</li>
+            <li>Answering customer questions using information from your own knowledge base</li>
+            <li>Translating content into other languages</li>
+            <li>Classifying incoming requests so they reach the right person automatically</li>
+            <li>Writing first drafts of social media posts, blog articles, and marketing copy</li>
+          </ul>
+
+          <h3>Examples you might already know</h3>
+          <div class="example-grid">
+            <div class="example-card">
+              <div class="ex-icon">💬</div>
+              <h4>ChatGPT</h4>
+              <p>Built on GPT models by OpenAI. The tool that made LLMs famous among the general public.</p>
+            </div>
+            <div class="example-card">
+              <div class="ex-icon">🤖</div>
+              <h4>Claude</h4>
+              <p>Built by Anthropic. Known for careful, thoughtful responses and strong performance on business tasks.</p>
+            </div>
+            <div class="example-card">
+              <div class="ex-icon">🔍</div>
+              <h4>Gemini</h4>
+              <p>Google's LLM, integrated into Search and Google Workspace tools you may already use.</p>
+            </div>
+            <div class="example-card">
+              <div class="ex-icon">✍️</div>
+              <h4>Copilot</h4>
+              <p>Microsoft's AI assistant, built into Word, Excel, Outlook, and Teams for everyday business use.</p>
+            </div>
+          </div>
+
+          <h3>What LLMs are not</h3>
+          <p>It is worth clearing up a few common misconceptions:</p>
+          <ul>
+            <li>LLMs are <strong>not connected to the internet</strong> by default. They know what they were trained on, but they do not automatically browse websites for new information.</li>
+            <li>LLMs are <strong>not always right</strong>. They can produce confident-sounding answers that are factually incorrect. This is called "hallucination" and it is something to be aware of, especially for tasks that require precise facts.</li>
+            <li>LLMs are <strong>not a replacement for human judgement</strong> in high-stakes decisions. They are tools that augment human capability, not remove it.</li>
+          </ul>
+        </div>
+        <div class="module-nav-row">
+          <button class="btn-module" onclick="goToModule('what-is-ai')">← Back</button>
+          <button class="btn-module primary" onclick="goToModule('automations')">Next: What is an Automation? →</button>
+        </div>
+      </div>
+
+      <!-- MODULE 4: AUTOMATIONS -->
+      <div class="module" id="module-automations" data-searchable>
+        <div class="module-header">
+          <div class="module-tag tag-basics">⚙️ Basics</div>
+          <h2>What is an Automation?</h2>
+          <p>Automations are the pipes that connect your tools together. Here is how they work.</p>
+          <div class="reading-time">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            5 minute read
+          </div>
+        </div>
+        <div class="article">
+          <h3>The core idea</h3>
+          <p>An automation is simply a set of instructions that runs by itself, without you having to do anything. Something happens (called a <strong>trigger</strong>), and then a series of steps runs automatically (called <strong>actions</strong>).</p>
+          <p>You have probably used automations without realising it. When you pay a bill online and receive a receipt in your email seconds later, that is an automation. When a calendar reminder pops up before your meeting, that is an automation. The idea is not new. What is new is how accessible and powerful these tools have become for small and medium businesses.</p>
+
+          <div class="callout example">
+            <span class="callout-icon">⚙️</span>
+            <p><strong>Simple example:</strong> A new form is submitted on your website (trigger) and the details are automatically added to your CRM, a welcome email is sent to the new contact, and your team gets a notification in Slack (actions). All without anyone lifting a finger.</p>
+          </div>
+
+          <h3>What makes AI automations different?</h3>
+          <p>Traditional automations are great for moving data between systems, but they can only follow the exact rules you set. If something unusual happens, they get stuck.</p>
+          <p><strong>AI automations add a layer of intelligence.</strong> Instead of just moving data, they can read it, understand it, and make decisions based on what it says. They can write a personalised reply, summarise a document, categorise a request, or flag something that looks unusual, all as part of a fully automated workflow.</p>
+
+          <h3>The building blocks</h3>
+          <ul>
+            <li><strong>Trigger:</strong> The event that starts the automation. Examples include receiving an email, a form submission, a new row in a spreadsheet, or a set time of day.</li>
+            <li><strong>Action:</strong> What happens as a result. Examples include sending an email, creating a record, generating a document, or sending a message in Slack.</li>
+            <li><strong>Condition:</strong> Optional rules that make the automation smarter. For example, only send the email if the lead is from the UK.</li>
+            <li><strong>AI Step:</strong> A point in the workflow where an LLM reads or generates text. This is what turns a basic automation into an intelligent one.</li>
+          </ul>
+
+          <h3>The tools that make it possible</h3>
+          <p>You do not need to build any of this from scratch. Platforms like Make.com, Zapier, and n8n provide a visual canvas where workflows are built by connecting blocks together, much like snapping pieces of a puzzle. These platforms handle all of the technical complexity behind the scenes.</p>
+
+          <div class="callout note">
+            <span class="callout-icon">✅</span>
+            <p>Most businesses already use the apps that automations connect. Gmail, Google Sheets, HubSpot, Slack, Notion, Airtable. The automation just makes them talk to each other automatically.</p>
+          </div>
+        </div>
+        <div class="module-nav-row">
+          <button class="btn-module" onclick="goToModule('what-is-llm')">← Back</button>
+          <button class="btn-module primary" onclick="goToModule('business-case')">Next: The Business Case →</button>
+        </div>
+      </div>
+
+      <!-- MODULE 5: BUSINESS CASE -->
+      <div class="module" id="module-business-case" data-searchable>
+        <div class="module-header">
+          <div class="module-tag tag-business">📈 Strategy</div>
+          <h2>The Business Case for Automation</h2>
+          <p>Why businesses that automate early consistently outperform those that do not.</p>
+          <div class="reading-time">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            6 minute read
+          </div>
+        </div>
+        <div class="article">
+          <h3>The hidden cost of manual work</h3>
+          <p>Most businesses have a set of repetitive tasks that consume significant time every week. Data entry, copy-pasting between tools, chasing invoices, sending follow-up emails, formatting reports, onboarding new clients. Individually, these tasks seem small. Together, they often add up to tens of hours per week across a team.</p>
+          <p>The real cost is not just the time. Every hour a skilled person spends on routine admin is an hour they are <strong>not spending on the work that actually requires their expertise</strong>. That is the real loss.</p>
+
+          <div class="stat-row">
+            <div class="stat-card">
+              <div class="stat-val">11hrs</div>
+              <div class="stat-desc">Average time saved per employee per week through automation</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">3×</div>
+              <div class="stat-desc">Typical return on investment in the first month</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">99%</div>
+              <div class="stat-desc">Reduction in human error for data transfer tasks</div>
+            </div>
+          </div>
+
+          <h3>Time savings</h3>
+          <p>The most immediate benefit. Tasks that used to take hours now happen in seconds. A workflow that required a team member to manually process 50 new leads every morning, checking each one against your CRM, drafting personalised emails, and updating a tracker, can be fully automated to run overnight without anyone's involvement.</p>
+
+          <h3>Cost reduction</h3>
+          <p>Automation does not replace people. It frees them from work that does not require a person. This means you can grow your operation without proportionally growing your headcount. A business that automates its client onboarding process does not need to hire an extra person every time their client numbers double.</p>
+
+          <h3>Fewer mistakes</h3>
+          <p>Humans make mistakes, especially on repetitive tasks. Copying data from one system to another, typos, missed steps, and forgotten follow-ups are all natural consequences of doing the same thing hundreds of times. Automations do the same step the same way every single time. For compliance-sensitive or financially important workflows, this consistency is extremely valuable.</p>
+
+          <h3>Scalability without growing pains</h3>
+          <p>A well-built automation scales effortlessly. Whether it processes 10 requests a day or 10,000, the workflow performs identically. For growing businesses, this is transformative. You can take on significantly more work without significantly more overhead.</p>
+
+          <div class="callout tip">
+            <span class="callout-icon">💡</span>
+            <p>The businesses winning right now are not the ones with the most staff. They are the ones that have figured out how to do more with the same team by removing friction from their processes.</p>
+          </div>
+
+          <h3>Competitive advantage</h3>
+          <p>While your competitors are still sending manual follow-up emails two days after a lead fills in a form, your automation can respond within 30 seconds, personalised, relevant, and ready to book a call. In almost every sector, the business that responds fastest and follows up most consistently wins more work. Automation makes that possible at scale.</p>
+        </div>
+        <div class="module-nav-row">
+          <button class="btn-module" onclick="goToModule('automations')">← Back</button>
+          <button class="btn-module primary" onclick="goToModule('examples')">Next: Real World Examples →</button>
+        </div>
+      </div>
+
+      <!-- MODULE 6: EXAMPLES -->
+      <div class="module" id="module-examples" data-searchable>
+        <div class="module-header">
+          <div class="module-tag tag-business">💡 Examples</div>
+          <h2>Real World Examples</h2>
+          <p>See exactly how automation works in businesses like yours.</p>
+          <div class="reading-time">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            5 minute read
+          </div>
+        </div>
+        <div class="article">
+          <h3>Lead follow-up</h3>
+          <p><strong>The problem:</strong> A potential customer fills in a contact form on your website. Your sales team is busy. The lead sits in an inbox for two days. By the time someone emails back, the prospect has already spoken to a competitor.</p>
+          <p><strong>The automation:</strong> The moment the form is submitted, the automation reads the enquiry using AI, drafts a personalised response based on what the person asked about, sends it from your email address, adds the contact to your CRM, and creates a follow-up task for your team. All of this happens in under 60 seconds, at any time of day.</p>
+
+          <h3>Invoice processing</h3>
+          <p><strong>The problem:</strong> Invoices arrive by email from dozens of suppliers in different formats. Someone has to open each one, read the details, enter them into your accounting system, and file the email. It takes hours every week and is prone to typos.</p>
+          <p><strong>The automation:</strong> Each incoming invoice email is automatically detected, the AI reads the attachment and extracts the supplier name, amount, date, and invoice number, and creates the corresponding record in your accounting software. The email is labelled and archived. No manual entry required.</p>
+
+          <h3>Client onboarding</h3>
+          <p><strong>The problem:</strong> Every time you win a new client, someone has to manually send a welcome email, create a project folder, set up the client in your project management tool, send a contract, and schedule a kickoff call. Miss any step and it reflects poorly on your business.</p>
+          <p><strong>The automation:</strong> When a contract is signed, the entire onboarding sequence fires automatically. Welcome email goes out. Project folder is created with the right structure. Client profile is set up in your tools. A kickoff booking link is sent. Every new client gets exactly the same smooth experience, every time.</p>
+
+          <h3>Social media scheduling</h3>
+          <p><strong>The problem:</strong> Staying consistent on LinkedIn or Instagram takes significant time. Writing posts, finding images, scheduling them, and tracking what performs well is a job in itself.</p>
+          <p><strong>The automation:</strong> You add a topic or a link to a spreadsheet. The AI drafts a post in your brand voice. It gets added to a scheduling queue and published at the optimal time. High-performing posts are flagged for you to review and repurpose.</p>
+
+          <div class="example-grid">
+            <div class="example-card">
+              <div class="ex-icon">📊</div>
+              <h4>Automated reporting</h4>
+              <p>Weekly performance reports assembled from multiple data sources and emailed to your team automatically.</p>
+            </div>
+            <div class="example-card">
+              <div class="ex-icon">🎧</div>
+              <h4>Customer support triage</h4>
+              <p>Incoming support requests categorised by urgency and topic, then routed to the right team member.</p>
+            </div>
+            <div class="example-card">
+              <div class="ex-icon">📅</div>
+              <h4>Meeting prep</h4>
+              <p>Before every client call, an AI summary of the client's history, recent emails, and open actions lands in your inbox.</p>
+            </div>
+            <div class="example-card">
+              <div class="ex-icon">🔔</div>
+              <h4>Payment chasing</h4>
+              <p>Overdue invoices trigger a polite, personalised chase sequence that escalates automatically if unpaid.</p>
+            </div>
+          </div>
+        </div>
+        <div class="module-nav-row">
+          <button class="btn-module" onclick="goToModule('business-case')">← Back</button>
+          <button class="btn-module primary" onclick="goToModule('faq')">Next: Common Questions →</button>
+        </div>
+      </div>
+
+      <!-- MODULE 7: FAQ -->
+      <div class="module" id="module-faq" data-searchable>
+        <div class="module-header">
+          <div class="module-tag tag-faq">❓ FAQs</div>
+          <h2>Common Questions</h2>
+          <p>Honest answers to the things people ask us most often.</p>
+          <div class="reading-time">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            7 minute read
+          </div>
+        </div>
+        <div class="article">
+          <div class="faq-list">
+
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                Do I need to understand the technology to benefit from it?
+                <span class="faq-chevron">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+              <div class="faq-a">Not at all. The whole point of working with an agency like ours is that you do not have to understand the underlying technology. You understand your business and your problems. We translate those into solutions. All we need from you is clarity on what is painful, repetitive, or slow in your day-to-day operations.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                Is my business data safe?
+                <span class="faq-chevron">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+              <div class="faq-a">Data security is something we take seriously at every step. We only use enterprise-grade AI providers who have strong data protection agreements in place and do not use your data to train their models. All automations are built using secure authentication and we never store sensitive data beyond what is needed to perform the task. We are happy to walk you through the security setup for your specific workflow before anything is built.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                How long does it take to get set up?
+                <span class="faq-chevron">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+              <div class="faq-a">Most automations are built and live within 3 to 5 working days from the point we have everything we need from you. Larger, more complex systems may take longer. We will always give you a clear timeline before we start work so there are no surprises. The free audit at the start of our process is specifically designed to scope everything accurately upfront.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                What happens if something breaks or stops working?
+                <span class="faq-chevron">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+              <div class="faq-a">Automations are monitored continuously. Most issues are caught and resolved before you notice anything. If something does go wrong on your end, you contact us and we fix it. This is included as part of ongoing maintenance for all clients. We also build every workflow with error handling built in, so if a step fails, you get a clear alert rather than silent data loss.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                Can I make changes after the automation is built?
+                <span class="faq-chevron">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+              <div class="faq-a">Yes. Businesses change, and your automations should change with them. Minor adjustments, like updating the wording of an email or adding a new step to a workflow, are handled quickly as part of your maintenance arrangement. For larger changes, we scope them as a small project and give you a clear timeline and cost before starting.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                What tools and apps do you work with?
+                <span class="faq-chevron">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+              <div class="faq-a">We work with the tools most small and medium businesses already use. Gmail, Google Workspace, HubSpot, Salesforce, Notion, Airtable, Slack, Xero, QuickBooks, Stripe, Shopify, WhatsApp, LinkedIn, and many more. If you use a tool and are unsure whether it can be automated, ask us and we will tell you honestly whether it is possible and what it would involve.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                Will automation make some of my team redundant?
+                <span class="faq-chevron">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+              <div class="faq-a">This is a very understandable concern and it is worth being direct about it. Automation removes tasks, not roles. The people who previously spent two hours a day on data entry now spend those two hours on higher-value work that only they can do. In practice, our clients typically find that their teams are happier after automation because the boring, repetitive parts of their jobs disappear.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                How much does it cost?
+                <span class="faq-chevron">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+              <div class="faq-a">Cost depends on the complexity and number of automations you need. The best place to start is with a free audit, where we map out your workflows and give you a clear proposal with honest pricing before you commit to anything. There is no obligation and nothing to lose. Book a call with us to get started.</div>
+            </div>
+
+            <div class="faq-item">
+              <div class="faq-q" onclick="toggleFaq(this)">
+                What is the difference between AI and automation?
+                <span class="faq-chevron">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>
+                </span>
+              </div>
+              <div class="faq-a">Automation is the plumbing: it connects your tools and moves information between them based on rules. AI is the intelligence layer: it reads, understands, and generates content as part of that workflow. On their own, automations are useful but limited. Combined with AI, they become capable of handling nuanced, language-based tasks that previously required a human. Most of what we build uses both together.</div>
+            </div>
+
+          </div>
+        </div>
+        <div class="module-nav-row">
+          <button class="btn-module" onclick="goToModule('examples')">← Back</button>
+          <button class="btn-module primary" onclick="window.location.href='index.html'">Back to home →</button>
+        </div>
+      </div>
+
+      <!-- MODULE 8: TROUBLESHOOTING -->
+      <div class="module" id="module-troubleshoot" data-searchable>
+        <div class="module-header">
+          <div class="module-tag tag-urgent">🔴 Support</div>
+          <h2>Something is not working</h2>
+          <p>We are really sorry you are having trouble. Let us help you get back on track as quickly as possible.</p>
+          <div class="reading-time">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            3 minute read
+          </div>
+        </div>
+        <div class="article">
+
+          <div class="callout tip">
+            <span class="callout-icon">🙏</span>
+            <p>We know how frustrating it is when something that is supposed to save you time suddenly stops. We take that seriously. Please do not hesitate to reach out and we will treat it as a priority.</p>
+          </div>
+
+          <h3>Before you contact us, try these quick checks</h3>
+          <p>Most issues have a simple cause. Working through this list takes two minutes and may save you a call.</p>
+
+          <ul class="checklist">
+            <li>
+              <span class="check-num">1</span>
+              <span>Check that the apps your automation connects to are still working normally. You can check the live status of all the platforms we use on our <a href="#" onclick="goToModule('status');return false;" style="color:var(--accent);font-weight:600;">status page</a>. If a service is reporting an outage, the automation will resume automatically once it recovers.</span>
+            </li>
+            <li>
+              <span class="check-num">2</span>
+              <span>Check whether you have changed your password or revoked access to any of the connected apps recently. Automations use a secure connection token, and that token stops working if your credentials change.</span>
+            </li>
+            <li>
+              <span class="check-num">3</span>
+              <span>Check that the trigger you are expecting is actually firing. For example, if the automation starts when a form is submitted, submit a test entry and see whether that alone triggers the workflow.</span>
+            </li>
+            <li>
+              <span class="check-num">4</span>
+              <span>Check your email inbox and spam folder for any notifications from us. If we have detected an issue, we may have already reached out to you.</span>
+            </li>
+          </ul>
+
+          <h3>Common reasons an automation stops</h3>
+
+          <div class="issue-card">
+            <div class="issue-header">
+              <span class="issue-icon">💳</span>
+              <div>
+                <div class="issue-title">Credit or usage allowance has run out</div>
+                <p class="issue-desc">Every automation platform has a monthly usage allowance. If your account has hit its limit for the month, workflows will pause until the allowance resets or is topped up.</p>
+              </div>
+            </div>
+            <div class="issue-fix"><strong>What to do:</strong> Let us know and we will check the account balance immediately. If this is a recurring issue we can look at upgrading the plan or optimising the workflow to use fewer operations.</div>
+          </div>
+
+          <div class="issue-card">
+            <div class="issue-header">
+              <span class="issue-icon">🔑</span>
+              <div>
+                <div class="issue-title">A connected app revoked its access</div>
+                <p class="issue-desc">Occasionally a third-party app will expire or revoke the connection that the automation relies on, particularly after a password change, a security update, or a period of inactivity.</p>
+              </div>
+            </div>
+            <div class="issue-fix"><strong>What to do:</strong> This is a quick fix on our end. Message us and we will reconnect the integration and run a test to make sure everything is flowing again.</div>
+          </div>
+
+          <div class="issue-card">
+            <div class="issue-header">
+              <span class="issue-icon">🔧</span>
+              <div>
+                <div class="issue-title">The structure of your data changed</div>
+                <p class="issue-desc">If a form, spreadsheet, or CRM field was renamed, removed, or restructured, the automation may no longer know where to find the information it needs. This can happen after a platform update or a team member making changes to a shared tool.</p>
+              </div>
+            </div>
+            <div class="issue-fix"><strong>What to do:</strong> Think about whether anything was changed in the tools the automation connects to. Let us know what changed and we will update the workflow to match.</div>
+          </div>
+
+          <div class="issue-card">
+            <div class="issue-header">
+              <span class="issue-icon">🌐</span>
+              <div>
+                <div class="issue-title">A third-party API changed</div>
+                <p class="issue-desc">Software companies periodically update their APIs, which are the technical interfaces that automations use to communicate with their platforms. When an API changes without warning, workflows that relied on the old version can break.</p>
+              </div>
+            </div>
+            <div class="issue-fix"><strong>What to do:</strong> This is entirely on us to fix. We monitor for API changes but occasionally one slips through. Contact us and we will get it resolved as a priority.</div>
+          </div>
+
+          <div class="issue-card">
+            <div class="issue-header">
+              <span class="issue-icon">🤖</span>
+              <div>
+                <div class="issue-title">The AI model received an unexpected input</div>
+                <p class="issue-desc">If your automation includes an AI step, it may occasionally receive an input that falls outside what it was designed to handle, for example an email in an unusual format or a response that is far longer than expected. This can cause the step to produce an error or an unhelpful output.</p>
+              </div>
+            </div>
+            <div class="issue-fix"><strong>What to do:</strong> Note down roughly when it stopped and what type of input triggered it if you can. That helps us diagnose it much faster. Send us a message and we will investigate.</div>
+          </div>
+
+          <div class="issue-card">
+            <div class="issue-header">
+              <span class="issue-icon">⏸️</span>
+              <div>
+                <div class="issue-title">The workflow was paused automatically</div>
+                <p class="issue-desc">Most automation platforms will pause a workflow after a series of consecutive errors to prevent runaway failures. This is a protective measure, but it means the automation stops processing new requests until someone reviews it.</p>
+              </div>
+            </div>
+            <div class="issue-fix"><strong>What to do:</strong> We should have been notified automatically when this happened. If you contact us, we will review the error log, fix the underlying issue, and resume the workflow.</div>
+          </div>
+
+          <h3>Still not sure what happened?</h3>
+          <p>That is completely fine. You do not need to diagnose it yourself. That is our job. Just let us know it is not working and we will take it from there.</p>
+
+          <div class="contact-cta">
+            <h3>Get in touch right now</h3>
+            <p>We aim to respond to all support messages within a few hours during business hours. For urgent issues, WhatsApp is the fastest way to reach us.</p>
+            <div class="contact-buttons">
+              <a href="mailto:hello@elmdale.ai?subject=My automation is not working&body=Hi Elmdale AI team,%0D%0A%0D%0AMy automation has stopped working. Here is what I noticed:%0D%0A%0D%0A[Please describe what happened and when it stopped]%0D%0A%0D%0AThanks" class="btn-contact email">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+                Email us
+              </a>
+              <a href="https://wa.me/447700000000?text=Hi%2C%20my%20automation%20has%20stopped%20working%20and%20I%20need%20some%20help." target="_blank" rel="noopener" class="btn-contact whatsapp">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+              </a>
+            </div>
+          </div>
+
+        </div>
+        <div class="module-nav-row">
+          <button class="btn-module" onclick="goToModule('faq')">← Back</button>
+          <button class="btn-module primary" onclick="window.location.href='index.html'">Back to home →</button>
+        </div>
+      </div>
+
+
+    </main>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="index.html" class="footer-logo">
+      <span class="logo-icon">
+        <svg width="14" height="14" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16,16 C13,9 4,9 4,16 C4,23 13,23 16,16 C19,9 28,9 28,16 C28,23 19,23 16,16 Z"
+            stroke="rgba(255,255,255,0.25)" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path class="logo-inf-run" d="M16,16 C13,9 4,9 4,16 C4,23 13,23 16,16 C19,9 28,9 28,16 C28,23 19,23 16,16 Z"
+            stroke="white" stroke-width="3" fill="none" stroke-linecap="round"
+            stroke-dasharray="28 122"/>
+          <circle class="logo-node" cx="16" cy="16" r="4" fill="#f97316"/>
+          <circle cx="16" cy="16" r="1.8" fill="white"/>
+        </svg>
+      </span>
+      Elmdale AI
+    </a>
+    <p>© 2026 Elmdale AI. All rights reserved.</p>
+    <div class="footer-links">
+      <a href="mailto:hello@elmdale.ai">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        hello@elmdale.ai
+      </a>
+    </div>
+  </footer>
+
+  <script>
+    const modules = ['welcome','what-is-ai','what-is-llm','automations','business-case','examples','faq','troubleshoot'];
+    let visited = new Set(['welcome']);
+
+    function goToModule(id) {
+      // hide all
+      document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+      document.querySelectorAll('#sidebar-nav a').forEach(a => a.classList.remove('active'));
+
+      // show target
+      const mod = document.getElementById('module-' + id);
+      if (mod) mod.classList.add('active');
+
+      const link = document.querySelector('[data-module="' + id + '"]');
+      if (link) link.classList.add('active');
+
+      visited.add(id);
+      updateProgress();
+
+      window.scrollTo({ top: document.querySelector('.support-layout').offsetTop - 72, behavior: 'smooth' });
+    }
+
+    function updateProgress() {
+      const pct = Math.round((visited.size / modules.length) * 100);
+      document.getElementById('prog-bar').style.width = pct + '%';
+    }
+
+    // sidebar click
+    document.querySelectorAll('#sidebar-nav a').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        goToModule(a.dataset.module);
+      });
+    });
+
+    // FAQ toggle
+    function toggleFaq(el) {
+      el.parentElement.classList.toggle('open');
+    }
+
+    // Search
+    const searchInput = document.getElementById('search-input');
+    const searchCount = document.getElementById('search-count');
+    const noResults   = document.getElementById('no-results');
+    let searchTimeout;
+
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(doSearch, 180);
+    });
+
+    function doSearch() {
+      const q = searchInput.value.trim().toLowerCase();
+
+      if (!q) {
+        clearHighlights();
+        searchCount.textContent = '';
+        noResults.style.display = 'none';
+        document.querySelectorAll('.module').forEach(m => m.classList.remove('search-hidden'));
+        return;
+      }
+
+      let totalMatches = 0;
+      let firstMatchModule = null;
+
+      document.querySelectorAll('.module[data-searchable]').forEach(mod => {
+        const text = mod.textContent.toLowerCase();
+        if (text.includes(q)) {
+          totalMatches++;
+          if (!firstMatchModule) firstMatchModule = mod;
+          mod.classList.remove('search-hidden');
+        } else {
+          mod.classList.add('search-hidden');
+        }
+      });
+
+      searchCount.textContent = totalMatches > 0
+        ? 'Found in ' + totalMatches + ' module' + (totalMatches > 1 ? 's' : '')
+        : '';
+
+      if (totalMatches === 0) {
+        noResults.style.display = 'block';
+        document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+      } else {
+        noResults.style.display = 'none';
+        if (firstMatchModule) {
+          document.querySelectorAll('.module').forEach(m => m.classList.remove('active'));
+          firstMatchModule.classList.add('active');
+          const id = firstMatchModule.id.replace('module-','');
+          document.querySelectorAll('#sidebar-nav a').forEach(a => a.classList.remove('active'));
+          const link = document.querySelector('[data-module="' + id + '"]');
+          if (link) link.classList.add('active');
+        }
+      }
+    }
+
+    function clearHighlights() {
+      document.querySelectorAll('.module').forEach(m => m.classList.remove('search-hidden','active'));
+      document.getElementById('module-welcome').classList.add('active');
+      document.querySelector('[data-module="welcome"]').classList.add('active');
+      document.querySelectorAll('#sidebar-nav a').forEach(a => a.classList.remove('active'));
+      document.querySelector('[data-module="welcome"]').classList.add('active');
+    }
+
+    // ── PLATFORM STATUS ──────────────────────────────────────────────────────
+    const spServices = [
+      { name: 'Make.com',         icon: '⚡', url: 'https://status.make.com/api/v2/status.json',      page: 'https://status.make.com',          parser: 'sp' },
+      { name: 'Zapier',           icon: '🔗', url: 'https://status.zapier.com/api/v2/status.json',    page: 'https://status.zapier.com',          parser: 'sp' },
+      { name: 'n8n',              icon: '🔀', url: null,                                              page: 'https://status.n8n.cloud',           parser: null },
+      { name: 'OpenAI',           icon: '🤖', url: 'https://status.openai.com/api/v2/status.json',   page: 'https://status.openai.com',          parser: 'sp' },
+      { name: 'Claude',           icon: '🧠', url: 'https://status.anthropic.com/api/v2/status.json',page: 'https://status.anthropic.com',        parser: 'sp' },
+      { name: 'Google Workspace', icon: '📧', url: null,                                              page: 'https://workspace.google.com/status', parser: null },
+      { name: 'Slack',            icon: '💬', url: 'https://slack-status.com/api/v2.0.0/current',    page: 'https://slack-status.com',            parser: 'slack' },
+      { name: 'HubSpot',          icon: '🎯', url: 'https://status.hubspot.com/api/v2/status.json',  page: 'https://status.hubspot.com',          parser: 'sp' },
+      { name: 'Notion',           icon: '📝', url: 'https://status.notion.so/api/v2/status.json',   page: 'https://status.notion.so',            parser: 'sp' },
+      { name: 'Airtable',         icon: '📊', url: 'https://status.airtable.com/api/v2/status.json', page: 'https://status.airtable.com',         parser: 'sp' },
+      { name: 'Salesforce',       icon: '☁️', url: null,                                             page: 'https://status.salesforce.com',       parser: null },
+      { name: 'Stripe',           icon: '💳', url: 'https://status.stripe.com/api/v2/status.json',  page: 'https://status.stripe.com',           parser: 'sp' },
+      { name: 'Xero',             icon: '🧾', url: null,                                             page: 'https://status.xero.com',             parser: null }
+    ];
+
+    function spSlug(name) { return 'sp-' + name.toLowerCase().replace(/[^a-z0-9]/g, ''); }
+
+    function spRenderSkeleton() {
+      const grid = document.getElementById('sp-status-grid');
+      if (!grid) return;
+      grid.innerHTML = spServices.map(s => `
+        <a href="${s.page}" target="_blank" rel="noopener" class="hp-svc-box hp-box-loading" id="${spSlug(s.name)}">
+          <div class="hp-svc-top">
+            <span class="hp-svc-icon">${s.icon}</span>
+            <span class="hp-svc-status-dot"></span>
+          </div>
+          <div class="hp-svc-name">${s.name}</div>
+          <div class="hp-svc-label">Checking…</div>
+        </a>
+      `).join('');
+    }
+
+    async function spFetchOne(svc) {
+      if (!svc.url) return { status: 'unknown', label: 'Check status page ↗' };
+      try {
+        const res = await fetch(svc.url, { cache: 'no-store' });
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        if (svc.parser === 'sp') {
+          const ind  = data?.status?.indicator ?? 'unknown';
+          const desc = data?.status?.description ?? '';
+          const map  = { none: ['ok','Operational'], minor: ['degraded','Degraded'], major: ['partial','Partial outage'], critical: ['outage','Major outage'] };
+          const [status, label] = map[ind] ?? ['unknown','Unknown'];
+          return { status, label: desc || label };
+        }
+        if (svc.parser === 'slack') {
+          const s = data?.status ?? '';
+          if (s === 'ok') return { status: 'ok', label: 'Operational' };
+          if (s === 'active') return { status: 'outage', label: 'Active incident' };
+          return { status: 'degraded', label: 'Disruption' };
+        }
+        return { status: 'unknown', label: 'Unknown' };
+      } catch { return { status: 'unknown', label: 'Check status page ↗' }; }
+    }
+
+    function spSetBox(name, result) {
+      const el = document.getElementById(spSlug(name));
+      if (!el) return;
+      const cls = { ok: 'hp-box-ok', degraded: 'hp-box-degraded', partial: 'hp-box-outage', outage: 'hp-box-outage', unknown: 'hp-box-unknown' };
+      el.className = 'hp-svc-box ' + (cls[result.status] || 'hp-box-unknown');
+      el.querySelector('.hp-svc-label').textContent = result.label;
+    }
+
+    async function spRefreshAll() {
+      const results = await Promise.allSettled(spServices.map(s => spFetchOne(s)));
+      let hasIssue = false, hasOutage = false;
+      results.forEach((res, i) => {
+        const r = res.status === 'fulfilled' ? res.value : { status: 'unknown', label: 'Check status page ↗' };
+        spSetBox(spServices[i].name, r);
+        if (r.status === 'degraded' || r.status === 'partial') hasIssue = true;
+        if (r.status === 'outage') { hasIssue = true; hasOutage = true; }
+      });
+      const overall = document.getElementById('sp-overall');
+      const text    = document.getElementById('sp-overall-text');
+      if (overall) overall.className = 'hp-status-overall ' + (hasOutage ? 'hp-overall-outage' : hasIssue ? 'hp-overall-degraded' : 'hp-overall-ok');
+      if (text)    text.textContent  = hasOutage ? 'Outage detected' : hasIssue ? 'Some issues' : 'All operational';
+    }
+
+    spRenderSkeleton();
+    spRefreshAll();
+    setInterval(spRefreshAll, 60000);
+  </script>
+</body>
+</html>

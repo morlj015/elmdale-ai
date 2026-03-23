@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4c1d95"/>
+      <stop offset="100%" stop-color="#1a0845"/>
+    </linearGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="32" height="32" rx="7" fill="url(#bg)"/>
+
+  <!-- Infinity symbol — two looping bezier curves meeting at centre -->
+  <path
+    d="M16,16 C13,9 4,9 4,16 C4,23 13,23 16,16 C19,9 28,9 28,16 C28,23 19,23 16,16 Z"
+    stroke="white"
+    stroke-width="2.2"
+    fill="none"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.92"
+  />
+
+  <!-- Orange node dot at crossing point with soft glow -->
+  <circle cx="16" cy="16" r="3.2" fill="#f97316" filter="url(#glow)"/>
+  <circle cx="16" cy="16" r="1.6" fill="white" opacity="0.9"/>
+</svg>
